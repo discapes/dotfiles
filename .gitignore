@@ -5,3 +5,5 @@
 !.config/fuzzel/**
 !.config/hypr/hyprland.conf
 !.gitignore
+!.config/cava/**
+.config/cava/shaders
