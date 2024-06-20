@@ -42,5 +42,5 @@ if command -v mise &>/dev/null; then
 	eval "$(mise activate zsh)"
 fi
 
-if [ -e /home/miika/.nix-profile/etc/profile.d/nix.sh ]; then . /home/miika/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
