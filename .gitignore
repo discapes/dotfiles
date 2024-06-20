@@ -11,3 +11,4 @@
 !.config/zsh/**
 !.zshrc
 !.config/direnv/**
+!.local/share/fonts/SymbolsNerdFont-Regular.ttf
