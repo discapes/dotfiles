@@ -10,3 +10,4 @@
 !.config/wob/**
 !.config/zsh/**
 !.zshrc
+!.config/direnv/**
