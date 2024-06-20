@@ -12,3 +12,4 @@
 !.zshrc
 !.config/direnv/**
 !.local/share/fonts/SymbolsNerdFont-Regular.ttf
+!.config/waybar/**
