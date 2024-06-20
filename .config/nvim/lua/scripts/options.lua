@@ -1,0 +1,9 @@
+local o = vim.o
+o.cursorlineopt = "both"
+o.shiftwidth = 0
+o.tabstop = 3
+o.clipboard = "unnamedplus"
+o.autoindent = true
+o.expandtab = false
+o.list = true
+o.relativenumber = true
