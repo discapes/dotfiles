@@ -7,3 +7,4 @@
 !.gitignore
 !.config/cava/**
 .config/cava/shaders
+!.config/wob/**
