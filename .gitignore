@@ -8,3 +8,5 @@
 !.config/cava/**
 .config/cava/shaders
 !.config/wob/**
+!.config/zsh/**
+!.zshrc
