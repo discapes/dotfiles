@@ -1,0 +1,7 @@
+*
+!*/
+!.config/nvim/**
+!.config/kitty/**
+!.config/fuzzel/**
+!.config/hypr/hyprland.conf
+!.gitignore
