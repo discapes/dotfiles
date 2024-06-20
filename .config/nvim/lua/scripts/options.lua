@@ -7,3 +7,4 @@ o.autoindent = true
 o.expandtab = false
 o.list = true
 o.relativenumber = true
+o.commentstring = "#%s"
