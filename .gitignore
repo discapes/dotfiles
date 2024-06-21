@@ -15,3 +15,4 @@
 !.config/waybar/**
 !.local/bin/**
 !README.md
+!.config/tofi/**
