@@ -20,3 +20,4 @@
 !.config/hypr/hyprlock.conf
 !.config/hypr/hypridle.conf
 !.config/dunst/**
+!.tmux.conf
