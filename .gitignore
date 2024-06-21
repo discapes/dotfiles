@@ -21,3 +21,4 @@
 !.config/hypr/hypridle.conf
 !.config/dunst/**
 !.tmux.conf
+!.ssh/id_ed25519.pub
