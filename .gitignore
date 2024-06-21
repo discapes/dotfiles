@@ -18,3 +18,4 @@
 !.config/tofi/**
 !.config/lf/**
 !.config/hypr/hyprlock.conf
+!.config/hypr/hypridle.conf
