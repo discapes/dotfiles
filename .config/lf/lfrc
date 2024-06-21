@@ -1,0 +1,6 @@
+map D % set -f && gio trash "$fx" && echo "Trashed $fx!"
+
+set previewer ctpv
+set cleaner ctpvclear
+&ctpv -s $id
+&ctpvquit $id

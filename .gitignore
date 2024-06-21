@@ -16,3 +16,4 @@
 !.local/bin/**
 !README.md
 !.config/tofi/**
+!.config/lf/**
