@@ -1,6 +1,6 @@
 anchor = center
 width = 180
-height = 180
+height = 200
 horizontal = false
 font-size = 12
 prompt-text = "> "
