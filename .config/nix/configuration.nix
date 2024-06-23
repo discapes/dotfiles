@@ -28,7 +28,7 @@
       "/home"
       "/nix"
     ];
-    files = [ "/etc/machine-id" ];
+    files = [ "/etc/machine-id" "/etc/passhash" ];
   };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -60,6 +60,10 @@
   networking.firewall.allowedUDPPorts = [ ];
   networking.firewall.enable = true;
   networking.nftables.enable = true;
+
+  # mkpasswd | sudo tee /etc/passhash
+  users.users.root.hashedPasswordFile = "/persist/etc/passhash";
+  users.mutableUsers = false;
 
   security.rtkit.enable = true;
   services.pipewire = {
@@ -119,6 +123,7 @@
     isNormalUser = true;
     description = "Miika Tuominen";
     extraGroups = [ "wheel" "docker" ];
+    hashedPasswordFile = "/persist/etc/passhash";
     shell = pkgs.zsh;
     packages = (with pkgs; [
       firefox
@@ -142,7 +147,7 @@
       bat
       wl-clipboard
       ctpv
-      flatpak
+      flatpak # flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo --user
       keepassxc
       nixfmt
       python3
