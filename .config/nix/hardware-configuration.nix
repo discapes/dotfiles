@@ -4,34 +4,30 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+  imports =
+    [ (modulesPath + "/profiles/qemu-guest.nix")
+    ];
 
-  boot.initrd.availableKernelModules = [
-    "xhci_pci"
-    "ehci_pci"
-    "ahci"
-    "usb_storage"
-    "sd_mod"
-    "sr_mod"
-    "rtsx_usb_sdmmc"
-  ];
+  boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "virtio_pci" "sr_mod" "virtio_blk" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/persist" = {
-    device = "/dev/disk/by-uuid/b88dcd4f-b2ab-4c6a-ba2c-55b617d52d67";
-    fsType = "ext4";
-    neededForBoot = true;
-  };
+  fileSystems."/persist" = # changed for /
+    { device = "/dev/disk/by-uuid/861673f6-3325-46e7-af64-02f091e54727";
+      fsType = "ext4";
+		neededForBoot = true; # added
+    };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/EB4A-B35F";
-    fsType = "vfat";
-  };
+  boot.initrd.luks.devices."root".device = "/dev/disk/by-uuid/207621ff-a0b8-42b1-84f3-908c68250f89";
 
-  swapDevices =
-    [{ device = "/dev/disk/by-uuid/0276567a-40a6-40cb-bc01-a674948cb0ea"; }];
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/9DFC-5CE0";
+      fsType = "vfat";
+      options = [ "fmask=0022" "dmask=0022" ];
+    };
+
+  swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
@@ -39,9 +35,6 @@
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp1s0.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlp2s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.intel.updateMicrocode =
-    lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

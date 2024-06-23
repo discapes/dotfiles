@@ -11,6 +11,7 @@ return {
     xml = { "xmlformat" },
     python = { "black" },
     htmldjango = { "djlint" },
+    nix = { "nixfmt" },
   },
 
   format_on_save = {
