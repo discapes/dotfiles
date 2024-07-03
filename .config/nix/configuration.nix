@@ -39,6 +39,7 @@
   services.fprintd.enable = true;
   # we want passsword to be primary
   security.pam.services.passwd.fprintAuth = false;
+  security.pam.services.passwd.nodelay = true;
   environment.localBinInPath = true;
   boot.loader.timeout = 0;
 

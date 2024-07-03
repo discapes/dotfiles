@@ -14,6 +14,12 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
   end,
 })
 
+vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
+  pattern = "hyprland.conf",
+  callback = function()
+    vim.opt.expandtab = true
+  end,
+})
 -- vim.api.nvim_create_autocmd("FileType", {
 --   pattern = "html",
 --   callback = function()
