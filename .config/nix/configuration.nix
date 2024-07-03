@@ -42,6 +42,9 @@
   security.pam.services.passwd.nodelay = true;
   environment.localBinInPath = true;
   boot.loader.timeout = 0;
+  # flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo --user
+  # we want it global because flatpak needs /var/lib/flatpak/repo to exist, even if the app is user-installed
+  services.flatpak.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.optimise.automatic = true;
@@ -109,9 +112,19 @@
         DisablePocket = true;
         ExtensionSettings = {
           "uBlock0@raymondhill.net" = {
-            # uBlock Origin
             install_url =
               "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+            installation_mode = "force_installed";
+          };
+          "keepassxc-browser@keepassxc.org" = {
+            install_url =
+              "https://addons.mozilla.org/firefox/downloads/latest/keepassxc-browser/latest.xpi";
+            installation_mode = "force_installed";
+          };
+          # easily get the extension id
+          "queryamoid@kaply.com" = {
+            install_url =
+              "https://github.com/mkaply/queryamoid/releases/download/v0.2/query_amo_addon_id-0.2-fx.xpi";
             installation_mode = "force_installed";
           };
         };
@@ -141,7 +154,6 @@
     hashedPasswordFile = "/persist/etc/passhash";
     shell = pkgs.zsh;
     packages = (with pkgs; [
-      firefox
       lxqt.lxqt-policykit
       ripgrep
       brightnessctl
@@ -166,7 +178,6 @@
       bat
       wl-clipboard
       ctpv
-      flatpak # flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo --user
       keepassxc
       nixfmt
       python3
