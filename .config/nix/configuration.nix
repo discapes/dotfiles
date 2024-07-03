@@ -1,14 +1,7 @@
-# dit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
 { config, lib, pkgs, unstable, ... }:
 
 {
-  imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-  ];
+  imports = [ ./hardware-configuration.nix ];
 
   fileSystems."/" = {
     device = "none";
@@ -17,12 +10,15 @@
     options = [ "defaults" "size=2G" "mode=755" ];
   };
 
+  # after installing, clean up /persist
   environment.persistence."/persist" = {
     hideMounts = true;
     directories = [
       "/var/log"
       "/var/lib/bluetooth"
       "/var/lib/nixos"
+      "/var/lib/fprint"
+      "/var/lib/docker"
       "/var/lib/systemd/coredump"
       "/etc/NetworkManager/system-connections"
       "/home"
@@ -37,6 +33,14 @@
     ACTION=="add", SUBSYSTEM=="backlight", RUN+="${pkgs.coreutils-full}/bin/chgrp users /sys/class/backlight/%k/brightness"
     ACTION=="add", SUBSYSTEM=="backlight", RUN+="${pkgs.coreutils-full}/bin/chmod g+w /sys/class/backlight/%k/brightness"
   '';
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
+  # remember to enroll fingerprint
+  services.fprintd.enable = true;
+  # we want passsword to be primary
+  security.pam.services.passwd.fprintAuth = false;
+  environment.localBinInPath = true;
+  boot.loader.timeout = 0;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.optimise.automatic = true;
@@ -137,7 +141,8 @@
     shell = pkgs.zsh;
     packages = (with pkgs; [
       firefox
-      fprintd
+      lxqt.lxqt-policykit
+      ripgrep
       brightnessctl
       kitty
       stow
