@@ -188,6 +188,8 @@
       go
       cargo
       gnome.gnome-software
+      grim
+      slurp
     ]);
   };
 

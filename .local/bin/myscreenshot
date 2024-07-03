@@ -7,7 +7,9 @@ screen
 copy area
 copy window
 copy screen' \
-| tofi)
+	| tofi)
+
+sleep 0.2 # wait for tofi to close
 
 case "$result" in
     "area") grim -g "$(slurp)" ;;
