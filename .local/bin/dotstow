@@ -3,7 +3,7 @@
 # however we don't want something like .m2 to be just a symlink
 # so we will create folders here if we don't want them to fully sync
 # because if they exist stow won't make them into symlinks
-mkdir ~/.ssh ~/.m2 ~/.config ~/.local/{bin,share} ~/.local/share/fonts ~/.config/zsh -v
+mkdir -p ~/.ssh ~/.m2 ~/.config ~/.local/{bin,share} ~/.local/share/fonts -v
 
 SCRIPTDIR=$(dirname -- "$( readlink -f -- "$0"; )");
 DOTDIR=$(dirname -- "$(dirname -- "$SCRIPTDIR")");

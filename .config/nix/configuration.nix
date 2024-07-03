@@ -31,6 +31,13 @@
     files = [ "/etc/machine-id" "/etc/passhash" ];
   };
 
+  # from https://salsa.debian.org/debian/brightnessctl/-/blob/debian/sid/90-brightnessctl.rules
+  # to allow brightnessctl to work without root
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="backlight", RUN+="${pkgs.coreutils-full}/bin/chgrp users /sys/class/backlight/%k/brightness"
+    ACTION=="add", SUBSYSTEM=="backlight", RUN+="${pkgs.coreutils-full}/bin/chmod g+w /sys/class/backlight/%k/brightness"
+  '';
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.optimise.automatic = true;
   nix.optimise.dates = [ "03:45" ];
@@ -53,15 +60,18 @@
     LC_TIME = "fi_FI.UTF-8";
   };
 
-  networking.hostName = "nixos";
+  networking.hostName = "nixpad";
   networking.networkmanager.enable = true;
   networking.nameservers = [ "1.1.1.1" "9.9.9.9" ];
   networking.firewall.allowedTCPPorts = [ ];
   networking.firewall.allowedUDPPorts = [ ];
   networking.firewall.enable = true;
   networking.nftables.enable = true;
+  networking.extraHosts = ''
+    10.0.0.3 pi
+  '';
 
-  # mkpasswd | sudo tee /etc/passhash
+  # mkpasswd | sudo tee /etc/persist/passhash
   users.users.root.hashedPasswordFile = "/persist/etc/passhash";
   users.mutableUsers = false;
 
@@ -86,7 +96,7 @@
   hardware.opengl.enable = true;
   virtualisation.docker.enable = true;
   nixpkgs.config.allowUnfree = true;
-  environment.systemPackages = with pkgs; [ wget git gptfdisk ];
+  environment.systemPackages = with pkgs; [ wget git gptfdisk wireguard-tools ];
   programs = {
     firefox = {
       enable = true;
@@ -122,11 +132,13 @@
   users.users.miika = {
     isNormalUser = true;
     description = "Miika Tuominen";
-    extraGroups = [ "wheel" "docker" ];
+    extraGroups = [ "wheel" "docker" "networkmanager" ];
     hashedPasswordFile = "/persist/etc/passhash";
     shell = pkgs.zsh;
     packages = (with pkgs; [
       firefox
+      fprintd
+      brightnessctl
       kitty
       stow
       lsd
@@ -134,6 +146,7 @@
       hyprlock
       hypridle
       tmux
+      glib.bin
       waybar
       tofi
       fuzzel

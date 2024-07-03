@@ -9,7 +9,7 @@
   };
 
   outputs = { self, nixpkgs, impermanence, nixpkgs-unstable }@attrs: {
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.nixpad = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = {
         unstable = import nixpkgs-unstable {
@@ -18,6 +18,7 @@
         };
       };
       modules = [
+        (import ./overlay.nix)
         ./configuration.nix
         # home-manager.nixosModules.home-manager
         impermanence.nixosModules.impermanence
