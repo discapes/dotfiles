@@ -117,6 +117,8 @@
   programs.hyprland.enable = true;
   #  programs.sway.enable = true;
   programs.neovim = {
+    # so we get nvim 10 and comment functionality
+    package = unstable.neovim-unwrapped;
     enable = true;
     defaultEditor = true;
     viAlias = true;
