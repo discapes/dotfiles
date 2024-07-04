@@ -1,0 +1,42 @@
+pkgs:
+(with pkgs; [
+  lxqt.lxqt-policykit
+  ripgrep
+  brightnessctl
+  kitty
+  stow
+  lsd
+  swaybg
+  hyprlock
+  hypridle
+  tmux
+  glib.bin
+  waybar
+  tofi
+  fuzzel
+  wob
+  lf
+  dunst
+  direnv
+  cava
+  fzf
+  zoxide
+  bat
+  wl-clipboard
+  ctpv
+  keepassxc
+  nixfmt
+  python3
+  nodejs
+  clang
+  zip
+  unzip
+  go
+  cargo
+  gnome.gnome-software
+  grim
+  slurp
+  fastfetch
+  ncdu
+  libreoffice-fresh
+])

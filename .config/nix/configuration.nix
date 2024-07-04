@@ -1,6 +1,4 @@
-{ config, lib, pkgs, unstable, ... }:
-
-{
+{ config, lib, pkgs, unstable, ... }: {
   imports = [ ./hardware-configuration.nix ];
 
   fileSystems."/" = {
@@ -33,18 +31,32 @@
     ACTION=="add", SUBSYSTEM=="backlight", RUN+="${pkgs.coreutils-full}/bin/chgrp users /sys/class/backlight/%k/brightness"
     ACTION=="add", SUBSYSTEM=="backlight", RUN+="${pkgs.coreutils-full}/bin/chmod g+w /sys/class/backlight/%k/brightness"
   '';
-  hardware.bluetooth.enable = true;
   services.blueman.enable = true;
-  # remember to enroll fingerprint
-  services.fprintd.enable = true;
-  # we want passsword to be primary
-  security.pam.services.passwd.fprintAuth = false;
-  security.pam.services.passwd.nodelay = true;
+  services.syncthing = {
+    enable = true; # a
+    user = "miika";
+    dataDir = "/home/miika"; # Default folder for new synced folders
+    configDir = "/home/miika/.config/syncthing";
+  };
+  services.getty.autologinUser = "miika";
+  services.fprintd.enable = true; # remember to enroll fingerprint
+  services.flatpak.enable =
+    true; # flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo --user
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+
   environment.localBinInPath = true;
-  boot.loader.timeout = 0;
-  # flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo --user
-  # we want it global because flatpak needs /var/lib/flatpak/repo to exist, even if the app is user-installed
-  services.flatpak.enable = true;
+  environment.systemPackages = with pkgs; [ wget git gptfdisk wireguard-tools ];
+
+  security.pam.services.passwd.fprintAuth =
+    false; # we want passsword to be primary
+  security.pam.services.passwd.nodelay = true;
+  security.sudo.wheelNeedsPassword = false;
+  security.rtkit.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.optimise.automatic = true;
@@ -52,6 +64,7 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.timeout = 0;
 
   time.timeZone = "Europe/Helsinki";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -79,18 +92,6 @@
     10.0.0.3 pi
   '';
 
-  # mkpasswd | sudo tee /etc/persist/passhash
-  users.users.root.hashedPasswordFile = "/persist/etc/passhash";
-  users.mutableUsers = false;
-
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
   programs.hyprland.enable = true;
   #  programs.sway.enable = true;
   programs.neovim = {
@@ -100,102 +101,24 @@
     vimAlias = true;
   };
   programs.zsh.enable = true;
-  security.sudo.wheelNeedsPassword = false;
-  hardware.opengl.enable = true;
-  virtualisation.docker.enable = true;
-  nixpkgs.config.allowUnfree = true;
-  environment.systemPackages = with pkgs; [ wget git gptfdisk wireguard-tools ];
-  programs = {
-    firefox = {
-      enable = true;
-      policies = {
-        DisablePocket = true;
-        ExtensionSettings = {
-          "uBlock0@raymondhill.net" = {
-            install_url =
-              "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
-            installation_mode = "force_installed";
-          };
-          "keepassxc-browser@keepassxc.org" = {
-            install_url =
-              "https://addons.mozilla.org/firefox/downloads/latest/keepassxc-browser/latest.xpi";
-            installation_mode = "force_installed";
-          };
-          # easily get the extension id
-          "queryamoid@kaply.com" = {
-            install_url =
-              "https://github.com/mkaply/queryamoid/releases/download/v0.2/query_amo_addon_id-0.2-fx.xpi";
-            installation_mode = "force_installed";
-          };
-        };
-      };
-      preferences = {
-        "browser.startup.page" = 3; # resume
-      };
-    };
-  };
-  # unavailable with impermeance
-  # system.copySystemConfiguration = true;
+  programs.firefox = import ./firefox.nix;
 
-  services = {
-    syncthing = {
-      enable = true; # a
-      user = "miika";
-      dataDir = "/home/miika"; # Default folder for new synced folders
-      configDir = "/home/miika/.config/syncthing";
-    };
-  };
-  # TODO gnome software working
-  services.getty.autologinUser = "miika";
+  # mkpasswd | sudo tee /etc/persist/passhash
+  users.users.root.hashedPasswordFile = "/persist/etc/passhash";
+  users.mutableUsers = false;
+  hardware.opengl.enable = true;
+  hardware.bluetooth.enable = true;
+  virtualisation.docker.enable = true;
+  # nixpkgs.config.allowUnfree = true;
+  # system.copySystemConfiguration = true;  # unavailable with impermeance
   users.users.miika = {
     isNormalUser = true;
     description = "Miika Tuominen";
     extraGroups = [ "wheel" "docker" "networkmanager" ];
     hashedPasswordFile = "/persist/etc/passhash";
     shell = pkgs.zsh;
-    packages = (with pkgs; [
-      lxqt.lxqt-policykit
-      ripgrep
-      brightnessctl
-      kitty
-      stow
-      lsd
-      swaybg
-      hyprlock
-      hypridle
-      tmux
-      glib.bin
-      waybar
-      tofi
-      fuzzel
-      wob
-      lf
-      dunst
-      direnv
-      cava
-      fzf
-      zoxide
-      bat
-      wl-clipboard
-      ctpv
-      keepassxc
-      nixfmt
-      python3
-      nodejs
-      clang
-      zip
-      unzip
-      go
-      cargo
-      gnome.gnome-software
-      grim
-      slurp
-      fastfetch
-      ncdu
-      libreoffice-fresh
-    ]);
+    packages = (import ./user-packages.nix) pkgs;
   };
-
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   systemd.extraConfig = ''
     DefaultTimeoutStopSec=20s
