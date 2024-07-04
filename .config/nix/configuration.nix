@@ -190,8 +190,15 @@
       gnome.gnome-software
       grim
       slurp
+      fastfetch
+      ncdu
     ]);
   };
+
+  xdg.portal.extraportals = [ pkgs.xdg-desktop-portal-gtk ];
+  systemd.extraConfig = ''
+    DefaultTimeoutStopSec=20s
+  '';
 
   system.stateVersion = "24.05"; # Did you read the comment?
 }
