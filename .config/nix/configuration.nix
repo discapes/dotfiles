@@ -192,10 +192,11 @@
       slurp
       fastfetch
       ncdu
+      libreoffice-fresh
     ]);
   };
 
-  xdg.portal.extraportals = [ pkgs.xdg-desktop-portal-gtk ];
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   systemd.extraConfig = ''
     DefaultTimeoutStopSec=20s
   '';
