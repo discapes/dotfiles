@@ -14,5 +14,6 @@ return {
     "python",
     "svelte",
     "htmldjango",
+    "nix",
   },
 }

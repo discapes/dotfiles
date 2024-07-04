@@ -10,6 +10,11 @@
           hash = "sha256-zDohA3F+zX9xbS0SGpF0cygPRPN6iXcH1TrRMhoO1qs=";
         };
       });
+      # we need to add glib-networking so screenshots can be downloaded
+      gnome = prev.gnome.overrideScope (final: prev: {
+        gnome-software = prev.gnome-software.overrideAttrs
+          (old: { buildInputs = old.buildInputs ++ [ pkgs.glib-networking ]; });
+      });
     })
   ];
 }

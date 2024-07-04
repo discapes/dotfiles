@@ -117,7 +117,10 @@
     extraGroups = [ "wheel" "docker" "networkmanager" ];
     hashedPasswordFile = "/persist/etc/passhash";
     shell = pkgs.zsh;
-    packages = (import ./user-packages.nix) pkgs;
+    packages = (import ./user-packages.nix) {
+      inherit pkgs;
+      inherit unstable;
+    };
   };
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   systemd.extraConfig = ''

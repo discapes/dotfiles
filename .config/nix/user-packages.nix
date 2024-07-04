@@ -1,4 +1,4 @@
-pkgs:
+{ pkgs, unstable }:
 (with pkgs; [
   lxqt.lxqt-policykit
   ripgrep
