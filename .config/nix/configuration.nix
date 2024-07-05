@@ -1,5 +1,4 @@
-{ config, lib, pkgs, unstable, ... }: {
-  imports = [ ./hardware-configuration.nix ];
+{ pkgs, pkgs-unstable, inputs, ... }: {
 
   fileSystems."/" = {
     device = "none";
@@ -118,7 +117,7 @@
   #  programs.sway.enable = true;
   programs.neovim = {
     # so we get nvim 10 and comment functionality
-    package = unstable.neovim-unwrapped;
+    package = pkgs-unstable.neovim-unwrapped;
     enable = true;
     defaultEditor = true;
     viAlias = true;
@@ -143,7 +142,7 @@
     shell = pkgs.zsh;
     packages = (import ./user-packages.nix) {
       inherit pkgs;
-      inherit unstable;
+      inherit pkgs-unstable;
     };
   };
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];

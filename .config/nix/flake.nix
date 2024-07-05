@@ -8,21 +8,25 @@
     impermanence.url = "github:nix-community/impermanence";
   };
 
-  outputs = { self, nixpkgs, impermanence, nixpkgs-unstable }@attrs: {
-    nixosConfigurations.nixpad = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = {
-        unstable = import nixpkgs-unstable {
-          system = "x86_64-linux";
-          config.allowUnfree = true;
+  outputs = { self, nixpkgs, impermanence, nixpkgs-unstable }@inputs: {
+    nixosConfigurations.nixpad = nixpkgs.lib.nixosSystem
+      (let system = "x86_64-linux";
+      in {
+        inherit system;
+        specialArgs = {
+          inherit inputs;
+          pkgs-unstable = import nixpkgs-unstable {
+            inherit system;
+            config.allowUnfree = true;
+          };
         };
-      };
-      modules = [
-        (import ./overlay.nix)
-        ./configuration.nix
-        # home-manager.nixosModules.home-manager
-        impermanence.nixosModules.impermanence
-      ];
-    };
+        modules = [
+          ./overlay.nix
+          ./hardware-configuration.nix
+          ./configuration.nix
+          impermanence.nixosModules.impermanence
+          # home-manager.nixosModules.home-manager
+        ];
+      });
   };
 }
