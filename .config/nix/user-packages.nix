@@ -26,7 +26,8 @@
   ctpv
   keepassxc
   nixfmt
-  python3
+  (python3.withPackages
+    (p: [ p.jupyterlab p.jupyterlab-widgets p.rpy2 p.ipywidgets ]))
   nodejs
   clang
   zip
@@ -46,4 +47,12 @@
   }).run
   distrobox
   networkmanagerapplet
+  deno # deno jupyter --unstable --install
+  (rWrapper.override {
+    packages = with rPackages; [ IRkernel ];
+  }) # sudo R, IRkernel::installspec(), copy to ~/.local/share/jupyter/kernels
+  micromamba
+  bruno
+  vlc
+  xorg.xhost
 ])

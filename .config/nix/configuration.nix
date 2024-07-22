@@ -1,4 +1,5 @@
 { pkgs, pkgs-unstable, inputs, ... }: {
+  # imports = [ ./kde.nix ];
 
   fileSystems."/" = {
     device = "none";
