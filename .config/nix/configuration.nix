@@ -152,5 +152,29 @@
   '';
 
   system.stateVersion = "24.05"; # Did you read the comment?
+
+  systemd.timers.backup = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      Unit = "backup.service";
+      OnCalendar = "daily";
+      Persistent = true;
+    };
+  };
+
+  systemd.services.backup = {
+    path = [ pkgs.openssh ];
+    script = ''
+      set -euo pipefail
+      cd ~
+      export RESTIC_PASSWORD_FILE=~/.resticpassword
+      ${pkgs.restic}/bin/restic -r sftp:box:rPictures backup Pictures --tag auto
+      ${pkgs.restic}/bin/restic -r sftp:box:rDocuments backup Documents --tag auto
+    '';
+    serviceConfig = {
+      Type = "oneshot";
+      User = "miika";
+    };
+  };
 }
 
