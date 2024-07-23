@@ -54,5 +54,11 @@
   micromamba
   bruno
   vlc
+  restic
+  fdupes
   xorg.xhost
+  file
+  nmap
+  hashdeep
+  gnome.nautilus
 ])
