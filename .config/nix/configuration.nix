@@ -5,7 +5,7 @@
     device = "none";
     fsType = "tmpfs";
     neededForBoot = true;
-    options = [ "defaults" "size=2G" "mode=755" ];
+    options = [ "defaults" "size=10G" "mode=755" ];
   };
 
   # after installing, clean up /persist
@@ -17,9 +17,11 @@
       "/var/lib/nixos"
       "/var/lib/fprint"
       "/var/lib/docker"
+      "/var/lib/libvirt"
       "/var/lib/systemd/coredump"
       "/etc/NetworkManager/system-connections"
       "/home"
+      "/root/.cache"
       "/nix"
     ];
     files = [ "/etc/machine-id" "/etc/passhash" ];
@@ -32,6 +34,7 @@
     ACTION=="add", SUBSYSTEM=="backlight", RUN+="${pkgs.coreutils-full}/bin/chmod g+w /sys/class/backlight/%k/brightness"
   '';
   services.blueman.enable = true;
+  boot.kernel.sysctl."kernel.sysrq" = 502;
   services.syncthing = {
     enable = true; # a
     user = "miika";
@@ -115,6 +118,7 @@
   '';
 
   programs.hyprland.enable = true;
+  programs.hyprland.xwayland.enable = true;
   #  programs.sway.enable = true;
   programs.neovim = {
     # so we get nvim 10 and comment functionality
@@ -133,6 +137,8 @@
   hardware.opengl.enable = true;
   hardware.bluetooth.enable = true;
   virtualisation.docker.enable = true;
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
   # nixpkgs.config.allowUnfree = true;
   # system.copySystemConfiguration = true;  # unavailable with impermeance
   users.users.miika = {
