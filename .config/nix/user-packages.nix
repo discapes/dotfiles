@@ -61,4 +61,5 @@
   nmap
   hashdeep
   gnome.nautilus
+  gnome.adwaita-icon-theme
 ])
