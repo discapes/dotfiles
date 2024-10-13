@@ -6,8 +6,8 @@ swap() {
 }
 
 alias ls="lsd -A"
-alias ssh_readonly="TERM=xterm-256color /usr/bin/env ssh"
-alias ssh="kitty +kitten ssh"
+alias ssh="TERM=xterm-256color /usr/bin/env ssh"
+#alias ssh="kitty +kitten ssh"
 alias dnf="sudo dnf5"
 alias vim="nvim"
 #alias rm="echo 'Use trash!' && false"

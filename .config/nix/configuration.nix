@@ -1,4 +1,4 @@
-{ pkgs, pkgs-unstable, inputs, ... }: {
+{ pkgs, pkgs-unstable, inputs, lib, ... }: {
   # imports = [ ./kde.nix ];
 
   fileSystems."/" = {
@@ -16,6 +16,7 @@
       "/var/lib/bluetooth"
       "/var/lib/nixos"
       "/var/lib/fprint"
+      "/var/lib/opensnitch"
       "/var/lib/docker"
       "/var/lib/libvirt"
       "/var/lib/systemd/coredump"
@@ -64,6 +65,7 @@
       CPU_MAX_PERF_ON_BAT = 20;
     };
   };
+  services.opensnitch.enable = true;
 
   powerManagement.enable = true;
   powerManagement.powertop.enable = true;
@@ -75,8 +77,9 @@
     gptfdisk
     wireguard-tools
     powertop
+    opensnitch-ui
   ];
-
+  security.pam.services.polkit-1.fprintAuth = false;
   security.pam.services.passwd.fprintAuth =
     false; # we want passsword to be primary
   security.pam.services.passwd.nodelay = true;
@@ -182,5 +185,8 @@
       User = "miika";
     };
   };
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [ "steam" "steam-original" "steam-run" ];
+  programs.steam.enable = true;
 }
 
