@@ -1,33 +1,67 @@
-vim.g.base46_cache = vim.fn.stdpath "data" .. "/nvchad/base46/"
-vim.g.mapleader = " "
+require "config.lazy"
 
--- bootstrap lazy and all plugins
-local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+-- OPTS
+local o = vim.o
+o.cursorlineopt = "both"
+o.cursorline = true
+o.shiftwidth = 0
+o.tabstop = 3
+o.clipboard = "unnamedplus"
+o.autoindent = true
+o.expandtab = false
+--o.list = true
+--o.listchars = "tab:c,extends:›,precedes:‹,nbsp:·,trail:·,eol:$"
+o.showbreak = "↪ "
+o.number = true
+o.relativenumber = true
+o.ignorecase = true
+o.commentstring = "#%s"
+o.signcolumn = "yes"
+vim.cmd "colorscheme retrobox"
+vim.cmd "highlight Normal guibg=None"
+vim.cmd "highlight SignColumn guibg=None"
 
-if not vim.loop.fs_stat(lazypath) then
-  local repo = "https://github.com/folke/lazy.nvim.git"
-  vim.fn.system { "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath }
-end
+-- AUTOCMDS
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    require("nvim-tree.api").tree.open()
+    vim.cmd "wincmd w"
+  end,
+})
 
-vim.opt.rtp:prepend(lazypath)
+-- MAPS
+-- LSP
+local map = vim.keymap.set
+map("n", "<leader><leader>", "<C-w>w", { desc = "Toggle tree focus" })
+map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
+map("n", "<leader>r", vim.lsp.buf.rename, { desc = "Rename identifier" })
+map("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
+map("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
+map("n", "gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
+map("n", "<leader>sh", vim.lsp.buf.signature_help, { desc = "Show signature help" })
+map("n", "<leader>D", vim.lsp.buf.type_definition, { desc = "Go to type definition" })
+map("n", "<leader>ds", vim.diagnostic.setloclist, { desc = "LSP diagnostic loclist" })
+map("n", "<leader>i", function()
+  vim.diagnostic.open_float(nil, { focus = false, scope = "cursor" })
+end, { desc = "Floating diagnostic" })
+map("n", "gr", vim.lsp.buf.references, { desc = "Show references" })
 
-require("lazy").setup({
-  {
-    "NvChad/NvChad",
-    lazy = false,
-    branch = "v2.5",
-    import = "nvchad.plugins",
-  },
-  { import = "plugins" },
-}, require "opts.lazy_opts")
+-- Telescope
+map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "telescope live grep" })
+map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "telescope find buffers" })
+map("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { desc = "telescope help page" })
+map("n", "<leader>ma", "<cmd>Telescope marks<CR>", { desc = "telescope find marks" })
+map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", { desc = "telescope find oldfiles" })
+map("n", "<leader>fz", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "telescope find in current buffer" })
 
--- load theme
-dofile(vim.g.base46_cache .. "defaults")
-dofile(vim.g.base46_cache .. "statusline")
+-- OTHER
+map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>") -- save with Ctrl + S
+map("n", "<leader>fm", require("conform").format)
 
-require "nvchad.autocmds"
-require "nvchad.options"
-require "nvchad.mappings"
-require "scripts.autocmds"
-require "scripts.options"
-require "scripts.mappings"
+-- disable arrowkeys
+map({ "n", "i", "v" }, "<Left>", "<Nop>")
+map({ "n", "i", "v" }, "<Right>", "<Nop>")
+map({ "n", "i", "v" }, "<Up>", "<Nop>")
+map({ "n", "i", "v" }, "<Down>", "<Nop>")
+map({ "n", "i", "v" }, "<PageUp>", "<Nop>")
+map({ "n", "i", "v" }, "<PageDown>", "<Nop>")

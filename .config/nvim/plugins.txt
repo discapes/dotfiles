@@ -1,0 +1,24 @@
+interesting plugins
+
+oil.nvim
+mini.nvim
+    ● bufferline.nvim 2.08ms  VeryLazy
+    ● dashboard-nvim 0.54ms  start
+    ● LazyVim 1.86ms  start
+    ● lualine.nvim 10.1ms  VeryLazy
+    ● mini.ai 1.16ms  VeryLazy
+    ● mini.icons 0.85ms 󰢱 mini.icons  LazyVim
+    ● mini.pairs 2.09ms  VeryLazy
+    ● nvim-treesitter-textobjects 1.9ms  VeryLazy
+    ● tokyonight.nvim 0.25ms 󰢱 tokyonight  LazyVim
+    ● trouble.nvim 1.97ms 󰢱 trouble  lualine.nvim
+    ● ts-comments.nvim 1.49ms  VeryLazy
+
+    ○ catppuccin 
+    ○ dressing.nvim 
+    ○ gitsigns.nvim  LazyFile 
+    ○ grug-far.nvim  <leader>sr  <leader>sr (v)  GrugFar 
+    ○ neo-tree.nvim  <leader>be  <leader>fe  <leader>fE  <leader>e  <leader>E  <leader>ge  Neotree 
+    ○ nvim-lint  LazyFile 
+    ○ persistence.nvim  <leader>qS  <leader>ql  <leader>qd  <leader>qs  BufReadPre 
+    ○ todo-comments.nvim  <leader>xt  <leader>xT  <leader>st  [t  <leader>sT  ]t  LazyFile  TodoTelescope  TodoTrouble 

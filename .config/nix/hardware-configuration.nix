@@ -8,24 +8,27 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
+  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
+  boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/persist" =
-    { device = "/dev/disk/by-uuid/2a8b864d-e134-4888-a211-284883f17091";
+    {
+      device = "/dev/disk/by-uuid/b5beeb3f-7833-4ed3-9a5b-7bfca0fb1761";
       fsType = "btrfs";
       neededForBoot = true;
+      options = [ "subvol=@" ];
     };
 
-  boot.initrd.luks.devices."root".device = "/dev/disk/by-uuid/7ef6efec-233f-45be-8bdd-5b5fcf51da44";
+  boot.initrd.luks.devices."root".device = "/dev/disk/by-uuid/5cf2b5f0-4fb1-4964-aa47-9579ab7c2c00";
 
   fileSystems."/boot" =
-  { device = "/dev/disk/by-uuid/E17C-94C2";
+    { device = "/dev/disk/by-uuid/5CBB-A6A0";
     fsType = "vfat";
-    options = [ "fmask=0022" "dmask=0022" ];
-  };
+    options = [ "fmask=0077" "dmask=0077" ];
+    };
+
 
   swapDevices = [ ];
 
@@ -38,5 +41,6 @@
   # networking.interfaces.wlp0s20f3.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
 }

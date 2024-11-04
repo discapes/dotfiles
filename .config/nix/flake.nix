@@ -9,7 +9,7 @@
   };
 
   outputs = { self, nixpkgs, impermanence, nixpkgs-unstable }@inputs: {
-    nixosConfigurations.nixpad = nixpkgs.lib.nixosSystem
+    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem
       (let system = "x86_64-linux";
       in {
         inherit system;
@@ -23,6 +23,7 @@
         modules = [
           ./overlay.nix
           ./hardware-configuration.nix
+	  ./boot.nix
           ./configuration.nix
           impermanence.nixosModules.impermanence
           # home-manager.nixosModules.home-manager

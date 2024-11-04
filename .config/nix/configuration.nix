@@ -1,98 +1,7 @@
 { pkgs, pkgs-unstable, inputs, lib, ... }: {
-  # imports = [ ./kde.nix ];
+  imports = [ ./de/gnome.nix ];
 
-  fileSystems."/" = {
-    device = "none";
-    fsType = "tmpfs";
-    neededForBoot = true;
-    options = [ "defaults" "size=10G" "mode=755" ];
-  };
-
-  # after installing, clean up /persist
-  environment.persistence."/persist" = {
-    hideMounts = true;
-    directories = [
-      "/var/log"
-      "/var/lib/bluetooth"
-      "/var/lib/nixos"
-      "/var/lib/fprint"
-      "/var/lib/opensnitch"
-      "/var/lib/docker"
-      "/var/lib/libvirt"
-      "/var/lib/systemd/coredump"
-      "/etc/NetworkManager/system-connections"
-      "/home"
-      "/root/.cache"
-      "/nix"
-    ];
-    files = [ "/etc/machine-id" "/etc/passhash" ];
-  };
-
-  # from https://salsa.debian.org/debian/brightnessctl/-/blob/debian/sid/90-brightnessctl.rules
-  # to allow brightnessctl to work without root
-  services.udev.extraRules = ''
-    ACTION=="add", SUBSYSTEM=="backlight", RUN+="${pkgs.coreutils-full}/bin/chgrp users /sys/class/backlight/%k/brightness"
-    ACTION=="add", SUBSYSTEM=="backlight", RUN+="${pkgs.coreutils-full}/bin/chmod g+w /sys/class/backlight/%k/brightness"
-  '';
-  services.blueman.enable = true;
-  boot.kernel.sysctl."kernel.sysrq" = 502;
-  services.syncthing = {
-    enable = true; # a
-    user = "miika";
-    dataDir = "/home/miika"; # Default folder for new synced folders
-    configDir = "/home/miika/.config/syncthing";
-  };
-  services.getty.autologinUser = "miika";
-  services.fprintd.enable = true; # remember to enroll fingerprint
-  services.flatpak.enable =
-    true; # flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo --user
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-  services.tlp = {
-    enable = true;
-    settings = {
-      CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-      CPU_MIN_PERF_ON_AC = 0;
-      CPU_MAX_PERF_ON_AC = 100;
-      CPU_MIN_PERF_ON_BAT = 0;
-      CPU_MAX_PERF_ON_BAT = 20;
-    };
-  };
-  services.opensnitch.enable = true;
-
-  powerManagement.enable = true;
-  powerManagement.powertop.enable = true;
-
-  environment.localBinInPath = true;
-  environment.systemPackages = with pkgs; [
-    wget
-    git
-    gptfdisk
-    wireguard-tools
-    powertop
-    opensnitch-ui
-  ];
-  security.pam.services.polkit-1.fprintAuth = false;
-  security.pam.services.passwd.fprintAuth =
-    false; # we want passsword to be primary
-  security.pam.services.passwd.nodelay = true;
-  security.sudo.wheelNeedsPassword = false;
-  security.rtkit.enable = true;
-
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nix.optimise.automatic = true;
-  nix.optimise.dates = [ "03:45" ];
-
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.timeout = 0;
+  system.stateVersion = "24.05"; # Did you read the comment?
 
   time.timeZone = "Europe/Helsinki";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -108,8 +17,13 @@
     LC_TELEPHONE = "fi_FI.UTF-8";
     LC_TIME = "fi_FI.UTF-8";
   };
+  services.xserver.xkb = {
+    layout = "fi";
+    variant = "nodeadkeys";
+  };
 
-  networking.hostName = "nixpad";
+
+  networking.hostName = "nixos";
   networking.networkmanager.enable = true;
   networking.nameservers = [ "1.1.1.1" "9.9.9.9" ];
   networking.firewall.allowedTCPPorts = [ ];
@@ -117,36 +31,66 @@
   networking.firewall.enable = true;
   networking.nftables.enable = true;
   networking.extraHosts = ''
-    10.0.0.3 pi
   '';
 
-  programs.hyprland.enable = true;
-  programs.hyprland.xwayland.enable = true;
-  #  programs.sway.enable = true;
-  programs.neovim = {
-    # so we get nvim 10 and comment functionality
-    package = pkgs-unstable.neovim-unwrapped;
+
+  hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
     enable = true;
-    defaultEditor = true;
-    viAlias = true;
-    vimAlias = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
   };
+
+
+  services.flatpak.enable =
+    true; # flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo --user
+  services.opensnitch.enable = true;
+  environment.localBinInPath = true;
+  environment.systemPackages = with pkgs; [
+    vim
+    wget
+    git
+    gptfdisk
+    wireguard-tools
+    powertop
+    opensnitch-ui
+  ];
+  security.pam.services.passwd.nodelay = true;
+  security.sudo.wheelNeedsPassword = false;
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.optimise.automatic = true;
+  nix.optimise.dates = [ "03:45" ];
+
+
+  # programs.neovim = {
+  #   # so we get nvim 10 and comment functionality
+  #   package = pkgs-unstable.neovim-unwrapped;
+  #   enable = true;
+  #   defaultEditor = true;
+  #   viAlias = false;
+  #   vimAlias = true;
+  # };
   programs.zsh.enable = true;
   programs.firefox = import ./firefox.nix;
 
   # mkpasswd | sudo tee /etc/persist/passhash
   users.users.root.hashedPasswordFile = "/persist/etc/passhash";
   users.mutableUsers = false;
-  hardware.opengl.enable = true;
-  hardware.bluetooth.enable = true;
-  virtualisation.docker.enable = true;
+
+
+  virtualisation.containers.enable = true;
+  virtualisation.podman.enable = true;
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
+
   # nixpkgs.config.allowUnfree = true;
   # system.copySystemConfiguration = true;  # unavailable with impermeance
-  users.users.miika = {
+  users.users.user = {
     isNormalUser = true;
-    description = "Miika Tuominen";
+    description = "user";
     extraGroups = [ "wheel" "docker" "networkmanager" ];
     hashedPasswordFile = "/persist/etc/passhash";
     shell = pkgs.zsh;
@@ -155,38 +99,12 @@
       inherit pkgs-unstable;
     };
   };
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   systemd.extraConfig = ''
     DefaultTimeoutStopSec=20s
   '';
 
-  system.stateVersion = "24.05"; # Did you read the comment?
-
-  systemd.timers.backup = {
-    wantedBy = [ "timers.target" ];
-    timerConfig = {
-      Unit = "backup.service";
-      OnCalendar = "daily";
-      Persistent = true;
-    };
-  };
-
-  systemd.services.backup = {
-    path = [ pkgs.openssh ];
-    script = ''
-      set -euo pipefail
-      cd ~
-      export RESTIC_PASSWORD_FILE=~/.resticpassword
-      ${pkgs.restic}/bin/restic -r sftp:box:rPictures backup Pictures --tag auto
-      ${pkgs.restic}/bin/restic -r sftp:box:rDocuments backup Documents --tag auto
-    '';
-    serviceConfig = {
-      Type = "oneshot";
-      User = "miika";
-    };
-  };
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [ "steam" "steam-original" "steam-run" ];
-  programs.steam.enable = true;
+  #nixpkgs.config.allowUnfreePredicate = pkg:
+  #  builtins.elem (lib.getName pkg) [ "steam" "steam-original" "steam-run" ];
+  #programs.steam.enable = true;
 }
 
