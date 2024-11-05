@@ -17,6 +17,7 @@
     hideMounts = true;
     directories = [
       "/var/log"
+      "/var/cache"
       "/var/lib/bluetooth"
       "/var/lib/nixos"
       "/var/lib/fprint"

@@ -38,7 +38,9 @@
   #clang
   #go
   #cargo
-  #deno # deno jupyter --unstable --install
+  deno # deno jupyter --unstable --install
+  pipx
+  python3
   #jdk
 
   # DESKTOP 

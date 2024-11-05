@@ -64,15 +64,6 @@
   nix.optimise.automatic = true;
   nix.optimise.dates = [ "03:45" ];
 
-
-  # programs.neovim = {
-  #   # so we get nvim 10 and comment functionality
-  #   package = pkgs-unstable.neovim-unwrapped;
-  #   enable = true;
-  #   defaultEditor = true;
-  #   viAlias = false;
-  #   vimAlias = true;
-  # };
   programs.zsh.enable = true;
   programs.firefox = import ./firefox.nix;
 
