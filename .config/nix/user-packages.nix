@@ -41,6 +41,7 @@
   deno # deno jupyter --unstable --install
   pipx
   python3
+  ansible
   #jdk
 
   # DESKTOP 
@@ -54,6 +55,7 @@
   vlc
   bruno
   drawio
+  owncloud-client
 
   # OTHER
   #glib.bin

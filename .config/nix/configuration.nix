@@ -46,7 +46,6 @@
 
   services.flatpak.enable =
     true; # flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo --user
-  services.opensnitch.enable = true;
   environment.localBinInPath = true;
   environment.systemPackages = with pkgs; [
     vim
@@ -54,8 +53,6 @@
     git
     gptfdisk
     wireguard-tools
-    powertop
-    opensnitch-ui
   ];
   security.pam.services.passwd.nodelay = true;
   security.sudo.wheelNeedsPassword = false;
