@@ -22,6 +22,10 @@
   yq
   bc
   dtrx
+  gita
+  hugo
+  openrazer-daemon
+  polychromatic
 
   #nmap
   #hashdeep

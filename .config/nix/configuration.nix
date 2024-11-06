@@ -79,7 +79,7 @@
   users.users.user = {
     isNormalUser = true;
     description = "user";
-    extraGroups = [ "wheel" "docker" "networkmanager" ];
+    extraGroups = [ "wheel" "docker" "networkmanager" "openrazer" ];
     hashedPasswordFile = "/persist/etc/passhash";
     shell = pkgs.zsh;
     packages = (import ./user-packages.nix) {
@@ -91,8 +91,10 @@
     DefaultTimeoutStopSec=20s
   '';
 
-  #nixpkgs.config.allowUnfreePredicate = pkg:
-  #  builtins.elem (lib.getName pkg) [ "steam" "steam-original" "steam-run" ];
-  #programs.steam.enable = true;
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [ "steam" "steam-original" "steam-run" ];
+  programs.steam.enable = true;
+  services.ratbagd.enable = true;
+  hardware.openrazer.enable = true;
 }
 

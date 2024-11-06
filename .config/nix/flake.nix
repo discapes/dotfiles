@@ -10,24 +10,26 @@
 
   outputs = { self, nixpkgs, impermanence, nixpkgs-unstable }@inputs: {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem
-      (let system = "x86_64-linux";
-      in {
-        inherit system;
-        specialArgs = {
-          inherit inputs;
-          pkgs-unstable = import nixpkgs-unstable {
-            inherit system;
-            config.allowUnfree = true;
+      (
+        let system = "x86_64-linux";
+        in {
+          inherit system;
+          specialArgs = {
+            inherit inputs;
+            pkgs-unstable = import nixpkgs-unstable {
+              inherit system;
+              config.allowUnfree = true;
+            };
           };
-        };
-        modules = [
-          ./overlay.nix
-          ./hardware-configuration.nix
-	  ./boot.nix
-          ./configuration.nix
-          impermanence.nixosModules.impermanence
-          # home-manager.nixosModules.home-manager
-        ];
-      });
+          modules = [
+            ./overlay.nix
+            ./hardware-configuration.nix
+            ./boot.nix
+            ./configuration.nix
+            impermanence.nixosModules.impermanence
+            # home-manager.nixosModules.home-manager
+          ];
+        }
+      );
   };
 }
