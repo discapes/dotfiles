@@ -5,11 +5,13 @@
   boot.loader.timeout = 0;
   boot.kernel.sysctl."kernel.sysrq" = 502;
 
+  zramSwap.enable = true;
+
   fileSystems."/" = {
     device = "none";
     fsType = "tmpfs";
     neededForBoot = true;
-    options = [ "defaults" "size=10G" "mode=755" ];
+    options = [ "defaults" "mode=755" "999%" ];
   };
 
   # after installing, clean up /persist
@@ -21,7 +23,6 @@
       "/var/lib/bluetooth"
       "/var/lib/nixos"
       "/var/lib/fprint"
-      "/var/lib/opensnitch"
       "/var/lib/docker"
       "/var/lib/libvirt"
       "/var/lib/systemd/coredump"

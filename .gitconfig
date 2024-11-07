@@ -15,3 +15,5 @@
 	editor = vim
 [push]
 	autoSetupRemote = true
+[safe]
+	directory = /home/user/code/python-notebook

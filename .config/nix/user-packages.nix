@@ -25,7 +25,9 @@
   gita
   hugo
   openrazer-daemon
+
   polychromatic
+  vscodium
 
   #nmap
   #hashdeep
@@ -44,8 +46,8 @@
   #cargo
   deno # deno jupyter --unstable --install
   pipx
-  python3
   ansible
+  python3
   #jdk
 
   # DESKTOP 
@@ -65,20 +67,10 @@
   #glib.bin
   #cava
   #bat
-  #(python3.withPackages (p: [
-  #  p.ansible-core
-  #  p.jupyterlab
-  #  p.jupyterlab-widgets
-  #  p.rpy2
-  #  p.ipywidgets
-  #]))
   ## extra pkgs for MATLAB from https://gitlab.com/doronbehar/nix-matlab/-/blob/master/common.nix
   #(steamPackages.steam-fhsenv-without-steam.override {
   #  extraPkgs = pkgs: [ pam libselinux libsndfile unzip cacert libglvnd jre ];
   #}).run
-  #(rWrapper.override {
-  #  packages = with rPackages; [ IRkernel ];
-  #}) # sudo R, IRkernel::installspec(), copy to ~/.local/share/jupyter/kernels
   #micromamba
   #xorg.xhost
   #gnome.adwaita-icon-theme
