@@ -1,0 +1,15 @@
+run-localmodconfig
+--- a/Makefile
++++ b/Makefile
+@@ -1,3 +1,11 @@
++ifeq ($(findstring modules,$(MAKECMDGOALS)),modules)
++    ifneq ($(shell [ -e lmc ] && echo yes),yes)
++	ASDF := $(shell make localmodconfig && touch lmc)
++    endif
++endif
++
++
++
+ # SPDX-License-Identifier: GPL-2.0
+ VERSION = 6
+ PATCHLEVEL = 12

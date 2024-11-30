@@ -26,9 +26,10 @@
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
   networking.nameservers = [ "1.1.1.1" "9.9.9.9" ];
-  networking.firewall.allowedTCPPorts = [ ];
-  networking.firewall.allowedUDPPorts = [ ];
-  networking.firewall.enable = true;
+  # WILL BREAK VIRTD DHCP
+  #  networking.firewall.allowedTCPPorts = [ ];
+  #  networking.firewall.allowedUDPPorts = [ ];
+  networking.firewall.enable = false;
   networking.nftables.enable = true;
   networking.extraHosts = ''
   '';
@@ -47,13 +48,19 @@
   services.flatpak.enable =
     true; # flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo --user
   environment.localBinInPath = true;
-  environment.systemPackages = with pkgs; [
-    vim
-    wget
-    git
-    gptfdisk
-    wireguard-tools
-  ];
+  environment.systemPackages =
+    (import ./user-packages.nix)
+      {
+        inherit pkgs;
+        inherit pkgs-unstable;
+      } ++ (with pkgs; [
+      vim
+      wget
+      git
+      gptfdisk
+      wireguard-tools
+      podman-tui
+    ]);
   security.pam.services.passwd.nodelay = true;
   security.sudo.wheelNeedsPassword = false;
 
@@ -61,8 +68,6 @@
   nix.optimise.automatic = true;
   nix.optimise.dates = [ "03:45" ];
 
-  programs.zsh.enable = true;
-  programs.firefox = import ./firefox.nix;
 
   # mkpasswd | sudo tee /etc/persist/passhash
   users.users.root.hashedPasswordFile = "/persist/etc/passhash";
@@ -70,22 +75,36 @@
 
 
   virtualisation.containers.enable = true;
-  virtualisation.podman.enable = true;
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+    defaultNetwork.settings.dns_enabled = true;
+  };
   virtualisation.libvirtd.enable = true;
-  programs.virt-manager.enable = true;
 
   # nixpkgs.config.allowUnfree = true;
   # system.copySystemConfiguration = true;  # unavailable with impermeance
+  programs = {
+    wireshark.enable = true;
+    wireshark.package = pkgs.wireshark;
+    steam.enable = true;
+    virt-manager.enable = true;
+    zsh.enable = true;
+    firefox = import ./firefox.nix;
+  };
+  services = {
+    ratbagd.enable = true;
+  };
   users.users.user = {
     isNormalUser = true;
     description = "user";
-    extraGroups = [ "wheel" "docker" "networkmanager" "openrazer" ];
+    extraGroups = [ "wheel" "docker" "networkmanager" "openrazer" "wireshark" ];
     hashedPasswordFile = "/persist/etc/passhash";
     shell = pkgs.zsh;
-    packages = (import ./user-packages.nix) {
-      inherit pkgs;
-      inherit pkgs-unstable;
-    };
+    # packages = (import ./user-packages.nix) {
+    #   inherit pkgs;
+    #   inherit pkgs-unstable;
+    # };
   };
   systemd.extraConfig = ''
     DefaultTimeoutStopSec=20s
@@ -93,8 +112,6 @@
 
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [ "steam" "steam-original" "steam-run" ];
-  programs.steam.enable = true;
-  services.ratbagd.enable = true;
   hardware.openrazer.enable = true;
 }
 

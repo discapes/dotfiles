@@ -25,9 +25,22 @@
   gita
   hugo
   openrazer-daemon
+  docker-compose
+  gnumake
+  pciutils
+  iw
+  aircrack-ng
+  ffmpeg-full
+  parted
+  ps_mem
+  stress-ng
+  lshw
+  usbutils
+  pulsemixer
 
   polychromatic
   vscodium
+
 
   #nmap
   #hashdeep
@@ -62,6 +75,8 @@
   bruno
   drawio
   owncloud-client
+  signal-desktop
+  kismet
 
   # OTHER
   #glib.bin
