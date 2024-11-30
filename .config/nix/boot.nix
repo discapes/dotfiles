@@ -5,16 +5,16 @@
   boot.loader.timeout = 0;
   boot.kernel.sysctl."kernel.sysrq" = 502;
 
-  # boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
-  #
-  # boot.kernelPatches = [{
-  #   name = "logo";
-  #   patch = ./my.patch;
-  #   extraConfig = ''
-  #     LOGO y
-  #     LOGO_LINUX_CLUT224 y
-  #   '';
-  # }];
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
+
+  boot.kernelPatches = [{
+    name = "logo";
+    patch = ./my.patch;
+    extraConfig = ''
+      LOGO y
+      LOGO_LINUX_CLUT224 y
+    '';
+  }];
   #      EXT4_FS y
   #      USB_STORAGE y
 
@@ -28,7 +28,6 @@
     "xhci_pci"
 
     # Misc. x86 keyboard stuff.
-    "pcips2"
     "atkbd"
     "i8042"
 
@@ -38,26 +37,19 @@
     "btrfs"
 
     "dm_crypt"
-    "dm_verity"
+    "dm_mod"
+    "cryptd"
 
-    "xxhash_generic"
+    "loop"
+    "overlay"
+
     "blake2b_generic"
     "sha256_generic"
     "crc32c"
-    "loop"
-    "overlay"
-    "dm_mod"
-    "dm_crypt"
-    "cryptd"
     "input_leds"
     "aes"
     "aes_generic"
-    "blowfish"
-    "twofish"
-    "serpent"
     "cbc"
-    "xts"
-    "lrw"
     "sha1"
     "sha256"
     "sha512"
@@ -77,7 +69,6 @@
   #   ext3 = lib.mkForce false;
   #   ext4 = lib.mkForce false;
   # };
-
 
   zramSwap.enable = true;
 
