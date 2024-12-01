@@ -1,15 +1,18 @@
 { lib, config, pkgs, ... }:
 {
-  #boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.timeout = 1;
+  boot.loader.timeout = 0;
   boot.kernel.sysctl."kernel.sysrq" = 502;
-  boot.loader.grub.enable = true;
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.device = "nodev";
-  boot.loader.grub.configurationLimit = 10;
-  boot.loader.grub.timeoutStyle = "hidden";
-  boot.kernelParams = [ "hidden" ];
+  #boot.loader.grub.enable = true;
+  #boot.loader.grub.efiSupport = true;
+  #boot.loader.grub.device = "nodev";
+  #boot.loader.grub.configurationLimit = 10;
+  #boot.loader.grub.timeoutStyle = "hidden";
+  boot.plymouth.theme = "breeze";
+  boot.initrd.systemd.enable = true;
+  boot.plymouth.enable = true;
+  boot.kernelParams = [ "quiet" ];
 
   # boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen
   boot.kernelPackages = pkgs.linuxKernel.packagesFor (pkgs.linuxKernel.kernels.linux_zen.override {
