@@ -37,6 +37,7 @@
   lshw
   usbutils
   pulsemixer
+  modprobed-db # create /public 777 and configure to store there
 
   polychromatic
   vscodium
