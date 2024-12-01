@@ -37,11 +37,8 @@
   lshw
   usbutils
   pulsemixer
-  modprobed-db # create /public 777 and configure to store there
-
-  polychromatic
-  vscodium
-
+  modprobed-db
+  wl-clipboard
 
   #nmap
   #hashdeep
@@ -64,9 +61,6 @@
   python3
   #jdk
 
-  # DESKTOP 
-  wl-clipboard
-
   # GUI APPS
   kitty
   gnome.gnome-software
@@ -78,6 +72,9 @@
   owncloud-client
   signal-desktop
   kismet
+  polychromatic
+  vscodium
+  filezilla
 
   # OTHER
   #glib.bin
