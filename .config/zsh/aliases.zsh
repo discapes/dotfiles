@@ -12,6 +12,12 @@ alias ssh="TERM=xterm-256color /usr/bin/env ssh"
 alias dnf="sudo dnf5"
 alias nvim="distrobox enter arch -- nvim"
 alias vim="distrobox enter arch -- nvim"
+
+cm() {
+	git add -A
+	git commit -m "$*"
+}
+
 compdef nvim="nvim"
 compdef vim="nvim"
 #alias rm="echo 'Use trash!' && false"
