@@ -16,6 +16,7 @@ alias vim="distrobox enter arch -- nvim"
 cm() {
 	git add -A
 	git commit -m "$*"
+	git push
 }
 
 compdef nvim="nvim"
