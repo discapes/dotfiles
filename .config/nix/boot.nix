@@ -14,26 +14,24 @@
   boot.plymouth.enable = true;
   boot.kernelParams = [ "quiet" ];
 
-  # boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen
-  boot.kernelPackages = pkgs.linuxKernel.packagesFor (pkgs.linuxKernel.kernels.linux_zen.override {
-    ignoreConfigErrors = true;
-  });
-
-
-  boot.kernelPatches = [
-    {
-      name = "custom";
-      patch = ./my.patch;
-      extraStructuredConfig = with lib.kernel;
-        {
-          LOGO = lib.mkForce yes;
-          LOGO_LINUX_CLUT224 = lib.mkForce yes;
-          EXT4_FS = lib.mkForce yes;
-          DRM_SIMPLEDRM = lib.mkForce no;
-          FB = lib.mkForce no;
-        };
-    }
-  ];
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
+  # boot.kernelPackages = pkgs.linuxKernel.packagesFor (pkgs.linuxKernel.kernels.linux_zen.override {
+  #   ignoreConfigErrors = true;
+  # });
+  # boot.kernelPatches = [
+  #   {
+  #     name = "custom";
+  #     patch = ./my.patch;
+  #     extraStructuredConfig = with lib.kernel;
+  #       {
+  #         LOGO = lib.mkForce yes;
+  #         LOGO_LINUX_CLUT224 = lib.mkForce yes;
+  #         EXT4_FS = lib.mkForce yes;
+  #         DRM_SIMPLEDRM = lib.mkForce no;
+  #         FB = lib.mkForce no;
+  #       };
+  #   }
+  # ];
   # FRAMEBUFFER_CONSOLE_DEFERRED_TAKEOVER n
 
 

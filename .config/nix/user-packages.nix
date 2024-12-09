@@ -39,6 +39,7 @@
   pulsemixer
   modprobed-db
   wl-clipboard
+  sqlite
 
   #nmap
   #hashdeep
@@ -55,10 +56,14 @@
   #clang
   #go
   #cargo
-  deno # deno jupyter --unstable --install
+  pkgs-unstable.deno # deno jupyter --unstable --install
   pipx
+  poetry
   ansible
   python3
+  pkgs-unstable.pnpm
+  pkgs-unstable.nodejs
+  awscli2
   #jdk
 
   # GUI APPS
@@ -73,8 +78,8 @@
   signal-desktop
   kismet
   polychromatic
-  vscodium
   filezilla
+  vscode
 
   # OTHER
   #glib.bin
