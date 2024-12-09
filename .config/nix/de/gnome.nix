@@ -1,6 +1,6 @@
 { pkgs, pkgs-unstable, inputs, lib, ... }: {
-  environment.gnome.excludePackages = (with pkgs; [ gnome-tour ])
-    ++ (with pkgs.gnome; [
+  environment.gnome.excludePackages = (with pkgs; [
+    gnome-tour
     epiphany
     yelp
     geary
@@ -14,8 +14,8 @@
 
   users.users.user.packages = (with pkgs; [
     gnome-extension-manager
-    gnome.dconf-editor
-    gnome.gnome-tweaks
+    dconf-editor
+    gnome-tweaks
     papirus-icon-theme
   ]);
 

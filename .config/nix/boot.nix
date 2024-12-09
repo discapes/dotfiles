@@ -4,17 +4,21 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.timeout = 0;
   boot.kernel.sysctl."kernel.sysrq" = 502;
+  boot.loader.systemd-boot.configurationLimit = 10;
+
+
+
   #boot.loader.grub.enable = true;
   #boot.loader.grub.efiSupport = true;
   #boot.loader.grub.device = "nodev";
   #boot.loader.grub.configurationLimit = 10;
   #boot.loader.grub.timeoutStyle = "hidden";
-  boot.plymouth.theme = "breeze";
-  boot.initrd.systemd.enable = true;
-  boot.plymouth.enable = true;
-  boot.kernelParams = [ "quiet" ];
+  #boot.plymouth.theme = "breeze";
+  #boot.initrd.systemd.enable = true;
+  #boot.plymouth.enable = true;
+  #boot.kernelParams = [ "quiet" ];
 
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
+  #boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
   # boot.kernelPackages = pkgs.linuxKernel.packagesFor (pkgs.linuxKernel.kernels.linux_zen.override {
   #   ignoreConfigErrors = true;
   # });
@@ -37,42 +41,41 @@
 
   # https://github.com/NixOS/nixpkgs/blob/nixos-24.05/nixos/modules/system/boot/kernel.nix
   # we don't want sd_mod or usb_storage, since they are built-in to the kernel
-  #boot.initrd.availableKernelModules = lib.mkForce [ "nvme" "xhci_pci" ];
 
-  boot.initrd.availableKernelModules = lib.mkForce [
-    "nvme"
-    "xhci_pci"
+  # boot.initrd.availableKernelModules = lib.mkForce [
+  #   "nvme"
+  #   "xhci_pci"
 
-    # Misc. x86 keyboard stuff.
-    "atkbd"
-    "i8042"
+  #   # Misc. x86 keyboard stuff.
+  #   "atkbd"
+  #   "i8042"
 
-    # x86 RTC needed by the stage 2 init script.
-    "rtc_cmos"
+  #   # x86 RTC needed by the stage 2 init script.
+  #   "rtc_cmos"
 
-    "btrfs"
+  #   "btrfs"
 
-    "dm_crypt"
-    "dm_mod"
-    "cryptd"
+  #   "dm_crypt"
+  #   "dm_mod"
+  #   "cryptd"
 
-    "loop"
-    "overlay"
+  #   "loop"
+  #   "overlay"
 
-    "blake2b_generic"
-    "sha256_generic"
-    "crc32c"
-    "input_leds"
-    "aes"
-    "aes_generic"
-    "cbc"
-    "sha1"
-    "sha256"
-    "sha512"
-    "af_alg"
-    "algif_skcipher"
-    "amdgpu"
-  ];
+  #   "blake2b_generic"
+  #   "sha256_generic"
+  #   "crc32c"
+  #   "input_leds"
+  #   "aes"
+  #   "aes_generic"
+  #   "cbc"
+  #   "sha1"
+  #   "sha256"
+  #   "sha512"
+  #   "af_alg"
+  #   "algif_skcipher"
+  #   "amdgpu"
+  # ];
 
   # we need to disable these or nixos tries to copy them into initrd, but they were removed by make localmodconfig from being modules
   #https://github.com/NixOS/nixpkgs/blob/1170690e2465389b0220dde7d519ba2157621b81/nixos/modules/tasks/filesystems/ext.nix#L5

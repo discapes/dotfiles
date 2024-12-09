@@ -117,7 +117,7 @@
   '';
 
   nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [ "steam" "steam-original" "steam-run" "vscode" ];
+    builtins.elem (lib.getName pkg) [ "steam" "steam-unwrapped" "steam-original" "steam-run" "vscode" "drawio" ];
   hardware.openrazer.enable = true;
 }
 

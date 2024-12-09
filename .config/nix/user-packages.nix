@@ -11,7 +11,6 @@
   tmux
   ncdu
   lf
-  fzf
   fdupes
   fastfetch
   direnv
@@ -20,6 +19,8 @@
   openssl
   jq
   yq
+  fzf
+  ripgrep
   bc
   dtrx
   gita
@@ -40,6 +41,8 @@
   modprobed-db
   wl-clipboard
   sqlite
+  fzf
+  ripgrep
 
   #nmap
   #hashdeep
@@ -68,7 +71,7 @@
 
   # GUI APPS
   kitty
-  gnome.gnome-software
+  gnome-software
   libreoffice-fresh
   #prismlauncher
   vlc
@@ -80,6 +83,7 @@
   polychromatic
   filezilla
   vscode
+
 
   # OTHER
   #glib.bin

@@ -19,10 +19,10 @@
         };
       });
       # we need to add glib-networking so screenshots can be downloaded
-      gnome = prev.gnome.overrideScope (final: prev: {
-        gnome-software = prev.gnome-software.overrideAttrs
-          (old: { buildInputs = old.buildInputs ++ [ pkgs.glib-networking ]; });
-      });
+      #      gnome = prev.gnome.overrideScope (final: prev: {
+      #        gnome-software = prev.gnome-software.overrideAttrs
+      #          (old: { buildInputs = old.buildInputs ++ [ pkgs.glib-networking ]; });
+      #      });
     })
   ];
 }
