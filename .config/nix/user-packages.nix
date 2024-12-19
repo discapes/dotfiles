@@ -27,6 +27,7 @@
   hugo
   openrazer-daemon
   docker-compose
+  dive
   gnumake
   pciutils
   iw
@@ -43,6 +44,11 @@
   sqlite
   fzf
   ripgrep
+  guestfs-tools
+  nmap
+  wireguard-tools
+  dnsutils
+  virt-viewer
 
   #nmap
   #hashdeep

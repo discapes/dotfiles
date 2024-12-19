@@ -1,10 +1,22 @@
 { lib, config, pkgs, ... }:
 {
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.timeout = 0;
+  boot.loader = {
+    systemd-boot.enable = true;
+    systemd-boot.configurationLimit = 10;
+    efi.canTouchEfiVariables = true;
+    timeout = 0;
+  };
+
+  boot.plymouth = {
+    enable = true;
+    theme = "breeze";
+  };
+
   boot.kernel.sysctl."kernel.sysrq" = 502;
-  boot.loader.systemd-boot.configurationLimit = 10;
+  boot.kernelParams = [ "quiet" ];
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
+  boot.initrd.systemd.enable = true;
+  boot.supportedFilesystems = [ "nfs" ];
 
 
 
@@ -13,12 +25,7 @@
   #boot.loader.grub.device = "nodev";
   #boot.loader.grub.configurationLimit = 10;
   #boot.loader.grub.timeoutStyle = "hidden";
-  #boot.plymouth.theme = "breeze";
-  #boot.initrd.systemd.enable = true;
-  #boot.plymouth.enable = true;
-  #boot.kernelParams = [ "quiet" ];
 
-  #boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
   # boot.kernelPackages = pkgs.linuxKernel.packagesFor (pkgs.linuxKernel.kernels.linux_zen.override {
   #   ignoreConfigErrors = true;
   # });
@@ -90,8 +97,8 @@
   #   ext4 = lib.mkForce false;
   # };
 
-  zramSwap.enable = true;
 
+  zramSwap.enable = true;
   fileSystems."/" = {
     device = "none";
     fsType = "tmpfs";
@@ -112,6 +119,7 @@
       "/var/lib/libvirt"
       "/var/lib/systemd/coredump"
       "/etc/NetworkManager/system-connections"
+      "/etc/wireguard"
       "/home"
       "/root/.cache"
       "/nix"

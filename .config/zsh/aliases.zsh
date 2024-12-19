@@ -19,6 +19,10 @@ cm() {
 	git push
 }
 
+dive() {
+	env dive <(docker save $1) --source=docker-archive
+}
+
 compdef nvim="nvim"
 compdef vim="nvim"
 #alias rm="echo 'Use trash!' && false"
