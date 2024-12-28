@@ -49,6 +49,7 @@
   wireguard-tools
   dnsutils
   virt-viewer
+  qrencode
 
   #nmap
   #hashdeep

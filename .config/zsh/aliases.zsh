@@ -7,11 +7,13 @@ swap() {
 
 setopt complete_aliases
 alias ls="lsd -A"
-alias ssh="TERM=xterm-256color /usr/bin/env ssh"
+alias ssh='TERM=xterm-256color /usr/bin/env ssh'
+alias tssh='TERM=xterm-256color /usr/bin/env ssh -o RequestTTY=yes -o RemoteCommand="tmux new -As0"'
 #alias ssh="kitty +kitten ssh"
 alias dnf="sudo dnf5"
 alias nvim="distrobox enter arch -- nvim"
 alias vim="distrobox enter arch -- nvim"
+alias lsblk="lsblk -o NAME,SIZE,FSTYPE,LABEL,PARTLABEL,MOUNTPOINTS"
 
 cm() {
 	git add -A

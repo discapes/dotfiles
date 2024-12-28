@@ -117,6 +117,7 @@
       "/var/lib/fprint"
       "/var/lib/docker"
       "/var/lib/libvirt"
+      "/var/lib/containers"
       "/var/lib/systemd/coredump"
       "/etc/NetworkManager/system-connections"
       "/etc/wireguard"

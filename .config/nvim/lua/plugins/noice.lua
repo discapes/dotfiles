@@ -20,6 +20,14 @@ return {
         filter = { event = "msg_showmode" },
       },
     },
+    messages = {
+      view = "mini",
+      view_error = "mini",
+      view_warn = "mini",
+    },
+    notify = {
+      view = "mini",
+    },
     presets = {
       long_message_to_split = true,
     },

@@ -66,6 +66,7 @@
       gptfdisk
       wireguard-tools
       podman-tui
+      virtiofsd
     ]);
   security.pam.services.passwd.nodelay = true;
   security.sudo.wheelNeedsPassword = false;
@@ -84,9 +85,11 @@
   virtualisation.podman = {
     enable = true;
     dockerCompat = true;
+    dockerSocket.enable = true;
     defaultNetwork.settings.dns_enabled = true;
   };
   virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd.qemu.vhostUserPackages = with pkgs; [ virtiofsd ];
 
   # nixpkgs.config.allowUnfree = true;
   # system.copySystemConfiguration = true;  # unavailable with impermeance
@@ -104,7 +107,7 @@
   users.users.user = {
     isNormalUser = true;
     description = "user";
-    extraGroups = [ "wheel" "docker" "networkmanager" "openrazer" "wireshark" ];
+    extraGroups = [ "wheel" "docker" "networkmanager" "openrazer" "wireshark" "podman" ];
     hashedPasswordFile = "/persist/etc/passhash";
     shell = pkgs.zsh;
     # packages = (import ./user-packages.nix) {

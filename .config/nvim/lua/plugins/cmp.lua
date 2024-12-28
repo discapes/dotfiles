@@ -17,7 +17,7 @@ return {
       },
       sources = {
         { name = "nvim_lsp" },
-        { name = "buffer" },
+        -- { name = "buffer" }, NO
         { name = "nvim_lua" },
         { name = "path" },
         { name = "snippets" },
