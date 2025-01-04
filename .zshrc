@@ -1,4 +1,6 @@
 source ~/.config/zsh/env.zsh
+setopt complete_aliases
+
 #[ -z "$WAYLAND_DISPLAY" ] && [ "$TTY" = "/dev/tty1" ] && exec Hyprland
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.

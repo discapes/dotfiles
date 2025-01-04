@@ -50,6 +50,12 @@
   dnsutils
   virt-viewer
   qrencode
+  htop
+  dust
+  bat
+  fd
+  tldr
+
 
   #nmap
   #hashdeep

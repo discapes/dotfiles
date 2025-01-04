@@ -10,6 +10,12 @@ export XDG_DATA_DIRS=$XDG_DATA_DIRS:/usr/share:/var/lib/flatpak/exports/share:$H
 # remember to install flatflaf to classpath
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=lcd -Dswing.systemlaf=com.formdev.flatlaf.FlatLightLaf -Dsun.java2d.opengl=true"
 export JAVA_OPTIONS="$JAVA_OPTIONS"
+
+if command -v bat &> /dev/null; then
+	export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+	export MANROFFOPT="-c"
+fi
+
 pa() { export PATH="$PATH:$1" }  
 pa ~/.local/share/coursier/bin
 pa ~/.cargo/bin
