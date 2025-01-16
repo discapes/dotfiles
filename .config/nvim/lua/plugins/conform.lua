@@ -27,6 +27,8 @@ return {
         python = { "black" },
         htmldjango = { "djlint" },
         nix = { "nixpkgs_fmt" },
+        terraform = { "terraform_fmt" }, -- tflint
+        tf = { "terraform_fmt" }, -- tflint
       },
     },
   },

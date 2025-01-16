@@ -55,6 +55,14 @@
   bat
   fd
   tldr
+  #
+  talosctl
+  kubectl
+  opentofu
+  kubernetes-helm
+  argocd
+  flux
+  kustomize
 
 
   #nmap

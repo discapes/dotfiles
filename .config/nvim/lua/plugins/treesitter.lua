@@ -24,6 +24,7 @@ return {
         "htmldjango",
         "nix",
         "prisma",
+        "terraform",
       },
 
       highlight = {
