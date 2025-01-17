@@ -65,6 +65,9 @@
   kustomize
 
 
+  ps_mem
+
+
   #nmap
   #hashdeep
   #restic

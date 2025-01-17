@@ -1,27 +1,7 @@
 { pkgs, pkgs-unstable, inputs, lib, ... }: {
-  imports = [ ./de/gnome.nix ];
+  imports = [ ./de/gnome.nix ./locale.nix ];
 
   system.stateVersion = "24.05"; # Did you read the comment?
-
-  time.timeZone = "Europe/Helsinki";
-  i18n.defaultLocale = "en_US.UTF-8";
-  console.keyMap = "fi";
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "fi_FI.UTF-8";
-    LC_IDENTIFICATION = "fi_FI.UTF-8";
-    LC_MEASUREMENT = "fi_FI.UTF-8";
-    LC_MONETARY = "fi_FI.UTF-8";
-    LC_NAME = "fi_FI.UTF-8";
-    LC_NUMERIC = "fi_FI.UTF-8";
-    LC_PAPER = "fi_FI.UTF-8";
-    LC_TELEPHONE = "fi_FI.UTF-8";
-    LC_TIME = "fi_FI.UTF-8";
-  };
-  services.xserver.xkb = {
-    layout = "fi";
-    variant = "nodeadkeys";
-  };
-
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
@@ -44,6 +24,7 @@
     pulse.enable = true;
   };
 
+  services.tailscale.enable = true;
   services.flatpak.enable =
     true;
   systemd.services.flatpak-repo = {
@@ -91,7 +72,6 @@
   virtualisation.libvirtd.enable = true;
   virtualisation.libvirtd.qemu.vhostUserPackages = with pkgs; [ virtiofsd ];
 
-  # nixpkgs.config.allowUnfree = true;
   # system.copySystemConfiguration = true;  # unavailable with impermeance
   programs = {
     wireshark.enable = true;
@@ -110,15 +90,13 @@
     extraGroups = [ "wheel" "docker" "networkmanager" "openrazer" "wireshark" "podman" ];
     hashedPasswordFile = "/persist/etc/passhash";
     shell = pkgs.zsh;
-    # packages = (import ./user-packages.nix) {
-    #   inherit pkgs;
-    #   inherit pkgs-unstable;
     # };
   };
   systemd.extraConfig = ''
     DefaultTimeoutStopSec=20s
   '';
 
+  # nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [ "steam" "steam-unwrapped" "steam-original" "steam-run" "vscode" "drawio" ];
   #hardware.openrazer.enable = true;
