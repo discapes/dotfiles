@@ -53,6 +53,7 @@
       "/var/lib/nixos"
       "/var/lib/fprint"
       "/var/lib/docker"
+      "/var/lib/tailscale"
       "/var/lib/libvirt"
       "/var/lib/containers"
       "/var/lib/systemd/coredump"
