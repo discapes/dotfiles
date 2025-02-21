@@ -1,19 +1,23 @@
-{ pkgs, pkgs-unstable, inputs, lib, ... }: {
-  imports = [ ./de/gnome.nix ./locale.nix ];
-
+{ config, pkgs, lib, ... }:
+{
   system.stateVersion = "24.05"; # Did you read the comment?
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
   networking.nameservers = [ "1.1.1.1" "9.9.9.9" ];
   # WILL BREAK VIRTD DHCP
-  #  networking.firewall.allowedTCPPorts = [ ];
-  #  networking.firewall.allowedUDPPorts = [ ];
+  networking.firewall.allowedTCPPorts = [ ];
+  networking.firewall.allowedUDPPorts = [ ];
   networking.firewall.enable = false;
   networking.nftables.enable = true;
   networking.extraHosts = ''
   '';
+  networking.networkmanager.dns = "none";
 
+  environment.variables =
+    {
+      RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
+    };
 
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -23,7 +27,14 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
-
+  services.syncthing =
+    {
+      enable = true;
+      user = "user";
+      group = "users";
+      dataDir = "/home/user/Sync"; # Default folder for new synced folders
+      configDir = "/home/user/.config/syncthing";
+    };
   services.tailscale.enable = true;
   services.flatpak.enable =
     true;
@@ -35,20 +46,6 @@
     '';
   };
   environment.localBinInPath = true;
-  environment.systemPackages =
-    (import ./user-packages.nix)
-      {
-        inherit pkgs;
-        inherit pkgs-unstable;
-      } ++ (with pkgs; [
-      vim
-      wget
-      git
-      gptfdisk
-      wireguard-tools
-      podman-tui
-      virtiofsd
-    ]);
   security.pam.services.passwd.nodelay = true;
   security.sudo.wheelNeedsPassword = false;
 
@@ -79,10 +76,6 @@
     steam.enable = true;
     virt-manager.enable = true;
     zsh.enable = true;
-    firefox = import ./firefox.nix;
-  };
-  services = {
-    ratbagd.enable = true;
   };
   users.users.user = {
     isNormalUser = true;
@@ -90,7 +83,6 @@
     extraGroups = [ "wheel" "docker" "networkmanager" "openrazer" "wireshark" "podman" ];
     hashedPasswordFile = "/persist/etc/passhash";
     shell = pkgs.zsh;
-    # };
   };
   systemd.extraConfig = ''
     DefaultTimeoutStopSec=20s
@@ -98,7 +90,6 @@
 
   # nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [ "steam" "steam-unwrapped" "steam-original" "steam-run" "vscode" "drawio" "megasync" ];
-  #hardware.openrazer.enable = true;
+    builtins.elem (lib.getName pkg) [ "steam" "steam-unwrapped" "steam-original" "steam-run" "vscode" "drawio" ];
 }
 

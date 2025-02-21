@@ -20,7 +20,7 @@
       device = "/dev/disk/by-uuid/b5beeb3f-7833-4ed3-9a5b-7bfca0fb1761";
       fsType = "btrfs";
       neededForBoot = true;
-      options = [ "subvol=@" ];
+      options = [ "subvol=@,compress=zstd" ];
     };
 
   boot.initrd.luks.devices."root".device = "/dev/disk/by-uuid/5cf2b5f0-4fb1-4964-aa47-9579ab7c2c00";

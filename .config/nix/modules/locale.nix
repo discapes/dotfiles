@@ -1,4 +1,5 @@
-{ pkgs, pkgs-unstable, inputs, lib, ... }: {
+{ config, pkgs, lib, ... }:
+{
   time.timeZone = "Europe/Helsinki";
   i18n.defaultLocale = "en_US.UTF-8";
   console.keyMap = "fi";

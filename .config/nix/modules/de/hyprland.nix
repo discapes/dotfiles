@@ -1,5 +1,5 @@
-{ pkgs, pkgs-unstable, inputs, ... }: {
-
+{ config, pkgs, lib, ... }:
+{
   services.getty.autologinUser = "user";
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   programs.hyprland.enable = true;
@@ -20,9 +20,9 @@
   };
 
   users.users.user.packages = with pkgs; [
-  #gnome.nautilus
-  #networkmanagerapplet
-  #obs-studio
+    #gnome.nautilus
+    #networkmanagerapplet
+    #obs-studio
     swaybg
     hyprlock
     hypridle

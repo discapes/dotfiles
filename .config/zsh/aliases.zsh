@@ -37,6 +37,7 @@ alias_if_valid du dust
 alias_if_valid top htop
 alias_if_valid dnf dnf5
 alias_if_valid nvim distrobox enter arch -- nvim
+alias ps="ps x"
 alias vim="nvim"
 compdef nvim="nvim"
 compdef vim="nvim"

@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
   # BOOTLOADER CONFIG
   boot.loader = {
@@ -25,7 +25,7 @@
   boot.kernelParams = [ "quiet" ];
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
   boot.initrd.systemd.enable = true;
-  boot.supportedFilesystems = [ "nfs" ];
+  boot.supportedFilesystems = [ "nfs" "ntfs" ];
   boot.extraModulePackages = with config.boot.kernelPackages; [
     rtl88xxau-aircrack
   ];

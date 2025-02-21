@@ -1,4 +1,5 @@
-{ pkgs, pkgs-unstable, inputs, lib, ... }: {
+{ config, pkgs, lib, ... }:
+{
   environment.gnome.excludePackages = (with pkgs; [
     gnome-tour
     epiphany
