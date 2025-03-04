@@ -50,13 +50,10 @@
   security.sudo.wheelNeedsPassword = false;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.channel.enable = false;
   nix.optimise.automatic = true;
   nix.optimise.dates = [ "03:45" ];
 
-
-  # mkpasswd | sudo tee /etc/persist/passhash
-  users.users.root.hashedPasswordFile = "/persist/etc/passhash";
-  users.mutableUsers = false;
 
 
   virtualisation.containers.enable = true;
@@ -76,11 +73,18 @@
     steam.enable = true;
     virt-manager.enable = true;
     zsh.enable = true;
+    adb.enable = true;
   };
+
+
+  # mkpasswd | sudo tee /etc/persist/passhash
+  users.users.root.hashedPasswordFile = "/persist/etc/passhash";
+  users.mutableUsers = false;
+
   users.users.user = {
     isNormalUser = true;
     description = "user";
-    extraGroups = [ "wheel" "docker" "networkmanager" "openrazer" "wireshark" "podman" ];
+    extraGroups = [ "wheel" "docker" "networkmanager" "openrazer" "wireshark" "podman" "adbusers" ];
     hashedPasswordFile = "/persist/etc/passhash";
     shell = pkgs.zsh;
   };

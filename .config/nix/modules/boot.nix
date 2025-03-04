@@ -44,6 +44,8 @@
   };
 
   # after installing, clean up /persist
+  # tip to see if files take space in /:
+  # dust -x /
   environment.persistence."/persist" = {
     hideMounts = true;
     directories = [

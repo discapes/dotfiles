@@ -50,6 +50,7 @@ with pkgs;
         ripgrep
         tldr
         zoxide
+        lazygit
       ];
       kube = [
         # argocd
@@ -65,6 +66,7 @@ with pkgs;
         gnome-software
         libreoffice-fresh
         drawio
+        gparted
       ];
       dev = [
         podman-tui
@@ -78,7 +80,8 @@ with pkgs;
         python3
         go
         clang
-
+        just
+        apacheHttpd # for htpasswd
       ];
       rust = [
         rustc
@@ -95,7 +98,6 @@ with pkgs;
 #(steamPackages.steam-fhsenv-without-steam.override {
 #  extraPkgs = pkgs: [ pam libselinux libsndfile unzip cacert libglvnd jre ];
 #}).run
-
 
 #aircrack-ng
 #awscli2
