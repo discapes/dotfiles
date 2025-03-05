@@ -4,6 +4,8 @@ with pkgs;
   environment.systemPackages =
     let
       std_utils = [
+        hello
+        home-manager
         bc
         btrfs-progs
         dnsutils
