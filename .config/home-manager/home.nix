@@ -19,8 +19,22 @@
   # environment.
   home.packages = with pkgs; [
     # SED_ADD_PKGS_HERE
-	nodePackages.prettier
-	rustc
+    typescript-language-server
+    svelte-language-server
+    pyright
+    tailwindcss-language-server
+    vscode-langservers-extracted
+    lua-language-server
+    eslint
+    opentofu
+    nixfmt-rfc-style
+    djlint
+    black
+    xmlformat
+    stylua
+    neovim
+    nodePackages.prettier
+    rustc
     hello
 
     # # Adds the 'hello' command to your environment. It prints a friendly

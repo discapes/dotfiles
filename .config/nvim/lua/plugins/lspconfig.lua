@@ -1,15 +1,8 @@
 return {
   {
-    "williamboman/mason-lspconfig.nvim",
-    opts = {
-      automatic_installation = true,
-    },
-    dependencies = { "williamboman/mason.nvim" },
-  },
-  {
     "neovim/nvim-lspconfig",
     event = { "BufReadPost", "BufNewFile" },
-    dependencies = { "williamboman/mason-lspconfig.nvim" },
+    -- dependencies = { "williamboman/mason-lspconfig.nvim" },
     config = function()
       local lspconfig = require "lspconfig"
       local servers = { "lua_ls", "html", "cssls", "tailwindcss", "eslint", "jsonls", "pyright", "svelte" }

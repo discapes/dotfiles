@@ -1,11 +1,5 @@
 return {
   {
-    "zapling/mason-conform.nvim",
-    dependencies = { "williamboman/mason.nvim", "stevearc/conform.nvim" },
-    event = "BufWritePre", -- uncomment for format on save
-    config = true,
-  },
-  {
     "stevearc/conform.nvim",
     event = "BufWritePre", -- uncomment for format on save
     opts = {
@@ -26,9 +20,9 @@ return {
         xml = { "xmlformat" },
         python = { "black" },
         htmldjango = { "djlint" },
-        nix = { "nixpkgs_fmt" },
-        terraform = { "terraform_fmt" }, -- tflint
-        tf = { "terraform_fmt" }, -- tflint
+        nix = { "nixfmt" },
+        terraform = { "tofu_fmt" }, -- tflint
+        tf = { "tofu_fmt" }, -- tflint
       },
     },
   },
