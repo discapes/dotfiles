@@ -13,7 +13,14 @@ fi
 DISABLE_AUTO_UPDATE="true"
 source ~/.config/zsh/ohmyzsh.zsh
 source ~/.config/zsh/p10k.zsh
-source ~/.config/zsh/aliases.zsh
+
+if [ -z "$CONTAINER_ID" ]; then
+	# no aliases in distrobox
+	source ~/.config/zsh/aliases.zsh
+else
+	# we want to use the host podman in distrobox
+	export CONTAINER_HOST=unix:///run/host/run/user/1000/podman/podman.sock
+fi
 
 
 ###########################
@@ -47,4 +54,4 @@ if command -v mise &>/dev/null; then
 fi
 
 if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
-
+eval "$(direnv hook zsh)"

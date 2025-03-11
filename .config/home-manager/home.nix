@@ -19,6 +19,7 @@
   # environment.
   home.packages = with pkgs; [
     # SED_ADD_PKGS_HERE
+    uv
     typescript-language-server
     svelte-language-server
     pyright

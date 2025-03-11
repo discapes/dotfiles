@@ -32,7 +32,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 -- MAPS
 -- LSP
 local map = vim.keymap.set
-map("n", "<leader><leader>", "<C-w>w", { desc = "Toggle tree focus" })
+map("n", "<M-t>", "<C-w>w", { desc = "Toggle tree focus" })
 map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
 map("n", "<leader>r", vim.lsp.buf.rename, { desc = "Rename identifier" })
 map("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
