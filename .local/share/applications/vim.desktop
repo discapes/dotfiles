@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=Vim
+Exec=/home/user/.nix-profile/bin/nvim
+Type=Application
+Terminal=true

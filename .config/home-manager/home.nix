@@ -19,6 +19,10 @@
   # environment.
   home.packages = with pkgs; [
     # SED_ADD_PKGS_HERE
+    grc
+    gpredict
+    gqrx
+    hackrf
     uv
     typescript-language-server
     svelte-language-server

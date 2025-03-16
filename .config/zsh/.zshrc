@@ -27,7 +27,7 @@ fi
 #
 #
 # Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
+HISTFILE=~/.local/state/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 setopt notify
