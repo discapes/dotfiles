@@ -19,7 +19,19 @@
   # environment.
   home.packages = with pkgs; [
     # SED_ADD_PKGS_HERE
-    grc
+    vdhcoapp
+    aria2
+    gnupg
+    iw
+    sqlite
+    apksigner
+    apktool
+    android-backup-extractor
+    jre
+    mitmproxy
+    hcxtools
+    hcxdumptool
+    gnuradio
     gpredict
     gqrx
     hackrf

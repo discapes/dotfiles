@@ -71,6 +71,7 @@
   };
   virtualisation.libvirtd.enable = true;
   virtualisation.libvirtd.qemu.vhostUserPackages = with pkgs; [ virtiofsd ];
+  virtualisation.waydroid.enable = true;
 
   # system.copySystemConfiguration = true;  # unavailable with impermeance
   programs = {
@@ -79,7 +80,9 @@
     steam.enable = true;
     virt-manager.enable = true;
     zsh.enable = true;
+    zsh.enableGlobalCompInit = false; # we don't want .zcompdump in ~/.config/zsh
     adb.enable = true;
+    gnupg.agent.enable = true;
   };
 
   # mkpasswd | sudo tee /etc/persist/passhash
@@ -98,6 +101,7 @@
       "podman"
       "adbusers"
       "plugdev"
+      "kvm"
     ];
     hashedPasswordFile = "/persist/etc/passhash";
     shell = pkgs.zsh;
