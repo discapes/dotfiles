@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   # BOOTLOADER CONFIG
   boot.loader = {
@@ -25,7 +30,10 @@
   boot.kernelParams = [ "quiet" ];
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
   boot.initrd.systemd.enable = true;
-  boot.supportedFilesystems = [ "nfs" "ntfs" ];
+  boot.supportedFilesystems = [
+    "nfs"
+    "ntfs"
+  ];
   boot.extraModulePackages = with config.boot.kernelPackages; [
     rtl88xxau-aircrack
   ];
@@ -40,7 +48,11 @@
     device = "none";
     fsType = "tmpfs";
     neededForBoot = true;
-    options = [ "defaults" "mode=755" "size=999%" ];
+    options = [
+      "defaults"
+      "mode=755"
+      "size=999%"
+    ];
   };
 
   # after installing, clean up /persist
@@ -65,7 +77,10 @@
       "/root/.cache"
       "/nix"
     ];
-    files = [ "/etc/machine-id" "/etc/passhash" ];
+    files = [
+      "/etc/machine-id"
+      "/etc/passhash"
+    ];
   };
 
 }

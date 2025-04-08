@@ -10,9 +10,16 @@
     };
   };
 
-  outputs = { nixpkgs, flake-utils, home-manager, ... }:
+  outputs =
+    {
+      nixpkgs,
+      flake-utils,
+      home-manager,
+      ...
+    }:
     flake-utils.lib.eachDefaultSystem (system: {
-      packages.homeConfigurations = nixpkgs.lib.genAttrs ["user" "miika.tuominen"] (user: 
+      packages.homeConfigurations = nixpkgs.lib.genAttrs [ "user" "miika.tuominen" ] (
+        user:
         home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system};
           modules = [ ./home.nix ];

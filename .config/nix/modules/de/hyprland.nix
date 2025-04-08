@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   services.getty.autologinUser = "user";
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
@@ -36,6 +41,5 @@
     lxqt.lxqt-policykit
     grim
     slurp
-  ]
-
-    }
+  ];
+}

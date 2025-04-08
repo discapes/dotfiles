@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 with pkgs;
 {
   environment.systemPackages =
@@ -114,7 +119,7 @@ with pkgs;
 #iw
 #jdk
 #kismet
-#libguestfs 
+#libguestfs
 #lua-language-server
 #micromamba
 #modprobed-db

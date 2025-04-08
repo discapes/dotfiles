@@ -1,24 +1,35 @@
-{ config, pkgs, lib, ... }:
 {
-  environment.gnome.excludePackages = (with pkgs; [
-    gnome-tour
-    epiphany
-    yelp
-    geary
-    gnome-contacts
-    gnome-shell-extensions
-    gnome-weather
-    gnome-calendar
-    simple-scan
-    gnome-maps
-  ]);
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
+  environment.gnome.excludePackages = (
+    with pkgs;
+    [
+      gnome-tour
+      epiphany
+      yelp
+      geary
+      gnome-contacts
+      gnome-shell-extensions
+      gnome-weather
+      gnome-calendar
+      simple-scan
+      gnome-maps
+    ]
+  );
 
-  users.users.user.packages = (with pkgs; [
-    gnome-extension-manager
-    dconf-editor
-    gnome-tweaks
-    papirus-icon-theme
-  ]);
+  users.users.user.packages = (
+    with pkgs;
+    [
+      gnome-extension-manager
+      dconf-editor
+      gnome-tweaks
+      papirus-icon-theme
+    ]
+  );
 
   # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
   systemd.services."getty@tty1".enable = false;
@@ -31,7 +42,6 @@
   services.displayManager.autoLogin.enable = true;
   services.displayManager.autoLogin.user = "user";
 
-
   programs.dconf = {
     enable = true;
     profiles.user.databases = [
@@ -39,7 +49,10 @@
         settings = {
           "org/gnome/desktop/input-sources" = {
             sources = [
-              (lib.gvariant.mkTuple [ "xkb" "fi+nodeadkeys" ])
+              (lib.gvariant.mkTuple [
+                "xkb"
+                "fi+nodeadkeys"
+              ])
             ];
           };
           "org/gnome/desktop/interface".color-scheme = "prefer-dark";
@@ -62,12 +75,11 @@
               "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
             ];
           };
-          "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
-            {
-              binding = "<Super>Return";
-              command = "kitty";
-              name = "Run kitty";
-            };
+          "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+            binding = "<Super>Return";
+            command = "kitty";
+            name = "Run kitty";
+          };
           "org/gnome/shell".enabled-extensions = [
             "just-perfection-desktop@just-perfection"
           ];

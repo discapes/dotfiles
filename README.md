@@ -10,7 +10,13 @@
 - Install them with `nix-shell -p home-manager just --run "just hswitch"` after installing Nix
 
 **Install NixOS configuration, if using NixOS:**
-- Run `mkpasswd | tee /etc/passhash` to create an encrypted password used by the configuration
+- Run `mkpasswd | sudo tee /etc/passhash` to create an encrypted password used by the configuration
 - Run `sudo nixos-rebuild boot --flake $(readlink -f ~/.config/nix)` to apply the NixOS configuration on the next boot
-  - You can use `just switch` later to do the same thing (`just` is a make-like task runner that reads `~/.justfile`)
+  - You can use `just switch` later to do the same thing 
+  - `just` is a make-like task runner that reads `~/.justfile`
 - Reboot
+
+**Install nix-darwin configuration, if using macOS:**
+- Run `sudo nix run nix-darwin/nix-darwin-24.11#darwin-rebuild -- switch --flake ~/.config/nix-darwin#darwin` to apply the configuration
+    - You can use `just switch` later to do the same thing
+    

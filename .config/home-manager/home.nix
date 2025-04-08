@@ -1,10 +1,18 @@
-{ config, pkgs, user, lib, system, ... }:
+{
+  config,
+  pkgs,
+  user,
+  lib,
+  system,
+  ...
+}:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = user;
-  home.homeDirectory = if lib.strings.hasSuffix "darwin" system then "/Users/${user}" else "/home/${user}";
+  home.homeDirectory =
+    if lib.strings.hasSuffix "darwin" system then "/Users/${user}" else "/home/${user}";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release

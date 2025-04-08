@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   services.desktopManager.plasma6.enable = true;
   services.displayManager.sddm.wayland.enable = true;

@@ -7,21 +7,20 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = inputs: {
-    nixosConfigurations.nixos = inputs.nixpkgs.lib.nixosSystem
-      {
-        modules = [
-          ./modules/hardware-configuration.nix
-          ./modules/boot.nix
-          ./modules/configuration.nix
-          ./modules/de/gnome.nix
-          ./modules/locale.nix
-          ./modules/packages.nix
-          ./modules/firefox.nix
-          inputs.impermanence.nixosModules.impermanence
-          inputs.nix-index-database.nixosModules.nix-index
-          { programs.nix-index-database.comma.enable = true; }
-          #./overlay.nix
-        ];
-      };
+    nixosConfigurations.nixos = inputs.nixpkgs.lib.nixosSystem {
+      modules = [
+        ./modules/hardware-configuration.nix
+        ./modules/boot.nix
+        ./modules/configuration.nix
+        ./modules/de/gnome.nix
+        ./modules/locale.nix
+        ./modules/packages.nix
+        ./modules/firefox.nix
+        inputs.impermanence.nixosModules.impermanence
+        inputs.nix-index-database.nixosModules.nix-index
+        { programs.nix-index-database.comma.enable = true; }
+        #./overlay.nix
+      ];
+    };
   };
 }
