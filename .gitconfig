@@ -11,9 +11,12 @@
 [user]
 	email = miika.km.tuominen@gmail.com
 	name = Miika Tuominen
+
 [core]
 	editor = vim
+
 [push]
 	autoSetupRemote = true
-[safe]
-	directory = /home/user/code/python-notebook
+
+[core]
+	excludesfile = ~/.config/my-gitignore
