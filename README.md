@@ -1,9 +1,16 @@
 # dotfiles
 
-run .local/bin/dotstow (later just dotstow) to create symlinks to the dotfile directory in ~
-run omz to install oh-my-zsh and plugins and themes
-read .config/nix/configuration.nix to see other required programs
-mkpasswd | tee /etc/passhash
-distrobox create --name arch --pull -i quay.io/toolbx/arch-toolbox:latest
-sudo pacman -S python-pip npm neovim cargo wl-clipboard ripgrep fzf terraform direnv python-uv
-gsettings set org.gnome.desktop.peripherals.touchpad disable-while-typing false
+**How to use:**
+- Clone the git repo anywhere like `~/code/dotfiles`
+- Run `~/code/dotfiles/.local/bin/dotstow` to symlink the dotfiles to `~`
+- Run `~/.local/bin/omz` to install oh-my-zsh, powerlevel10k, zsh-autosuggestions and zsh-syntax-highlighting to `~/.oh-my-zsh`
+
+**Install software, tools and utilities:**
+- I manage installed software using home-manager instead of configuration.nix to reduce the overhead of installing new packages
+- Install them with `nix-shell -p home-manager just --run "just hswitch"` after installing Nix
+
+**Install NixOS configuration, if using NixOS:**
+- Run `mkpasswd | tee /etc/passhash` to create an encrypted password used by the configuration
+- Run `sudo nixos-rebuild boot --flake $(readlink -f ~/.config/nix)` to apply the NixOS configuration on the next boot
+  - You can use `just switch` later to do the same thing (`just` is a make-like task runner that reads `~/.justfile`)
+- Reboot

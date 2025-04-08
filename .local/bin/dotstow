@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 # --no-folding is off because we want it to sync when we create something in ~/.config/nvim for example
-# however we don't want something like .m2 to be just a symlink
-# so we will create folders here if we don't want them to fully sync
-# because if they exist stow won't make them into symlinks
-mkdir -p ~/.ssh ~/.m2 ~/.config ~/.local/{bin,share} ~/.local/share/fonts  ~/.config/environment.d/ -v
+# however we don't want that to happen to folders like .ssh/ obviously
+# and that won't happen if the folders already exist so we create them here
+mkdir -v -p ~/.ssh ~/.m2 ~/.config ~/.local/{bin,share} ~/.local/share/fonts  ~/.config/environment.d/
 
 SCRIPTDIR=$(dirname -- "$( readlink -f -- "$0"; )");
 DOTDIR=$(dirname -- "$(dirname -- "$SCRIPTDIR")");
 echo "Loading files from $DOTDIR"
-stow -d "$DOTDIR" -t ~ . -v 
-
+stow -v -d "$DOTDIR" -t ~ . 

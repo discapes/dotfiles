@@ -17,4 +17,4 @@ bindkey -v
 
 pa() { export PATH="$PATH:$1" }  
 pa ~/.local/bin
-
+pa /usr/local/bin # for some reason this isn't default on mac (on some programs) - https://github.com/kovidgoyal/kitty/issues/1721

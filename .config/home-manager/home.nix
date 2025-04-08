@@ -1,10 +1,10 @@
-{ config, pkgs, ... }:
+{ config, pkgs, user, lib, system, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "user";
-  home.homeDirectory = "/home/user";
+  home.username = user;
+  home.homeDirectory = if lib.strings.hasSuffix "darwin" system then "/Users/${user}" else "/home/${user}";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -19,22 +19,23 @@
   # environment.
   home.packages = with pkgs; [
     # SED_ADD_PKGS_HERE
-    vdhcoapp
+    just
+    #vdhcoapp
     aria2
     gnupg
-    iw
+    #iw
     sqlite
-    apksigner
-    apktool
-    android-backup-extractor
-    jre
+    #apksigner
+    #apktool
+    #android-backup-extractor
+    #jre
     mitmproxy
-    hcxtools
-    hcxdumptool
-    gnuradio
-    gpredict
-    gqrx
-    hackrf
+    #hcxtools
+    #hcxdumptool
+    #gnuradio
+    #gpredict
+    #    gqrx
+    #hackrf
     uv
     typescript-language-server
     svelte-language-server

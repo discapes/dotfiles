@@ -84,5 +84,9 @@ alias lsblk="lsblk -o NAME,SIZE,FSTYPE,LABEL,PARTLABEL,MOUNTPOINTS"
 alias xssh='TERM=xterm-256color /usr/bin/env ssh' # fix kitty terminal
 
 ssh() {
-	kitten ssh -o RequestTTY=yes "$@" tmux new -As0 zsh
+	if [ "$TERM" == "xterm-kitty" ]; then
+		kitten ssh -o RequestTTY=yes "$@" tmux new -As0 zsh
+	else
+		env ssh -o RequestTTY=yes "$@" tmux new -As0 zsh
+	fi
 }

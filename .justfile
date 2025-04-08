@@ -1,16 +1,17 @@
 @_default:
 	just --list
 
-original_prof := shell('powerprofilesctl get')
+ppc_path := shell('command -v powerprofilesctl || true')
+original_prof := if ppc_path != '' { shell('powerprofilesctl get') } else { '' }
 
 _boost:
-	powerprofilesctl set performance
+	{{ if ppc_path != '' { 'powerprofilesctl set performance' } else { '' } }}
 
 _unboost:
-	powerprofilesctl set {{original_prof}}
+	{{ if ppc_path != '' { 'powerprofilesctl set ' + original_prof } else { '' } }}
 
 hswitch: _boost && _unboost
-	home-manager switch
+	home-manager switch --flake $(readlink -f ~/.config/home-manager)
 
 add pkg: && hswitch
 	sed -i '/SED_ADD_PKGS_HERE/a\    {{pkg}}' ~/.config/home-manager/home.nix
@@ -18,7 +19,7 @@ add pkg: && hswitch
 switch: _boost && _unboost
 	# not needed because we use just variables instead of $()
 	##!/usr/bin/env -S sh -xeu
-	sudo nixos-rebuild switch --flake $(readlink -f ~/.config/nix)
+	sudo nixos-rebuild switch --flake $(readlink -f ~/.config/nix)#nixos
 
 prune: _prune-nix _prune-docker
 
