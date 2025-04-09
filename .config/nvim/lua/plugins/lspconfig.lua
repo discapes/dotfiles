@@ -5,7 +5,7 @@ return {
     -- dependencies = { "williamboman/mason-lspconfig.nvim" },
     config = function()
       local lspconfig = require "lspconfig"
-      local servers = { "lua_ls", "html", "cssls", "tailwindcss", "eslint", "jsonls", "pyright", "svelte" }
+      local servers = { "lua_ls", "html", "cssls", "tailwindcss", "eslint", "jsonls", "pyright", "svelte", "bashls" }
       for _, lsp in ipairs(servers) do
         lspconfig[lsp].setup {
           -- on_attach = on_attach,
@@ -22,6 +22,11 @@ return {
           },
         },
       }
+
+      lspconfig.bashls.setup {
+        filetypes = { "sh", "zsh" },
+      }
+
       local function organize_imports()
         local params = {
           command = "_typescript.organizeImports",

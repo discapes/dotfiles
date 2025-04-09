@@ -17,6 +17,6 @@
 - Reboot
 
 **Install nix-darwin configuration, if using macOS:**
-- Run `sudo nix run nix-darwin/nix-darwin-24.11#darwin-rebuild -- switch --flake ~/.config/nix-darwin#darwin` to apply the configuration
+- Run `sudo nix run nix-darwin/nix-darwin-24.11#darwin-rebuild -- switch --flake $(readlink -f ~/.config/nix-darwin)#darwin` to apply the configuration
     - You can use `just switch` later to do the same thing
     

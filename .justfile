@@ -1,4 +1,4 @@
-set unstable
+set unstable := true
 
 @_default:
     just --list
@@ -13,15 +13,21 @@ _boost:
 [linux]
 _unboost:
     {{ if ppc_path != '' { 'powerprofilesctl set ' + original_prof } else { '' } }}
-	
+
 _boost:
+
 _unboost:
 
 hswitch: _boost && _unboost
     home-manager switch --flake $(readlink -f ~/.config/home-manager)
 
+[linux]
 add pkg: && hswitch
     sed -i '/SED_ADD_PKGS_HERE/a\    {{ pkg }}' ~/.config/home-manager/home.nix
+
+[macos]
+add pkg: && hswitch
+    sed -i '' $'s/SED_ADD_PKGS_HERE/&\\\n    {{ pkg }}/' ~/.config/home-manager/home.nix
 
 [linux]
 switch: _boost && _unboost
@@ -29,7 +35,7 @@ switch: _boost && _unboost
 
 [macos]
 switch:
-	sudo darwin-rebuild switch --flake ~/.config/nix-darwin#darwin
+    sudo darwin-rebuild switch --flake $(readlink -f ~/.config/nix-darwin)#darwin
 
 prune: _prune-nix _prune-docker
 

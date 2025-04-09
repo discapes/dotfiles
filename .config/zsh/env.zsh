@@ -10,7 +10,6 @@ export XDG_DATA_DIRS=$XDG_DATA_DIRS:/usr/share:/var/lib/flatpak/exports/share:$H
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=lcd -Dswing.systemlaf=com.formdev.flatlaf.FlatLightLaf -Dsun.java2d.opengl=true"
 export JAVA_OPTIONS="$JAVA_OPTIONS"
 
-
 pa ~/.local/share/coursier/bin
 pa ~/.cargo/bin
 pa ~/.local/bin

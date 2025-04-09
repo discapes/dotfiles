@@ -23,7 +23,7 @@ return {
         nix = { "nixfmt" },
         terraform = { "tofu_fmt" }, -- tflint
         tf = { "tofu_fmt" }, -- tflint
-        just = { "tofu_fmt" },
+        just = { "just" },
       },
     },
   },

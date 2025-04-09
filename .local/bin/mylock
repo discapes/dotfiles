@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 set -euo pipefail
 
 pgrep hyprlock && exit
@@ -6,16 +6,16 @@ pgrep hyprlock && exit
 if command -v fprintd-verify; then
 
 	(
-	until fprintd-verify; do
-		 echo "Failed to verify fingerprint at $(date)" | systemd-cat
-	done
-	echo "Unlocked at $(date)" | systemd-cat
-	pkill -USR1 hyprlock
+		until fprintd-verify; do
+			echo "Failed to verify fingerprint at $(date)" | systemd-cat
+		done
+		echo "Unlocked at $(date)" | systemd-cat
+		pkill -USR1 hyprlock
 	) &
 	hyprlock
-	kill $(jobs -p)
+	kill "$(jobs -p)"
 	pkill fprintd
 
 else
-	hyprlock	
+	hyprlock
 fi

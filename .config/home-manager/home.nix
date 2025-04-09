@@ -27,6 +27,8 @@
   # environment.
   home.packages = with pkgs; [
     # SED_ADD_PKGS_HERE
+    shfmt
+    bash-language-server
     just
     #vdhcoapp
     aria2

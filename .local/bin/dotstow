@@ -2,9 +2,9 @@
 # --no-folding is off because we want it to sync when we create something in ~/.config/nvim for example
 # however we don't want that to happen to folders like .ssh/ obviously
 # and that won't happen if the folders already exist so we create them here
-mkdir -v -p ~/.ssh ~/.m2 ~/.config ~/.local/{bin,share} ~/.local/share/fonts  ~/.config/environment.d/
+mkdir -v -p ~/.ssh ~/.m2 ~/.config ~/.local/{bin,share} ~/.local/share/fonts ~/.config/environment.d/
 
-SCRIPTDIR=$(dirname -- "$( readlink -f -- "$0"; )");
-DOTDIR=$(dirname -- "$(dirname -- "$SCRIPTDIR")");
+SCRIPTDIR=$(dirname -- "$(readlink -f -- "$0")")
+DOTDIR=$(dirname -- "$(dirname -- "$SCRIPTDIR")")
 echo "Loading files from $DOTDIR"
-stow -v -d "$DOTDIR" -t ~ . 
+stow -v -d "$DOTDIR" -t ~ .

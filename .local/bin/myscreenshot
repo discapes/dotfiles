@@ -1,21 +1,21 @@
 #!/bin/sh
 
 result=$(echo \
-'area
+	'area
 window
 screen
 copy area
 copy window
-copy screen' \
-	| tofi)
+copy screen' |
+	tofi)
 
 sleep 0.2 # wait for tofi to close
 
 case "$result" in
-    "area") grim -g "$(slurp)" ;;
-    "window") grim -g "$(swaymsg -t get_tree | jq -j '.. | select(.type?) | select(.focused).rect | "\(.x),\(.y) \(.width)x\(.height)"')" ;;
-    "screen") grim ;;
-    "copy area") grim -g "$(slurp)" - | wl-copy ;;
-    "copy window") grim -g "$(swaymsg -t get_tree | jq -j '.. | select(.type?) | select(.focused).rect | "\(.x),\(.y) \(.width)x\(.height)"')" - | wl-copy ;;
-    "copy screen") grim - | wl-copy ;;
+"area") grim -g "$(slurp)" ;;
+"window") grim -g "$(swaymsg -t get_tree | jq -j '.. | select(.type?) | select(.focused).rect | "\(.x),\(.y) \(.width)x\(.height)"')" ;;
+"screen") grim ;;
+"copy area") grim -g "$(slurp)" - | wl-copy ;;
+"copy window") grim -g "$(swaymsg -t get_tree | jq -j '.. | select(.type?) | select(.focused).rect | "\(.x),\(.y) \(.width)x\(.height)"')" - | wl-copy ;;
+"copy screen") grim - | wl-copy ;;
 esac

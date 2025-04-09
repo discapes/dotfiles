@@ -1,8 +1,8 @@
 swap() {
 	#[ "$#" -ne 2 ] || [ ! -f "$1" ] || [ ! -f "$2" ] && echo "invalid arguments" && return 1
 	[ ! -f "$1" ] || [ ! -f "$2" ] && echo "invalid arguments" && return 1
-    local TMPFILE=tmp.$$
-    mv "$1" $TMPFILE && mv "$2" "$1" && mv $TMPFILE "$2"
+	local TMPFILE=tmp.$$
+	mv "$1" $TMPFILE && mv "$2" "$1" && mv $TMPFILE "$2"
 }
 
 cm() {
@@ -21,17 +21,17 @@ dive() {
 alias_if_valid() {
 	replacement=$2
 	original=$1
+
 	restargs=${@:3}
-	if command -v $replacement &> /dev/null; then
+	if command -v $replacement &>/dev/null; then
 		alias -g $original="$replacement"
-	else 
+	else
 		# exit with error if the replacement command is not installed
 		return 1
 	fi
 }
 
-# run_w_reminder: function that runs specified command with arguments and prints a reminder at the end
-# example usage: run_w_reminder "Notice: foobar" ls -A
+# run_w_reminder: function that runs specified command with arguments and prints a reminder at the end example usage: run_w_reminder "Notice: foobar" ls -A
 # this will run "ls -A" and print "Notice: foobar" at the end
 run_w_reminder() {
 	reminder=$1
@@ -42,15 +42,16 @@ run_w_reminder() {
 }
 
 # alias_remind: function that creates an alias to run_w_reminder to remind the user to use a better alternative
-# example usage: alias_remind ls lsd 
+# example usage: alias_remind ls lsd
 # this will create an alias "ls" that runs "ls" and prints a reminder to use lsd at the end
 alias_remind() {
 	replacement=$2
 	original=$1
-	if command -v $replacement &> /dev/null; then
+	if command -v $replacement &>/dev/null; then
 		alias -g $original="run_w_reminder 'Notice: use $replacement instead' $original"
 	else
 		# exit with error if the replacement command is not installed
+		#
 		return 1
 	fi
 }
@@ -73,7 +74,7 @@ alias_if_valid less bat
 
 alias_remind find fd
 alias_remind grep rg || alias grep="grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.venv,venv}"
-alias_remind du dust  || alias du="du -h"
+alias_remind du dust || alias du="du -h"
 
 alias ps="ps x"
 alias dps="docker ps --format 'table {{.ID}}\t{{.Names}}\t{{.Status}}'"

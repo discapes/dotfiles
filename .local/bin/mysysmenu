@@ -10,11 +10,10 @@ logout
 ' | tofi)
 
 case "$result" in
-    "shutdown") poweroff ;;
-    "reboot") reboot ;;
-    "suspend") systemctl suspend ;;
-    "hibernate") systemctl hibernate ;;
-    "lock") loginctl lock-session ;;
-	"logout") hyprctl dispatch exit ;;
+"shutdown") poweroff ;;
+"reboot") reboot ;;
+"suspend") systemctl suspend ;;
+"hibernate") systemctl hibernate ;;
+"lock") loginctl lock-session ;;
+"logout") hyprctl dispatch exit ;;
 esac
-
