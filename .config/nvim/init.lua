@@ -33,6 +33,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 -- LSP
 local map = vim.keymap.set
 map("n", "<M-t>", "<C-w>w", { desc = "Toggle tree focus" })
+map("n", "<Esc>", "<C-w>w", { desc = "Toggle tree focus" })
 map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
 map("n", "<leader>r", vim.lsp.buf.rename, { desc = "Rename identifier" })
 map("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
@@ -47,7 +48,12 @@ end, { desc = "Floating diagnostic" })
 map("n", "gr", vim.lsp.buf.references, { desc = "Show references" })
 
 -- Telescope
-map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "telescope live grep" })
+map(
+  "n",
+  "<leader>fw",
+  "<cmd>Telescope live_grep find_command=rg,--ignore,--hidden prompt_prefix=🔍<cr>",
+  { desc = "telescope live grep" }
+)
 map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "telescope find buffers" })
 map("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { desc = "telescope help page" })
 map("n", "<leader>ma", "<cmd>Telescope marks<CR>", { desc = "telescope find marks" })

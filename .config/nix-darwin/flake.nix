@@ -64,6 +64,8 @@
           ];
 
           nix.channel.enable = false;
+          system.keyboard.enableKeyMapping = true;
+          system.keyboard.remapCapsLockToEscape = true;
         };
     in
     {

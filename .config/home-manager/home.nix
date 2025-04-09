@@ -27,6 +27,8 @@
   # environment.
   home.packages = with pkgs; [
     # SED_ADD_PKGS_HERE
+    yarn
+    bat
     shfmt
     bash-language-server
     just
