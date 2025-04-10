@@ -4,7 +4,6 @@
 `sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply discapes`
 OR
 `nix-shell -p chezmoi --run "chezmoi init --apply discapes"`
-- Run `~/.local/bin/omz` to install oh-my-zsh, powerlevel10k, zsh-autosuggestions and zsh-syntax-highlighting to `~/.oh-my-zsh` TODO jetbrains
 - Use the cea command to edit dotfiles
 
 **Install software, tools and utilities:**
