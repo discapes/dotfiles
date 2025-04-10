@@ -30,7 +30,8 @@ switch switch=(switch): _boost && _unboost
 
 [macos]
 switch switch='switch':
-    sudo darwin-rebuild {{ switch }} --flake $(readlink -f ~/.config/nix-darwin)#darwin
+    # doesn't work as sudo
+    darwin-rebuild {{ switch }} --flake $(readlink -f ~/.config/nix-darwin)#darwin
 
 prune: _prune-nix _prune-docker
 
