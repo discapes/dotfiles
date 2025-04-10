@@ -66,6 +66,7 @@
           nix.channel.enable = false;
           system.keyboard.enableKeyMapping = true;
           system.keyboard.remapCapsLockToEscape = true;
+          system.defaults.finder.QuitMenuItem = true;
         };
     in
     {
