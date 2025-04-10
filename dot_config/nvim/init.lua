@@ -35,7 +35,7 @@ require("scripts.autocmds")
 -- LSP
 local map = vim.keymap.set
 map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>") -- save with Ctrl + S
-map("n", "<C-s>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
+map("n", "<C-l>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
 map("n", "<M-t>", "<C-w>w", { desc = "Toggle tree focus" })
 map("n", "<Esc>", "<C-w>w", { desc = "Toggle tree focus" })
 map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })

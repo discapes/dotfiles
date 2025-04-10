@@ -1,9 +1,11 @@
 # dotfiles
 
 **How to use:**
-- Clone the git repo anywhere like `~/code/dotfiles`
-- Run `~/code/dotfiles/.local/bin/dotstow` to symlink the dotfiles to `~`
-- Run `~/.local/bin/omz` to install oh-my-zsh, powerlevel10k, zsh-autosuggestions and zsh-syntax-highlighting to `~/.oh-my-zsh`
+`sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply discapes`
+OR
+`nix-shell -p chezmoi --run "chezmoi init --apply discapes"`
+- Run `~/.local/bin/omz` to install oh-my-zsh, powerlevel10k, zsh-autosuggestions and zsh-syntax-highlighting to `~/.oh-my-zsh` TODO jetbrains
+- Use the cea command to edit dotfiles
 
 **Install software, tools and utilities:**
 - I manage installed software using home-manager instead of configuration.nix to reduce the overhead of installing new packages
