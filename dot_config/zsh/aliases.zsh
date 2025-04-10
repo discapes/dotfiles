@@ -16,15 +16,15 @@ dive() {
 }
 
 # alias_if_valid: function that creates an alias if the replacement command is installed
-# example usage: alias_if_valid lsd ls -A
-# this will create an alias "ls" that runs "lsd -A" if lsd is installed
+# example usage: alias_if_valid ls lsd -A
+# this will create an alias "ls" that runs "ls -A" if lsd is installed
 alias_if_valid() {
 	replacement=$2
 	original=$1
 
 	restargs=${@:3}
 	if command -v $replacement &>/dev/null; then
-		alias $original="$replacement"
+		alias $original="$replacement $restargs"
 	else
 		# exit with error if the replacement command is not installed
 		return 1
@@ -71,6 +71,8 @@ alias_if_valid dnf dnf5
 alias_if_valid top htop
 alias_if_valid vim nvim
 alias_if_valid less bat
+alias_if_valid c chezmoi
+alias_if_valid cea chezmoi edit --watch --apply
 
 alias_remind find fd
 alias_remind grep rg || alias grep="grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.venv,venv}"

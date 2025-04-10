@@ -27,6 +27,7 @@
   # environment.
   home.packages = with pkgs; [
     # SED_ADD_PKGS_HERE
+    chezmoi
     yarn
     bat
     shfmt
