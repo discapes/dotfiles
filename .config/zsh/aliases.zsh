@@ -24,7 +24,7 @@ alias_if_valid() {
 
 	restargs=${@:3}
 	if command -v $replacement &>/dev/null; then
-		alias -g $original="$replacement"
+		alias $original="$replacement"
 	else
 		# exit with error if the replacement command is not installed
 		return 1
@@ -48,7 +48,7 @@ alias_remind() {
 	replacement=$2
 	original=$1
 	if command -v $replacement &>/dev/null; then
-		alias -g $original="run_w_reminder 'Notice: use $replacement instead' $original"
+		alias $original="run_w_reminder 'Notice: use $replacement instead' $original"
 	else
 		# exit with error if the replacement command is not installed
 		#
@@ -83,6 +83,8 @@ alias free="free -h"
 alias df="df -h"
 alias lsblk="lsblk -o NAME,SIZE,FSTYPE,LABEL,PARTLABEL,MOUNTPOINTS"
 alias xssh='TERM=xterm-256color /usr/bin/env ssh' # fix kitty terminal
+alias dn='docker network inspect $(docker network ls | awk '\''$3 == "bridge" { print $1 }'\'') | jq -r '\''.[] | .Name + " " + .IPAM.Config[0].Subnet'\'''
+alias dip='docker inspect -f $'\''{{.State.Status}}\t\t{{range .NetworkSettings.Networks}} {{.IPAddress}}{{end}}\t{{.Name}}'\'' $(docker ps -aq) | column -t -s $'\''\t'\'''
 
 ssh() {
 	if [ "$TERM" == "xterm-kitty" ]; then
