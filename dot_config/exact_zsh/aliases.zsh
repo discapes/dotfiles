@@ -72,7 +72,10 @@ alias_if_valid top htop
 alias_if_valid vim nvim
 alias_if_valid less bat
 alias_if_valid c chezmoi
-alias_if_valid cea chezmoi edit --watch --apply
+#alias_if_valid cea chezmoi edit --watch --apply
+# we don't need watch or apply since nvim is configured to apply saved files
+alias_if_valid cea chezmoi edit
+alias_if_valid ccd cd "$(chezmoi source-path)"
 
 alias_remind find fd
 alias_remind grep rg || alias grep="grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.venv,venv}"

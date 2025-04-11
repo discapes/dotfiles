@@ -3,6 +3,10 @@ set unstable := true
 @_default:
     just --list
 
+# we want to run flake commands in the source directory
+# since they might update the flake.lock file
+
+flakes_prefix := shell('chezmoi source-path') + "/dot_config/exact_"
 switch := 'switch'
 ppc_path := which('powerprofilesctl')
 original_prof := if ppc_path != '' { shell('powerprofilesctl get') } else { '' }
@@ -14,24 +18,24 @@ _unboost:
     {{ if ppc_path != '' { 'powerprofilesctl set ' + original_prof } else { '' } }}
 
 hswitch: _boost && _unboost
-    home-manager switch --flake $(readlink -f ~/.config/home-manager)
+    home-manager switch --flake {{ flakes_prefix }}home-manager
 
 [linux]
 add pkg: && hswitch
-    sed -i '/SED_ADD_PKGS_HERE/a\    {{ pkg }}' ~/.config/home-manager/home.nix
+    sed -i '/SED_ADD_PKGS_HERE/a\    {{ pkg }}' {{ flakes_prefix }}home-manager/home.nix
 
 [macos]
 add pkg: && hswitch
-    sed -i '' $'s/SED_ADD_PKGS_HERE/&\\\n    {{ pkg }}/' ~/.config/home-manager/home.nix
+    sed -i '' $'s/SED_ADD_PKGS_HERE/&\\\n    {{ pkg }}/' {{ flakes_prefix }}home-manager/home.nix
 
 [linux]
 switch switch=(switch): _boost && _unboost
-    sudo nixos-rebuild {{ switch }} --flake $(readlink -f ~/.config/nix)#nixos
+    sudo nixos-rebuild {{ switch }} --flake {{ flakes_prefix }}nix#nixos
 
 [macos]
 switch switch='switch':
     # doesn't work as sudo
-    darwin-rebuild {{ switch }} --flake $(readlink -f ~/.config/nix-darwin)#darwin
+    darwin-rebuild {{ switch }} --flake {{ flakes_prefix }}nix-darwin#darwin
 
 prune: _prune-nix _prune-docker
 
@@ -46,21 +50,24 @@ _prune-docker:
 
 [macos]
 _update-flake:
-    nix flake update --flake $(readlink -f ~/.config/nix-darwin)
+    nix flake update --flake {{ flakes_prefix }}nix-darwin
 
 [linux]
 _update-flake:
-    nix flake update --flake $(readlink -f ~/.config/nix)
+    nix flake update --flake {{ flakes_prefix }}nix
 
 _update-home-flake:
-    nix flake update --flake $(readlink -f ~/.config/home-manager)
+    nix flake update --flake {{ flakes_prefix }}home-manager
 
 _update-brew:
     brew update
     brew upgrade
 
+_update-dotfiles:
+    chezmoi update
+
 [linux]
-update: _update-home-flake hswitch _update-flake switch
+update: _update-dotfiles _update-home-flake hswitch _update-flake switch
 
 [macos]
-update: _update-brew _update-home-flake hswitch _update-flake switch
+update: _update-dotfiles _update-brew _update-home-flake hswitch _update-flake switch
