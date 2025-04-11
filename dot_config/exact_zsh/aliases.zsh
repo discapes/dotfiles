@@ -84,18 +84,31 @@ alias_remind du dust || alias du="du -h"
 
 alias ps="ps x"
 alias dps="docker ps --format 'table {{.ID}}\t{{.Names}}\t{{.Status}}'"
-alias tssh='TERM=xterm-256color /usr/bin/env ssh -o RequestTTY=yes -o RemoteCommand="tmux new -As0 zsh"'
+#alias tssh='TERM=xterm-256color /usr/bin/env ssh -o RequestTTY=yes -o RemoteCommand="tmux new -As0 zsh"'
 alias free="free -h"
 alias df="df -h"
 alias lsblk="lsblk -o NAME,SIZE,FSTYPE,LABEL,PARTLABEL,MOUNTPOINTS"
-alias xssh='TERM=xterm-256color /usr/bin/env ssh' # fix kitty terminal
 alias dn='docker network inspect $(docker network ls | awk '\''$3 == "bridge" { print $1 }'\'') | jq -r '\''.[] | .Name + " " + .IPAM.Config[0].Subnet'\'''
 alias dip='docker inspect -f $'\''{{.State.Status}}\t\t{{range .NetworkSettings.Networks}} {{.IPAddress}}{{end}}\t{{.Name}}'\'' $(docker ps -aq) | column -t -s $'\''\t'\'''
 
-ssh() {
-	if [ "$TERM" == "xterm-kitty" ]; then
+# tssh() {
+# 	if [ "$TERM" == "xterm-kitty" ]; then
+# 		kitten ssh -o RequestTTY=yes "$@" tmux new -As0 zsh
+# 	else
+# 		env ssh -o RequestTTY=yes "$@" tmux new -As0 zsh
+# 	fi
+# }
+
+#alias xssh='TERM=xterm-256color /usr/bin/env ssh' # fix kitty terminal
+if [ "$TERM" == "xterm-kitty" ]; then
+	alias ssh='kitten ssh'
+	_tssh() {
 		kitten ssh -o RequestTTY=yes "$@" tmux new -As0 zsh
-	else
-		env ssh -o RequestTTY=yes "$@" tmux new -As0 zsh
-	fi
-}
+	}
+	alias tssh='_tssh'
+else
+	_tssh() {
+		ssh -o RequestTTY=yes "$@" tmux new -As0 zsh
+	}
+	alias tssh='_tssh'
+fi

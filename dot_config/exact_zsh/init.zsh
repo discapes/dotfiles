@@ -1,18 +1,12 @@
+# prompt
 if [ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${USER}.zsh" ]; then
 	source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${USER}.zsh"
 else
 	PROMPT='%(?.%F{blue}⏺.%F{red}⏺)%f %2~ > '
 	RPROMPT='%F{8}⏱ %*%f'
 fi
-
-### HOOKS (they add commands which aliases.zsh looks for
-if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile.d/nix.sh; fi                                             # added by Nix installer
-if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh; fi # on macOS
-if [ -e /opt/homebrew/bin/brew ]; then eval "$(/opt/homebrew/bin/brew shellenv)"; fi
-
-### this has no deps
-source ~/.config/zsh/global_env.zsh
-
+#
+##
 # The following lines were added by compinstall
 zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
 zstyle :compinstall filename ~/.zshrc
@@ -21,6 +15,25 @@ autoload -Uz compinit
 compinit -d ~/.cache/.zcompdump
 # End of lines added by compinstall
 
+#
+#
+#
+#
+# options
+HISTFILE=~/.cache/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+setopt notify
+setopt complete_aliases
+unsetopt autocd beep extendedglob nomatch
+bindkey -v
+
+#
+##
+##
+##
+##
+## oh my zsh
 if [ -z "$SSH_CLIENT" ]; then
 	source ~/.config/zsh/env.zsh
 	[ -z "$WAYLAND_DISPLAY" ] && [ "$TTY" = "/dev/tty1" ] && exec Hyprland
@@ -30,6 +43,7 @@ if [ -z "$SSH_CLIENT" ]; then
 		# we want to use the host podman in distrobox
 		export CONTAINER_HOST=unix:///run/host/run/user/1000/podman/podman.sock
 	fi
+
 	source ~/.config/zsh/ohmyzsh.zsh
 	source ~/.config/zsh/p10k.zsh
 fi
