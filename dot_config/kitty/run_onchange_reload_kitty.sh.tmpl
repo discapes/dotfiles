@@ -1,4 +1,9 @@
 #!/usr/bin/env sh
 
 # kitty.conf hash: {{ include "dot_config/kitty/kitty.conf.tmpl" | sha256sum }}
-killall -SIGUSR1 kitty
+# use pkill on linux and killall on darwin
+if [ "$(uname)" = "Linux" ]; then
+	 pkill -SIGUSR1 kitty
+else
+	 killall -SIGUSR1 kitty
+fi
