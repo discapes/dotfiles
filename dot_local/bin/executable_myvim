@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# if there's only one argument that is a directory,
+# cd to that directory and run "vim ."
+# else just run "vim" with the arguments
+# use neovim if available
+if command -v nvim &>/dev/null; then
+  VIM_CMD="nvim"
+else
+  VIM_CMD="vim"
+fi
+
+if [ "$#" -eq 1 ] && [ -d "$1" ]; then
+  cd "$1" || exit
+  $VIM_CMD .
+else
+  $VIM_CMD "$@"
+fi

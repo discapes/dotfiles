@@ -19,14 +19,6 @@ compinit -d ~/.cache/.zcompdump
 #
 #
 #
-# options
-HISTFILE=~/.cache/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
-setopt notify
-setopt complete_aliases
-unsetopt autocd beep extendedglob nomatch
-bindkey -v
 
 #
 ##
@@ -47,6 +39,15 @@ if [ -z "$SSH_CLIENT" ]; then
 	source ~/.config/zsh/ohmyzsh.zsh
 	source ~/.config/zsh/p10k.zsh
 fi
+
+# options - after omz
+HISTFILE=~/.cache/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+setopt notify
+setopt complete_aliases
+unsetopt autocd beep extendedglob nomatch
+bindkey -v
 
 # these depend on brew, and zoxide depends on compinit
 command -v mise &>/dev/null && eval "$(mise activate zsh)"

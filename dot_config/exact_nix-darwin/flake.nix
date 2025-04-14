@@ -67,6 +67,20 @@
           system.keyboard.enableKeyMapping = true;
           system.keyboard.remapCapsLockToEscape = true;
           system.defaults.finder.QuitMenuItem = true;
+          system.defaults.dock.autohide = true;
+          system.defaults.CustomUserPreferences = {
+            "com.apple.symbolichotkeys" = {
+              AppleSymbolicHotKeys = {
+                # https://github.com/NUIKit/CGSInternal/blob/master/CGSHotKeys.h
+                # see `defaults read com.apple.symbolichotkeys` for mapping
+                # `rm ~/Library/Preferences/com.apple.symbolichotkeys.plist` to reset
+                # Previous and Next Input source hotkeys conflict with C-space
+                "60".enabled = false;
+                "61".enabled = false;
+              };
+            };
+          };
+
         };
     in
     {

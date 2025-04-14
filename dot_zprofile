@@ -1,18 +1,18 @@
 # why have a zprofile?
 #https://github.com/NixOS/nix/issues/10248
 
-if command -v bat &>/dev/null; then
-	export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-	export MANROFFOPT="-c" # needed atleast on mac
-else
-	export MANPAGER="less -R --use-color -Dd+r -Du+b"
-fi
-
-command -v nvim &>/dev/null && export EDITOR=nvim || export EDITOR=vim
-
 ### HOOKS (they add commands which aliases.zsh looks for
 if [ -e /opt/homebrew/bin/brew ]; then eval "$(/opt/homebrew/bin/brew shellenv)"; fi
 if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile.d/nix.sh; fi                                             # added by Nix installer
 if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh; fi # on macOS
 
-export PATH="$PATH:/usr/local/bin:$HOME/.local/bin"
+export PATH="$HOME/.local/bin:$PATH:/usr/local/bin:"
+
+command -v myvim &>/dev/null && export EDITOR=myvim || export EDITOR=vim
+
+if command -v bat &>/dev/null; then
+  	export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+	export MANROFFOPT="-c" # needed atleast on mac
+else
+	export MANPAGER="less -R --use-color -Dd+r -Du+b"
+fi

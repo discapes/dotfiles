@@ -27,6 +27,10 @@
   # environment.
   home.packages = with pkgs; [
     # SED_ADD_PKGS_HERE
+    fzf
+    ripgrep
+    cargo
+    fd
     lazygit
     chezmoi
     yarn

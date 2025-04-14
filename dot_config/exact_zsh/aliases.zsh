@@ -69,7 +69,8 @@ alias_if_valid ls lsd || alias ls="ls --color=tty"
 alias_if_valid cat bat
 alias_if_valid dnf dnf5
 alias_if_valid top htop
-alias_if_valid vim nvim
+alias_if_valid vim myvim
+alias_if_valid nvim myvim
 alias_if_valid less bat
 alias_if_valid c chezmoi
 #alias_if_valid cea chezmoi edit --watch --apply
@@ -90,14 +91,7 @@ alias df="df -h"
 alias lsblk="lsblk -o NAME,SIZE,FSTYPE,LABEL,PARTLABEL,MOUNTPOINTS"
 alias dn='docker network inspect $(docker network ls | awk '\''$3 == "bridge" { print $1 }'\'') | jq -r '\''.[] | .Name + " " + .IPAM.Config[0].Subnet'\'''
 alias dip='docker inspect -f $'\''{{.State.Status}}\t\t{{range .NetworkSettings.Networks}} {{.IPAddress}}{{end}}\t{{.Name}}'\'' $(docker ps -aq) | column -t -s $'\''\t'\'''
-
-# tssh() {
-# 	if [ "$TERM" == "xterm-kitty" ]; then
-# 		kitten ssh -o RequestTTY=yes "$@" tmux new -As0 zsh
-# 	else
-# 		env ssh -o RequestTTY=yes "$@" tmux new -As0 zsh
-# 	fi
-# }
+alias gc='git clone --depth=1'
 
 #alias xssh='TERM=xterm-256color /usr/bin/env ssh' # fix kitty terminal
 if [ "$TERM" == "xterm-kitty" ]; then
@@ -112,3 +106,4 @@ else
 	}
 	alias tssh='_tssh'
 fi
+
