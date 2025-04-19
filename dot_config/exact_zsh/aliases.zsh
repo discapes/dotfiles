@@ -75,7 +75,7 @@ alias_if_valid less bat
 alias_if_valid c chezmoi
 #alias_if_valid cea chezmoi edit --watch --apply
 # we don't need watch or apply since nvim is configured to apply saved files
-alias_if_valid cea chezmoi edit
+#alias_if_valid cea chezmoi edit -- we should use nvims Projects instead so it restores session
 alias_if_valid ccd cd "$(chezmoi source-path)"
 alias_if_valid lg lazygit
 
@@ -92,6 +92,8 @@ alias lsblk="lsblk -o NAME,SIZE,FSTYPE,LABEL,PARTLABEL,MOUNTPOINTS"
 alias dn='docker network inspect $(docker network ls | awk '\''$3 == "bridge" { print $1 }'\'') | jq -r '\''.[] | .Name + " " + .IPAM.Config[0].Subnet'\'''
 alias dip='docker inspect -f $'\''{{.State.Status}}\t\t{{range .NetworkSettings.Networks}} {{.IPAddress}}{{end}}\t{{.Name}}'\'' $(docker ps -aq) | column -t -s $'\''\t'\'''
 alias gc='git clone --depth=1'
+alias dcu="docker network create user --opt com.docker.network.bridge.gateway_mode_ipv4=nat-unprotected"
+alias dr="docker run -it --rm -d --network user --name"
 
 #alias xssh='TERM=xterm-256color /usr/bin/env ssh' # fix kitty terminal
 if [ "$TERM" == "xterm-kitty" ]; then
