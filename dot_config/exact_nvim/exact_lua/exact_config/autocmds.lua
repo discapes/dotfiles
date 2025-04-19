@@ -20,3 +20,18 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
     -- end
   end,
 })
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = { vim.fn.expand("~") .. "/.local/share/chezmoi/*" },
+  callback = function()
+    print("Applying chezmoi changes...")
+    local filepath = vim.fn.expand("%:p")
+    -- it is much faster to apply just the specific file, but if
+    -- we want chezmoi to execute scripts like run_reload_kitty.sh.tmpl
+    -- when we edit kitty.conf so we need to apply the whole config
+    vim.fn.jobstart({ "chezmoi", "apply", "--source-path", filepath }, {
+      -- vim.fn.jobstart({ "chezmoi", "apply" }, {
+      detach = true,
+    })
+  end,
+})

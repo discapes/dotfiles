@@ -14,21 +14,20 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
 	end,
 })
 
---autocmd BufWritePost ~/.local/share/chezmoi/* ! chezmoi apply --source-path "%"
-vim.api.nvim_create_autocmd("BufWritePost", {
-	pattern = { vim.fn.expand("~") .. "/.local/share/chezmoi/*" },
-	callback = function()
-		print("Applying chezmoi changes...")
-		local filepath = vim.fn.expand("%:p")
-		-- it would be faster to apply just the specific file, but
-		-- we need chezmoi to execute scripts like run_reload_kitty.sh.tmpl
-		-- when we edit kitty.conf so we need to apply the whole config
-		-- vim.fn.jobstart({ "chezmoi", "apply", "--source-path", filepath }, {
-		vim.fn.jobstart({ "chezmoi", "apply" }, {
-			detach = true,
-		})
-	end,
-})
+--vim.api.nvim_create_autocmd("BufWritePost", {
+--	pattern = { vim.fn.expand("~") .. "/.local/share/chezmoi/*" },
+--	callback = function()
+--		print("Applying chezmoi changes...")
+--		local filepath = vim.fn.expand("%:p")
+--		-- it would be faster to apply just the specific file, but
+--		-- we need chezmoi to execute scripts like run_reload_kitty.sh.tmpl
+--		-- when we edit kitty.conf so we need to apply the whole config
+--		-- vim.fn.jobstart({ "chezmoi", "apply", "--source-path", filepath }, {
+--		vim.fn.jobstart({ "chezmoi", "apply" }, {
+--			detach = true,
+--		})
+--	end,
+--})
 
 vim.api.nvim_create_user_command("DiffOrig", function()
 	local scratch_buffer = vim.api.nvim_create_buf(false, true)
