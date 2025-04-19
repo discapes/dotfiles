@@ -18,6 +18,9 @@ o.wrap = true
 o.spell = false -- this is overridden by a LazyVim autocmd
 o.spelllang = "" -- use this to disable spellchecking
 
+-- override root dir detection
+vim.g.root_spec = { ".git", "cwd" }
+
 -- what do we do with these?
 -- o.autoindent = true
 -- o.expandtab = false

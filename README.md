@@ -29,4 +29,3 @@ TODO:
 
 - neovim
   - better chezmoi integration
-  - disable root detection
