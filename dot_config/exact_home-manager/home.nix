@@ -27,11 +27,25 @@
   # environment.
   home.packages = with pkgs; [
     # SED_ADD_PKGS_HERE
+    dust
+    bun
+    ffmpeg
+    imagemagick
+    resvg
+    _7zz
+    yazi
+    languagetool
+    lolcat
+    figlet
+    dwt1-shell-color-scripts
+    nixd
     killall
+    # needed for programs like neovim and yazi
     fzf
-    ripgrep
-    cargo
     fd
+    ripgrep
+
+    cargo
     lazygit
     chezmoi
     yarn
