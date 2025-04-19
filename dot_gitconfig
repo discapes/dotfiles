@@ -22,4 +22,4 @@
 	excludesfile = ~/.config/my-gitignore
 
 [includeIf "gitdir:code/work/"]
-    path = ~/.gitconfig.work
+  path = ~/.gitconfig.work
