@@ -14,6 +14,10 @@ o.showbreak = "↪ " -- how to show wrapped lines
 o.commentstring = "#%s" -- what to comment with when the language is not detected
 o.wrap = true
 
+-- to disable spellchecking
+o.spell = false -- this is overridden by a LazyVim autocmd
+o.spelllang = "" -- use this to disable spellchecking
+
 -- what do we do with these?
 -- o.autoindent = true
 -- o.expandtab = false
