@@ -35,3 +35,9 @@ vim.api.nvim_create_autocmd("BufWritePost", {
     })
   end,
 })
+
+vim.api.nvim_create_autocmd("DirChanged", {
+  callback = function()
+    Snacks.explorer()
+  end,
+})
