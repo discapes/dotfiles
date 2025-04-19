@@ -23,3 +23,6 @@
 
 [includeIf "gitdir:code/work/"]
   path = ~/.gitconfig.work
+
+[init]
+	defaultBranch = master
