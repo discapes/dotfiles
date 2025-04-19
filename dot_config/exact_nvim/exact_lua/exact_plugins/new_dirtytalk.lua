@@ -1,10 +1,14 @@
--- spellcheck for programmers
 -- right now I'm using Harper LS
--- return {
---   "psliwka/vim-dirtytalk",
---   build = ":DirtytalkUpdate",
---   event = "BufEnter",
---   config = function()
---     vim.opt.spelllang = { "en", "programming" }
---   end,
--- }
+if true then
+  return {}
+end
+
+-- spellcheck for programmers
+return {
+  "psliwka/vim-dirtytalk",
+  build = ":DirtytalkUpdate",
+  event = "BufEnter",
+  config = function()
+    vim.opt.spelllang = { "en", "programming" }
+  end,
+}
