@@ -6,6 +6,13 @@ return {
       cssls = {},
       -- we don't want to spellcheck comments
       harper_ls = {
+        settings = {
+          ["harper-ls"] = {
+            linters = {
+              ToDoHyphen = false,
+            },
+          },
+        },
         filetypes = {
           "text",
           "plaintex",
