@@ -26,6 +26,7 @@
           # optional to also wrap and install comma
           { programs.nix-index-database.comma.enable = true; }
         ];
+        specialArgs = { inherit self; };
       };
     };
 }

@@ -38,7 +38,7 @@
     "1.1.1.1"
     "8.8.8.8"
   ];
-  networking.sknownNetworkServices = [
+  networking.knownNetworkServices = [
     "Wi-Fi"
   ];
 
