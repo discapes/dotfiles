@@ -4,12 +4,17 @@
   lib,
   ...
 }:
+
+# Here I put packages that I'm certain to only need on NixOS. So most CLI tools and packages that I would use on macOS
+# too would be in home-manager, so I can install them easily. However, packages that are Linux-specific belong here
+# (or in the future I might move everything to home-manager if I use another Linux distro), and also packages that are
+# "provided by the OS" like partitioning tools or system management utilities, or GUI apps that might be safer to
+# manage with something other than nix.
 with pkgs;
 {
   environment.systemPackages =
     let
       std_utils = [
-        hello
         home-manager
         bc
         btrfs-progs
@@ -20,13 +25,10 @@ with pkgs;
         git
         gptfdisk
         htop
-        jq
         lshw
         nmap
         openssl
         pciutils
-        stow
-        tmux
         unzip
         usbutils
         vim
@@ -35,37 +37,10 @@ with pkgs;
         wget
         wireguard-tools
         wl-clipboard
-        yq
         zip
-        rclone
       ];
       cli_niceties = [
-        bat
-        ctpv
-        dive
-        dtrx
-        dust
-        fastfetch
-        fd
-        fdupes
-        fzf
-        gita
-        lf
-        lsd
-        ncdu
-        ps_mem
-        ripgrep
-        tldr
-        zoxide
-        lazygit
-      ];
-      kube = [
-        # argocd
-        flux
-        kubectl
-        kubernetes-helm
-        kustomize
-        talosctl
+        # moved to home-manager
       ];
       apps = [
         kitty
@@ -78,27 +53,17 @@ with pkgs;
       dev = [
         podman-tui
         docker-compose
-        direnv
         distrobox
         ansible
-        opentofu
         nodejs
         vscode
         python3
         go
         clang
-        just
         apacheHttpd # for htpasswd
       ];
-      rust = [
-        rustc
-        rustfmt
-        rust-analyzer
-        clippy
-        cargo
-      ];
     in
-    std_utils ++ cli_niceties ++ apps ++ dev ++ rust;
+    std_utils ++ cli_niceties ++ apps ++ dev;
 }
 
 ## extra pkgs for MATLAB from https://gitlab.com/doronbehar/nix-matlab/-/blob/master/common.nix

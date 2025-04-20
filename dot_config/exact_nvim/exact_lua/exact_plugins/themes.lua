@@ -8,9 +8,9 @@ return {
   { "ellisonleao/gruvbox.nvim" },
   {
     "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "catppuccin-mocha", -- actually doesn't matter since we use last-color
-    },
+    -- opts = {
+    --   colorscheme = "catppuccin-mocha", -- actually doesn't matter since we use last-color
+    -- },
   },
   {
     "folke/tokyonight.nvim",
@@ -28,7 +28,7 @@ return {
     -- event = "VeryLazy",
     lazy = false,
     config = function()
-      local theme = require("last-color").recall() or "default"
+      local theme = require("last-color").recall() or "catppuccin-mocha"
       vim.cmd.colorscheme(theme)
     end,
   },

@@ -8,103 +8,178 @@
 }:
 
 {
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
+  # required by home-manager
   home.username = user;
   home.homeDirectory =
     if lib.strings.hasSuffix "darwin" system then "/Users/${user}" else "/home/${user}";
-
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
-  # You should not change this value, even if you update Home Manager. If you do
-  # want to update the value, then make sure to first check the Home Manager
-  # release notes.
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
-  home.packages = with pkgs; [
-    # SED_ADD_PKGS_HERE
-    dust
-    bun
-    ffmpeg
-    imagemagick
-    resvg
-    _7zz
-    yazi
-    languagetool
-    lolcat
-    figlet
-    dwt1-shell-color-scripts
-    nixd
-    killall
-    # needed for programs like neovim and yazi
-    fzf
-    fd
-    ripgrep
+  # see packages.nix for a note on what packages belong where.
+  home.packages =
+    with pkgs;
+    (
+      let
+        languageServers = [
+          # Bash
+          bash-language-server
+          # Svelte
+          svelte-language-server
+          # Static Type Checker for Python
+          pyright
+          # Tailwind CSS
+          tailwindcss-language-server
+          # eslint, html, css, json
+          vscode-langservers-extracted
+          # Ansible
+          ansible-language-server
+          # Docker
+          docker-compose-language-service
+          dockerfile-language-server-nodejs
+          # Harper spell checker
+          harper
+          # Markdown
+          marksman
+          # Nix
+          nil
+          # Prisma Schema
+          # nix-shell -p 'nodePackages."@prisma/language-server"'
+          # https://github.com/NixOS/nixos-search/issues/293
+          # https://github.com/NixOS/nixpkgs/pull/392481
+          # nodePackages."@prisma/language-server"
+          # Python linter and code formatter
+          ruff
+          # TOML
+          taplo
+          # Terraform
+          terraform-ls
+          # LSP wrapper for typescript extension of vscode
+          # replaces tsserver in LazyVim
+          # https://github.com/LazyVim/LazyVim/discussions/3603
+          # typescript-language-server
+          vtsls
+          # YAML
+          yaml-language-server
+          # Lua
+          lua-language-server
+        ];
+        formatters = [
+          djlint
+          black
+          xmlformat
+          stylua
+          nodePackages.prettier
+          nixfmt-rfc-style
+          shfmt
+          markdownlint-cli2
+        ];
+        util = [
+          fzf
+          fd
+          ripgrep
+          dust
+          ffmpeg
+          imagemagick
+          resvg
+          _7zz
+          bat
+          zoxide
+          dtrx
+          fdupes
+          gita
+          lsd
+          ps_mem
+          tldr
+          direnv
+          jq
+          yq
+        ];
+        tui = [
+          yazi
+          lazygit
+          dive
+          ncdu
+          tmux
+        ];
+        fun = [
+          fastfetch
+          figlet
+          lolcat
+          dwt1-shell-color-scripts
+        ];
+        wireless = [
+          gqrx
+          gnuradio
+          gpredict
+          hackrf
+          hcxdumptool
+          hcxtools
+          iw
+        ];
+        kube = [
+          # argocd
+          flux
+          kubectl
+          kubernetes-helm
+          kustomize
+          talosctl
+        ];
+        rust = [
+          rustc
+          rustfmt
+          rust-analyzer
+          clippy
+          cargo
+        ];
+        others = [
+          # SED_ADD_PKGS_HERE
+          just
+          opentofu
+          aria2
+          bun
+          cargo
+          chezmoi
+          eslint
+          gnupg
+          killall
+          languagetool
+          mitmproxy
+          neovim
+          nixd
+          rustc
+          sqlite
+          uv
+          yarn
+          rclone
+          # android-backup-extractor
+          # apksigner
+          # apktool
+          # jre
+          # vdhcoapp
+        ];
+      in
+      languageServers
+      ++ formatters
+      ++ util
+      ++ tui
+      ++ fun
+      # ++ wireless
+      # ++ kube
+      # ++ rust
+      ++ others
+    );
 
-    cargo
-    lazygit
-    chezmoi
-    yarn
-    bat
-    shfmt
-    bash-language-server
-    just
-    #vdhcoapp
-    aria2
-    gnupg
-    #iw
-    sqlite
-    #apksigner
-    #apktool
-    #android-backup-extractor
-    #jre
-    mitmproxy
-    #hcxtools
-    #hcxdumptool
-    #gnuradio
-    #gpredict
-    #    gqrx
-    #hackrf
-    uv
-    typescript-language-server
-    svelte-language-server
-    pyright
-    tailwindcss-language-server
-    vscode-langservers-extracted
-    lua-language-server
-    eslint
-    opentofu
-    nixfmt-rfc-style
-    djlint
-    black
-    xmlformat
-    stylua
-    neovim
-    nodePackages.prettier
-    rustc
-    hello
+  # # It is sometimes useful to fine-tune packages, for example, by applying
+  # # overrides. You can do that directly here, just don't forget the
+  # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
+  # # fonts?
+  # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
 
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
-
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
-  ];
+  # # You can also create simple shell scripts directly inside your
+  # # configuration. For example, this adds a command 'my-hello' to your
+  # # environment:
+  # (pkgs.writeShellScriptBin "my-hello" ''
+  #   echo "Hello, ${config.home.username}!"
+  # '')
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.

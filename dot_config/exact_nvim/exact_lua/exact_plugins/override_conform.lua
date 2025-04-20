@@ -6,6 +6,7 @@ return {
       just = { "just" },
       xml = { "xmlformatter" },
       htmldjango = { "djlint" },
+      fish = {}, -- we don't need this
     },
     formatters = {
       ["markdownlint-cli2"] = {
