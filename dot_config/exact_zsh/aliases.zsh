@@ -95,8 +95,10 @@ alias gc='git clone --depth=1'
 alias dcu="docker network create user --opt com.docker.network.bridge.gateway_mode_ipv4=nat-unprotected"
 alias dr="docker run -it --rm -d --network user --name"
 
-#alias xssh='TERM=xterm-256color /usr/bin/env ssh' # fix kitty terminal
 if [ "$TERM" == "xterm-kitty" ]; then
+  # to connect to places where the kitten doesn't work eg. openwrt
+  # then we also need to set TERM to avoid vim and tmux not working
+	alias ssh_petfree='TERM=xterm-256color ssh'
 	alias ssh='kitten ssh'
 	_tssh() {
 		kitten ssh -o RequestTTY=yes "$@" tmux new -As0 zsh
