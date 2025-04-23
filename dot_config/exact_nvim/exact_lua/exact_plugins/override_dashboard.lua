@@ -7,7 +7,7 @@ return {
           pane = 1,
           {
             section = "terminal",
-            cmd = "cat ~/.config/neovim-banner.txt | lolcat -S 1",
+            cmd = "cat ~/.config/neovim-banner.txt | lolcat -S 1 2>/dev/null",
             height = 6,
             padding = 2,
             indent = 5,
