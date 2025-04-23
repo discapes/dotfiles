@@ -25,4 +25,7 @@
   path = ~/.gitconfig.work
 
 [init]
-	defaultBranch = master
+  defaultBranch = master
+
+[commit]
+  gpgSign = true
