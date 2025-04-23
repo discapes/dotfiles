@@ -132,6 +132,7 @@
         ];
         others = [
           # SED_ADD_PKGS_HERE
+    mpv
           just
           opentofu
           aria2

@@ -1,0 +1,20 @@
+#!/bin/sh
+
+mkdir -p ~/.local/share/mime/packages
+cat >~/.local/share/mime/packages/drawio.xml <<'EOF'
+<?xml version="1.0" encoding="utf-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+<mime-type type="application/vnd.jgraph.mxfile">
+  <glob pattern="*.drawio"/>
+    <comment>draw.io Diagram</comment>
+  <icon name="x-office-document" />
+</mime-type>
+<mime-type type="application/vnd.visio">
+  <glob pattern="*.vsdx"/>
+    <comment>VSDX Document</comment>
+  <icon name="x-office-document" />
+</mime-type>
+</mime-info>
+EOF
+
+update-mime-database ~/.local/share/mime

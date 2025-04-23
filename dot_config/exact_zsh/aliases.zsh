@@ -98,7 +98,7 @@ alias dr="docker run -it --rm -d --network user --name"
 if [ "$TERM" == "xterm-kitty" ]; then
   # to connect to places where the kitten doesn't work eg. openwrt
   # then we also need to set TERM to avoid vim and tmux not working
-	alias ssh_petfree='TERM=xterm-256color ssh'
+	alias ssh_petfree='TERM=xterm-256color \ssh'
 	alias ssh='kitten ssh'
 	_tssh() {
 		kitten ssh -o RequestTTY=yes "$@" tmux new -As0 zsh
