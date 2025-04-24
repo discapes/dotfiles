@@ -22,7 +22,7 @@
 	excludesfile = ~/.config/my-gitignore
 
 [includeIf "gitdir:code/work/"]
-  path = ~/.gitconfig.work
+  path = work.config
 
 [init]
   defaultBranch = master

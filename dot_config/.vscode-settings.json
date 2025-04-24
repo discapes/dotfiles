@@ -1,6 +1,7 @@
 {
   "workbench.colorTheme": "SynthWave84",
   "terminal.integrated.fontFamily": "JetbrainsMono Nerd Font",
-  "vim.useSystemClipboard": true
+  "vim.useSystemClipboard": true,
+  "editor.fontFamily": "JetbrainsMono Nerd Font Mono, Menlo, Monaco, 'Courier New', monospace"
 }
 
