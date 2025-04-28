@@ -22,11 +22,11 @@ hswitch: _boost && _unboost
 
 [linux]
 add pkg: && hswitch
-    sed -i '/SED_ADD_PKGS_HERE/a\    {{ pkg }}' {{ flakes_prefix }}home-manager/home.nix
+    sed -i '/SED_ADD_PKGS_HERE/a\          {{ pkg }}' {{ flakes_prefix }}home-manager/home.nix
 
 [macos]
 add pkg: && hswitch
-    sed -i '' $'s/SED_ADD_PKGS_HERE/&\\\n    {{ pkg }}/' {{ flakes_prefix }}home-manager/home.nix
+    sed -i '' $'s/SED_ADD_PKGS_HERE/&\\\n          {{ pkg }}/' {{ flakes_prefix }}home-manager/home.nix
 
 [linux]
 switch switch=(switch): _boost && _unboost

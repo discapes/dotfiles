@@ -131,8 +131,10 @@
         ];
         others = [
           # SED_ADD_PKGS_HERE
-    bitwarden-cli
-    mpv
+          bitwarden-cli
+          mpv
+          gawk
+          dive
           just
           opentofu
           aria2
