@@ -92,6 +92,9 @@ alias lsblk="lsblk -o NAME,SIZE,FSTYPE,LABEL,PARTLABEL,MOUNTPOINTS"
 alias dn='docker network inspect $(docker network ls | awk '\''$3 == "bridge" { print $1 }'\'') | jq -r '\''.[] | .Name + " " + .IPAM.Config[0].Subnet'\'''
 alias dip='docker inspect -f $'\''{{.State.Status}}\t\t{{range .NetworkSettings.Networks}} {{.IPAddress}}{{end}}\t{{.Name}}'\'' $(docker ps -aq) | column -t -s $'\''\t'\'''
 alias gc='git clone --depth=1'
+alias gs="git status -s"
+alias e="exit"
+alias gd="git diff --color-words"
 alias dcu="docker network create user --opt com.docker.network.bridge.gateway_mode_ipv4=nat-unprotected"
 alias dr="docker run -it --rm -d --network user --name"
 
