@@ -41,6 +41,7 @@ with pkgs;
       ];
       cli_niceties = [
         # moved to home-manager
+        ps_mem # not available on macOS
       ];
       apps = [
         kitty

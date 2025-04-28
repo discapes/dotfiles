@@ -87,7 +87,6 @@
           fdupes
           gita
           lsd
-          ps_mem
           tldr
           direnv
           jq
