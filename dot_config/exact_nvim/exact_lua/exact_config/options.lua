@@ -9,7 +9,7 @@ local o = vim.o
 -- o.clipboard = "unnamedplus"
 
 -- custom options
-o.listchars = "tab:» ,extends:›,precedes:‹,nbsp:·,trail:·" -- ,eol:$
+o.listchars = "tab:» ,extends:›,precedes:‹,nbsp:!,trail:·" -- ,eol:$
 o.showbreak = "↪ " -- how to show wrapped lines
 o.commentstring = "#%s" -- what to comment with when the language is not detected
 o.wrap = true
