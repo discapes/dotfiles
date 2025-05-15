@@ -97,6 +97,7 @@ alias e="exit"
 alias gd="git diff --color-words"
 alias dcu="docker network create user --opt com.docker.network.bridge.gateway_mode_ipv4=nat-unprotected"
 alias dr="docker run -it --rm -d --network user --name"
+alias mitmproxy="mitmproxy 2>/dev/null" # bug on macOS
 
 if [ "$TERM" == "xterm-kitty" ]; then
   # to connect to places where the kitten doesn't work eg. openwrt

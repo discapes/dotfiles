@@ -6,3 +6,4 @@
 .idea/
 .git
 __pycache__
+.aider*
