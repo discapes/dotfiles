@@ -1,5 +1,6 @@
 # prompt
-if [ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${USER}.zsh" ]; then
+USE_STARSHIP=
+if [[ -z $USE_STARSHIP && -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${USER}.zsh" ]]; then
 	source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${USER}.zsh"
 else
 	PROMPT='%(?.%F{blue}⏺.%F{red}⏺)%f %2~ > '
@@ -36,8 +37,23 @@ if [ -z "$SSH_CLIENT" ]; then
 		export CONTAINER_HOST=unix:///run/host/run/user/1000/podman/podman.sock
 	fi
 
-	source ~/.config/zsh/ohmyzsh.zsh
-	source ~/.config/zsh/p10k.zsh
+  if [ -n "$USE_STARSHIP" ]; then
+    # export STARSHIP_CONFIG=~/.config/starship.toml
+    eval "$(starship init zsh)"
+  else
+    source ~/.config/zsh/ohmyzsh.zsh
+    source ~/.config/zsh/p10k.zsh
+  fi
+else
+  command -v fastfetch &>/dev/null && fastfetch
+  echo Welcome, $USER
+fi
+
+if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+  source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+if [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
 # options - after omz

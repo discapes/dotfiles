@@ -76,7 +76,7 @@ alias_if_valid c chezmoi
 #alias_if_valid cea chezmoi edit --watch --apply
 # we don't need watch or apply since nvim is configured to apply saved files
 #alias_if_valid cea chezmoi edit -- we should use nvims Projects instead so it restores session
-alias_if_valid ccd cd "$(chezmoi source-path)"
+alias ccd='cd "$(chezmoi source-path)"'
 alias_if_valid lg lazygit
 
 alias_remind find fd
@@ -85,7 +85,7 @@ alias_remind du dust || alias du="du -h"
 
 alias ps="ps x"
 alias dps="docker ps --format 'table {{.ID}}\t{{.Names}}\t{{.Status}}'"
-#alias tssh='TERM=xterm-256color /usr/bin/env ssh -o RequestTTY=yes -o RemoteCommand="tmux new -As0 zsh"'
+#alias s='TERM=xterm-256color /usr/bin/env ssh -o RequestTTY=yes -o RemoteCommand="tmux new -As0 zsh"'
 alias free="free -h"
 alias df="df -h"
 alias lsblk="lsblk -o NAME,SIZE,FSTYPE,LABEL,PARTLABEL,MOUNTPOINTS"
@@ -104,14 +104,14 @@ if [ "$TERM" == "xterm-kitty" ]; then
   # then we also need to set TERM to avoid vim and tmux not working
 	alias ssh_petfree='TERM=xterm-256color \ssh'
 	alias ssh='kitten ssh'
-	_tssh() {
+	_s() {
 		kitten ssh -o RequestTTY=yes "$@" tmux new -As0 zsh
 	}
-	alias tssh='_tssh'
+	alias s='_s'
 else
-	_tssh() {
+	_s() {
 		ssh -o RequestTTY=yes "$@" tmux new -As0 zsh
 	}
-	alias tssh='_tssh'
+	alias s='_s'
 fi
 
