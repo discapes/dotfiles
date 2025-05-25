@@ -90,7 +90,9 @@
           tldr
           direnv
           jq
-          yq
+          # use https://github.com/mikefarah/yq (yq-go) instead of https://github.com/kislyuk/yq (yq)
+          # https://stackoverflow.com/questions/53315791/how-to-convert-a-json-response-into-yaml-in-bash
+          yq-go
         ];
         tui = [
           yazi
@@ -133,7 +135,8 @@
           # SED_ADD_PKGS_HERE
           sops
           pnpm
-          bitwarden-cli
+          graphviz
+          gtimelog
           mpv
           gawk
           dive
