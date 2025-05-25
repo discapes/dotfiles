@@ -56,7 +56,8 @@ with pkgs;
         docker-compose
         distrobox
         ansible
-        nodejs
+        # https://github.com/NixOS/nixpkgs/blob/nixos-24.11/pkgs/top-level/all-packages.nix
+        nodejs_latest
         vscode
         python3
         go

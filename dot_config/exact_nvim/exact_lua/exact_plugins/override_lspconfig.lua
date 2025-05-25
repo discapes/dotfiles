@@ -3,6 +3,14 @@ return {
   ---@class PluginLspOpts
   opts = {
     servers = {
+      pyright = {
+        settings = {
+          python = {
+            pythonPath = vim.fn.exepath("python3"),
+            venvPath = vim.env.VIRTUAL_ENV and vim.env.VIRTUAL_ENV or vim.env.PYENV_ROOT,
+          },
+        },
+      },
       cssls = {},
       -- we don't want to spellcheck comments
       harper_ls = {

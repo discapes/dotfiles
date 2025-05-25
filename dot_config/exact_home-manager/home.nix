@@ -131,6 +131,8 @@
         ];
         others = [
           # SED_ADD_PKGS_HERE
+          sops
+          pnpm
           bitwarden-cli
           mpv
           gawk
@@ -151,7 +153,7 @@
           rustc
           sqlite
           uv
-          yarn
+          yarn-berry
           rclone
           # android-backup-extractor
           # apksigner

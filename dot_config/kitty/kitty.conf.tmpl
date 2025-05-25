@@ -1,9 +1,11 @@
 enable_audio_bell no
 macos_option_as_alt right
 #hide_window_decorations titlebar-only
+hide_window_decorations yes
 allow_remote_control yes
 listen_on unix:/tmp/mykitty
-enabled_layouts splits,horizontal,vertical
+#enabled_layouts splits,horizontal,vertical
+enabled_layouts tall:bias=50;full_size=1;mirrored=false
 cursor_trail 3
 cursor_trail_decay 0.1 0.4
 
@@ -96,6 +98,12 @@ map cmd+6 goto_tab 6
 map cmd+7 goto_tab 7
 map cmd+8 goto_tab 8
 map cmd+9 goto_tab 9
+map ctrl+shift+j previous_window
+map ctrl+shift+k next_window
+map ctrl+shift+up layout_action move_to_screen_edge top
+map ctrl+shift+left layout_action move_to_screen_edge left
+map ctrl+shift+right layout_action move_to_screen_edge right
+map ctrl+shift+down layout_action move_to_screen_edge bottom
 
 
 ### FONTS

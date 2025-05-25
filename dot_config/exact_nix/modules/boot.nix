@@ -34,9 +34,9 @@
     "nfs"
     "ntfs"
   ];
-  boot.extraModulePackages = with config.boot.kernelPackages; [
-    rtl88xxau-aircrack
-  ];
+  # boot.extraModulePackages = with config.boot.kernelPackages; [
+  #   rtl88xxau-aircrack
+  # ];
 
   # how to override kernel options
   # boot.kernelPackages = pkgs.linuxKernel.packagesFor (pkgs.linuxKernel.kernels.linux_zen.override {

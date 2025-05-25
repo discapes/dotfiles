@@ -7,6 +7,13 @@ return {
     picker = {
       hidden = true,
       sources = {
+        explorer = {
+          layout = {
+            layout = {
+              width = 25,
+            },
+          },
+        },
         files = {
           hidden = true,
         },
