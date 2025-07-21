@@ -21,6 +21,19 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
   end,
 })
 
+-- simple but hardcoded to only support the one chezmoi instance
+-- vim.api.nvim_create_autocmd("BufWritePost", {
+--   pattern = { vim.fn.expand("~") .. "/.local/share/chezmoi/*" },
+--   callback = function()
+--     print("Applying chezmoi changes...")
+--     local filepath = vim.fn.expand("%:p")
+--     vim.fn.jobstart({ "chezmoi", "apply", "--source-path", filepath }, {
+--       -- vim.fn.jobstart({ "chezmoi", "apply" }, {
+--       detach = true,
+--     })
+--   end,
+-- })
+
 vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = { vim.fn.expand("~") .. "/.local/share/chez*" },
   callback = function()
