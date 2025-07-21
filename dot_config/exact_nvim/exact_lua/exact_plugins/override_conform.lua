@@ -7,13 +7,15 @@ return {
       xml = { "xmlformatter" },
       htmldjango = { "djlint" },
       fish = {}, -- we don't need this
+      ["markdown"] = { "prettier", "markdownlint", "markdown-toc" },
+      ["markdown.mdx"] = { "prettier", "markdownlint", "markdown-toc" },
     },
     formatters = {
-      ["markdownlint-cli2"] = {
-        cwd = function()
-          return vim.fn.expand("~") -- https://github.com/DavidAnson/markdownlint-cli2/issues/53
-        end,
-      },
+      -- ["markdownlint-cli2"] = {
+      --   cwd = function()
+      --     return vim.fn.expand("~") -- https://github.com/DavidAnson/markdownlint-cli2/issues/53
+      --   end,
+      -- },
     },
   },
 }
