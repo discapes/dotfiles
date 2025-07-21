@@ -16,18 +16,8 @@ autoload -Uz compinit
 compinit -d ~/.cache/.zcompdump
 # End of lines added by compinstall
 
-#
-#
-#
-#
-
-#
-##
-##
-##
-##
-## oh my zsh
-if [ -z "$SSH_CLIENT" ]; then
+# run these if we are on a host with dotfiles installed
+if [ -z "$SSH_CLIENT" ] && [ -f ~/.config/zsh/env.zsh ]; then
 	source ~/.config/zsh/env.zsh
 	[ -z "$WAYLAND_DISPLAY" ] && [ "$TTY" = "/dev/tty1" ] && exec Hyprland
 	DISABLE_AUTO_UPDATE="true"
@@ -46,7 +36,13 @@ if [ -z "$SSH_CLIENT" ]; then
   fi
 else
   command -v fastfetch &>/dev/null && fastfetch
-  echo Welcome, $USER
+  echo
+  if command -v fortune &>/dev/null; then
+    fortune
+  elif [ -f /usr/games/fortune ]; then
+    /usr/games/fortune
+  fi
+  echo Welcome, $USER.
 fi
 
 if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
