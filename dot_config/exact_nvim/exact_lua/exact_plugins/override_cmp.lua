@@ -1,6 +1,8 @@
 -- so autocomplete is triggered by pressing tab instead of enter
 return {
   "saghen/blink.cmp",
+  -- we set the version because https://cmp.saghen.dev/configuration/fuzzy
+  version = "1.*",
   opts = {
     keymap = {
       preset = "super-tab",

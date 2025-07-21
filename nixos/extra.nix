@@ -63,6 +63,7 @@
     gnome-tweaks
     rage
     wireguard-tools
+    gnome-extension-manager
   ];
 
   services.flatpak.enable = true;
