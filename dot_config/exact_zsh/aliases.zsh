@@ -98,6 +98,10 @@ alias gd="git diff --color-words"
 alias dcu="docker network create user --opt com.docker.network.bridge.gateway_mode_ipv4=nat-unprotected"
 alias dr="docker run -it --rm -d --network user --name"
 alias mitmproxy="mitmproxy 2>/dev/null" # bug on macOS
+alias ca="chezmoi apply"
+alias nr="nix --extra-experimental-features 'nix-command flakes' run"
+alias ns="sudo nixos-rebuild switch --flake ~/.local/share/chezmoi/nixos"
+alias nsb="sudo nixos-rebuild boot --flake ~/.local/share/chezmoi/nixos"
 
 if [ "$TERM" == "xterm-kitty" ]; then
   # to connect to places where the kitten doesn't work eg. openwrt
