@@ -79,9 +79,9 @@ alias_if_valid c chezmoi
 alias ccd='cd "$(chezmoi source-path)"'
 alias_if_valid lg lazygit
 
-alias_remind find fd
-alias_remind grep rg || alias grep="grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.venv,venv}"
-alias_remind du dust || alias du="du -h"
+# alias_remind find fd
+# alias_remind grep rg || alias grep="grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.venv,venv}"
+# alias_remind du dust || alias du="du -h"
 
 alias ps="ps x"
 alias dps="docker ps --format 'table {{.ID}}\t{{.Names}}\t{{.Status}}'"
