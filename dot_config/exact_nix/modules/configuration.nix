@@ -53,6 +53,8 @@
   environment.localBinInPath = true;
   security.pam.services.passwd.nodelay = true;
   security.sudo.wheelNeedsPassword = false;
+  programs.java.enable = true;
+  programs.nix-ld.enable = true;
 
   nix.settings.experimental-features = [
     "nix-command"
@@ -61,6 +63,7 @@
   nix.channel.enable = false;
   nix.optimise.automatic = true;
   nix.optimise.dates = [ "03:45" ];
+  system.rebuild.enableNg = true;
 
   virtualisation.containers.enable = true;
   virtualisation.podman = {
