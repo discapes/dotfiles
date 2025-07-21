@@ -10,7 +10,8 @@
 
 [user]
 	email = miika.km.tuominen@gmail.com
-	name = Miika Tuominen
+  name = Miika Tuominen
+  signingKey = key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHEcD9ND7akyuONPgy1iRMBjZBNxOv5U0Cll9qP4qyZE
 
 [core]
 	editor = vim
@@ -29,3 +30,6 @@
 
 [commit]
   gpgSign = true
+
+[gpg]
+  format = ssh
