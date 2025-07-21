@@ -65,12 +65,14 @@
         formatters = [
           djlint
           black
-          xmlformat
+          # error: collision between `/nix/store/zfhjsy1mv6dq8vdxcsv3m8hz79xs1rq7-prettier-3.5.3/LICENSE' and `/nix/store/dr3nvna1509ga30k51qv6zdcpw5frlk5-xmlformat-1.04/LICENSE'
+          # xmlformat
           stylua
           nodePackages.prettier
           nixfmt-rfc-style
           shfmt
-          markdownlint-cli2
+          # markdownlint-cli2
+          markdownlint-cli # works a lot better at finding config in parent folders
         ];
         util = [
           fzf
@@ -133,16 +135,8 @@
         ];
         others = [
           # SED_ADD_PKGS_HERE
-          rustdesk-flutter
-          rustdesk-flutter
-          kustomize
-          fluxcd
-          flux
-          kubernetes-helm
-          k9s
-          k3sup
-          kubectl
-          starship
+          qrencode
+          helmfile
           sops
           pnpm
           graphviz
