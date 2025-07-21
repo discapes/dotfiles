@@ -16,3 +16,7 @@ if command -v bat &>/dev/null; then
 else
 	export MANPAGER="less -R --use-color -Dd+r -Du+b"
 fi
+
+if [ -e ~/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock ]; then
+  export SSH_AUTH_SOCK=~/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock
+fi
