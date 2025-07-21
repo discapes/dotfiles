@@ -133,6 +133,16 @@
         ];
         others = [
           # SED_ADD_PKGS_HERE
+          rustdesk-flutter
+          rustdesk-flutter
+          kustomize
+          fluxcd
+          flux
+          kubernetes-helm
+          k9s
+          k3sup
+          kubectl
+          starship
           sops
           pnpm
           graphviz
@@ -149,7 +159,7 @@
           eslint
           gnupg
           killall
-          languagetool
+          # languagetool
           mitmproxy
           neovim
           nixd
