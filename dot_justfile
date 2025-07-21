@@ -3,8 +3,9 @@ set unstable := true
 @_default:
     just --list
 
-# we want to run flake commands in the source directory
-# since they might update the flake.lock file
+# we use flakes_source_prefix when editing the config, but
+# flakes_prefix when updating since we don't really want the
+# lock file in chezmoi
 
 flakes_source_prefix := shell('chezmoi source-path') + "/dot_config/exact_"
 flakes_prefix := "~/.config/"
