@@ -1,8 +1,7 @@
-{{ $passphrase := promptStringOnce . "passphrase" "passphrase" -}}
+# get this from bitwarden
+encryption = "age"
+[age]
+    identity = "~/.config/age-key"
+    recipient = "age1c2w0suxdttvaf6ju7vz6ws2825n5hwct3xnm2dgwmvpfgdefq4wsdq7dqq"
+    command = "rage"
 
-encryption = "gpg"
-[data]
-    passphrase = {{ $passphrase | quote }}
-[gpg]
-    symmetric = true
-    args = ["--batch", "--passphrase", {{ $passphrase | quote }}, "--no-symkey-cache"]
