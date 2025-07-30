@@ -22,9 +22,6 @@
 [core]
 	excludesfile = ~/.config/my-gitignore
 
-[includeIf "gitdir:code/work/"]
-  path = work.config
-
 [init]
   defaultBranch = master
 
@@ -33,3 +30,7 @@
 
 [gpg]
   format = ssh
+
+# use this last to allow overriding
+[includeIf "gitdir:code/work/"]
+  path = work.config
