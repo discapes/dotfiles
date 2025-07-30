@@ -100,8 +100,13 @@ alias dr="docker run -it --rm -d --network user --name"
 alias mitmproxy="mitmproxy 2>/dev/null" # bug on macOS
 alias ca="chezmoi apply"
 alias nr="nix --extra-experimental-features 'nix-command flakes' run"
-alias ns="sudo nixos-rebuild switch --flake ~/.local/share/chezmoi/nixos"
-alias nsb="sudo nixos-rebuild boot --flake ~/.local/share/chezmoi/nixos"
+if [ "$(uname -s)" = "Darwin" ]; then
+  alias ns="sudo darwin-rebuild switch --flake ~/.local/share/chezmoi/nix-darwin"
+  alias nsb="sudo darwin-rebuild boot --flake ~/.local/share/chezmoi/nix-darwin"
+else
+  alias ns="sudo nixos-rebuild switch --flake ~/.local/share/chezmoi/nixos"
+  alias nsb="sudo nixos-rebuild boot --flake ~/.local/share/chezmoi/nixos"
+fi
 
 if [ "$TERM" == "xterm-kitty" ]; then
   # to connect to places where the kitten doesn't work eg. openwrt

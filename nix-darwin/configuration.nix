@@ -1,25 +1,14 @@
-{ pkgs, self, ... }:
+{ pkgs, ... }:
 {
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
-  environment.systemPackages = [
-    pkgs.vim
-  ];
+  # nix.registry.nixpkgs.to = {
+  #   type = "path";
+  #   path = pkgs.path;
+  # };
+  # nix.registry.nixpkgs.flake = pkgs;
 
-  # Necessary for using flakes on this system.
-  nix.settings.experimental-features = "nix-command flakes";
+  security.pam.services.sudo_local.touchIdAuth = true;
 
-  # Set Git commit hash for darwin-version.
-  system.configurationRevision = self.rev or self.dirtyRev or null;
-
-  # Used for backwards compatibility, please read the changelog before changing.
-  # $ darwin-rebuild changelog
-  system.stateVersion = 5;
-
-  # The platform the configuration will be used on.
-  nixpkgs.hostPlatform = "aarch64-darwin";
-
-  security.pam.enableSudoTouchIdAuth = true;
+  system.primaryUser = "miika.tuominen";
 
   system.defaults.NSGlobalDomain = {
     KeyRepeat = 2;
@@ -29,10 +18,11 @@
   };
   system.defaults.finder.ShowPathbar = true;
 
-  system.activationScripts.postUserActivation.text = ''
-    # Following line should allow us to avoid a logout/login cycle
-    /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
-  ''; # https://medium.com/@zmre/nix-darwin-quick-tip-activate-your-preferences-f69942a93236
+  # removed in 25.05
+  # system.activationScripts.postUserActivation.text = ''
+  #   # Following line should allow us to avoid a logout/login cycle
+  #   /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+  # ''; # https://medium.com/@zmre/nix-darwin-quick-tip-activate-your-preferences-f69942a93236
 
   networking.dns = [
     "1.1.1.1"

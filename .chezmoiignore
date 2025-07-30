@@ -4,3 +4,4 @@ README.md
 .oh-my-zsh/custom/themes/powerlevel10k/**/*.zwc
 **/flake.lock
 /nixos
+/nix-darwin
