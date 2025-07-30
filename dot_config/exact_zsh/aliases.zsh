@@ -109,7 +109,7 @@ if [ "$TERM" == "xterm-kitty" ]; then
 	alias ssh_petfree='TERM=xterm-256color \ssh'
 	alias ssh='kitten ssh'
 	_s() {
-		kitten ssh -o RequestTTY=yes "$@" tmux new -As0 zsh
+    ssh -o RequestTTY=yes "$@" 'command -v tmux && (command -v zsh && tmux new -As0 zsh || tmux new -As0 bash) || bash'
 	}
 	alias s='_s'
 else
@@ -119,3 +119,9 @@ else
 	alias s='_s'
 fi
 
+# check if user is in docker group
+if groups | grep -q '\bdocker\b'; then
+  alias d='docker'
+else
+  alias d='sudo docker'
+fi
