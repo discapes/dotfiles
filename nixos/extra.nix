@@ -64,6 +64,8 @@
     rage
     wireguard-tools
     gnome-extension-manager
+    libreoffice-qt6-fresh
+
   ];
 
   services.flatpak.enable = true;
