@@ -107,6 +107,7 @@ else
   alias ns="sudo nixos-rebuild switch --flake ~/.local/share/chezmoi/nixos"
   alias nsb="sudo nixos-rebuild boot --flake ~/.local/share/chezmoi/nixos"
 fi
+alias ff="fastfetch"
 
 if [ "$TERM" == "xterm-kitty" ]; then
   # to connect to places where the kitten doesn't work eg. openwrt

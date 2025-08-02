@@ -25,6 +25,16 @@
     "kvm"
   ];
 
+  # so it won't be full
+  boot.loader.systemd-boot.configurationLimit = 10;
+  boot.loader.timeout = 0;
+  # boot animation animation
+  boot.plymouth.enable = true;
+  # breeze looks slightly better than default
+  boot.plymouth.theme = "breeze";
+  # required for LUKS decryption to be integrated with plymouth
+  boot.initrd.systemd.enable = true;
+
   # unused
   # ##########
   # programs.java.enable = false;
