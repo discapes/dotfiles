@@ -7,4 +7,4 @@
 .git
 __pycache__
 .aider*
-.terraform*
+.terraform/
