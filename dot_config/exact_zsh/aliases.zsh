@@ -73,6 +73,7 @@ alias_if_valid vim myvim
 alias_if_valid nvim myvim
 alias_if_valid less bat
 alias_if_valid c chezmoi
+alias_if_valid vim nvim
 #alias_if_valid cea chezmoi edit --watch --apply
 # we don't need watch or apply since nvim is configured to apply saved files
 #alias_if_valid cea chezmoi edit -- we should use nvims Projects instead so it restores session
@@ -82,21 +83,29 @@ alias_if_valid lg lazygit
 # alias_remind find fd
 # alias_remind grep rg || alias grep="grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.venv,venv}"
 # alias_remind du dust || alias du="du -h"
+#
+
+# check if user is in docker group
+if groups | grep -q '\bdocker\b'; then
+  alias d='docker'
+else
+  alias d='sudo docker'
+fi
+alias dps="d ps --format 'table {{.ID}}\t{{.Names}}\t{{.Status}}'"
+alias dn='d network inspect $(d network ls | awk '\''$3 == "bridge" { print $1 }'\'') | jq -r '\''.[] | .Name + " " + .IPAM.Config[0].Subnet'\'''
+alias dip='d inspect -f $'\''{{.State.Status}}\t\t{{range .NetworkSettings.Networks}} {{.IPAddress}}{{end}}\t{{.Name}}'\'' $(d ps -aq) | column -t -s $'\''\t'\'''
+alias dcu="d network create user --opt com.docker.network.bridge.gateway_mode_ipv4=nat-unprotected"
+alias dr="d run -it --rm -d --network user --name"
 
 alias ps="ps x"
-alias dps="docker ps --format 'table {{.ID}}\t{{.Names}}\t{{.Status}}'"
 #alias s='TERM=xterm-256color /usr/bin/env ssh -o RequestTTY=yes -o RemoteCommand="tmux new -As0 zsh"'
 alias free="free -h"
 alias df="df -h"
 alias lsblk="lsblk -o NAME,SIZE,FSTYPE,LABEL,PARTLABEL,MOUNTPOINTS"
-alias dn='docker network inspect $(docker network ls | awk '\''$3 == "bridge" { print $1 }'\'') | jq -r '\''.[] | .Name + " " + .IPAM.Config[0].Subnet'\'''
-alias dip='docker inspect -f $'\''{{.State.Status}}\t\t{{range .NetworkSettings.Networks}} {{.IPAddress}}{{end}}\t{{.Name}}'\'' $(docker ps -aq) | column -t -s $'\''\t'\'''
 alias gc='git clone --depth=1'
 alias gs="git status -s"
 alias e="exit"
 alias gd="git diff --color-words"
-alias dcu="docker network create user --opt com.docker.network.bridge.gateway_mode_ipv4=nat-unprotected"
-alias dr="docker run -it --rm -d --network user --name"
 alias mitmproxy="mitmproxy 2>/dev/null" # bug on macOS
 alias ca="chezmoi apply"
 alias nr="nix --extra-experimental-features 'nix-command flakes' run"
@@ -115,7 +124,7 @@ if [ "$TERM" == "xterm-kitty" ]; then
 	alias ssh_petfree='TERM=xterm-256color \ssh'
 	alias ssh='kitten ssh'
 	_s() {
-    ssh -o RequestTTY=yes "$@" 'command -v tmux && (command -v zsh && tmux new -As0 zsh || tmux new -As0 bash) || bash'
+    ssh -o RequestTTY=yes "$@" 'command -v tmux && (command -v zsh && SHELL=$(command -v zsh) tmux new -As0 zsh || tmux new -As0 bash) || bash'
 	}
 	alias s='_s'
 else
@@ -125,9 +134,3 @@ else
 	alias s='_s'
 fi
 
-# check if user is in docker group
-if groups | grep -q '\bdocker\b'; then
-  alias d='docker'
-else
-  alias d='sudo docker'
-fi
