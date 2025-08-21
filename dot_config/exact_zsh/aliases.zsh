@@ -117,6 +117,7 @@ else
   alias nsb="sudo nixos-rebuild boot --flake ~/.local/share/chezmoi/nixos"
 fi
 alias ff="fastfetch"
+alias dsps='docker node ps $(docker node ls -q) --filter desired-state=Running -q --format "table {{.Node}}\t{{.Name}}\t{{.Image}}" | sed 1d | sort -u'
 
 if [ "$TERM" == "xterm-kitty" ]; then
   # to connect to places where the kitten doesn't work eg. openwrt
