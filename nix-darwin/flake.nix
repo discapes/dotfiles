@@ -7,6 +7,7 @@
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
   outputs =
@@ -15,6 +16,7 @@
       nix-darwin,
       nixpkgs,
       nix-index-database,
+      nixpkgs-unstable,
     }:
     let
       configuration =
@@ -39,6 +41,11 @@
           configuration
           nix-index-database.darwinModules.nix-index
           { programs.nix-index-database.comma.enable = true; }
+          {
+            nix.registry = {
+              pkgs.flake = nixpkgs-unstable;
+            };
+          }
         ];
       };
     };
