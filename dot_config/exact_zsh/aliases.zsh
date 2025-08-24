@@ -125,7 +125,7 @@ if [ "$TERM" == "xterm-kitty" ]; then
 	alias ssh_petfree='TERM=xterm-256color \ssh'
 	alias ssh='kitten ssh'
 	_s() {
-    ssh -o RequestTTY=yes "$@" 'command -v tmux && (command -v zsh && SHELL=$(command -v zsh) tmux new -As0 zsh || tmux new -As0 bash) || bash'
+    ssh -o RequestTTY=yes "$@" 'export TERMINFO="$HOME/.terminfo"; source /etc/profile; command -v tmux && (command -v zsh && SHELL=$(command -v zsh) tmux new -As0 zsh || tmux new -As0 bash -l) || bash -l'
 	}
 	alias s='_s'
 else
