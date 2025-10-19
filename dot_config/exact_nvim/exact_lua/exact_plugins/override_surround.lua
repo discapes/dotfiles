@@ -1,5 +1,5 @@
 return {
-  "echasnovski/mini.surround",
+  "nvim-mini/mini.surround",
   opts = {
     -- so we can for example surround code blocks with ```
     -- instead of surrounding each line of the selection
