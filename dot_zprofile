@@ -6,7 +6,7 @@ if [ -e /opt/homebrew/bin/brew ]; then eval "$(/opt/homebrew/bin/brew shellenv)"
 if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile.d/nix.sh; fi                                             # added by Nix installer
 if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh; fi # on macOS
 
-export PATH="$HOME/.local/bin:$PATH:/usr/local/bin:$HOME/.npm-global/bin"
+export PATH="$HOME/.local/bin:$PATH:/usr/local/bin:$HOME/.npm-global/bin:$HOME/.nix-profile/bin"
 
 command -v myvim &>/dev/null && export EDITOR=myvim || export EDITOR=vim
 
