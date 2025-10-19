@@ -3,7 +3,8 @@
 # kitty.conf hash: {{ include "dot_config/kitty/kitty.conf.tmpl" | sha256sum }}
 # use pkill on linux and killall on darwin
 if [ "$(uname)" = "Linux" ]; then
-	 pkill -SIGUSR1 kitty
+	pkill -SIGUSR1 kitty
 else
-	 killall -SIGUSR1 kitty
+	killall -SIGUSR1 kitty
 fi
+echo
