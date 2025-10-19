@@ -34,3 +34,7 @@
 # use this last to allow overriding
 [includeIf "gitdir:code/work/"]
   path = work.config
+[pull]
+	rebase = true
+[branch]
+	autosetuprebase = always
