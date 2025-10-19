@@ -136,3 +136,4 @@ else
 	alias s='_s'
 fi
 
+alias gss='for f in *; do cd $f;echo $f|lolcat;gs;cd ..; done'
