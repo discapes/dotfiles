@@ -1,1 +1,2 @@
 source ~/.config/zsh/init.zsh
+[ -f ~/.config/zsh/extra.zsh ] && source ~/.config/zsh/extra.zsh
