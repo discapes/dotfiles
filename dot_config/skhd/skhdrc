@@ -1,0 +1,4 @@
+alt - return : /Applications/Kitty.app/Contents/MacOS/Kitty -d ~
+0x68 : ~/.local/bin/typechar ö
+0x0A : ~/.local/bin/typechar ä
+
