@@ -9,3 +9,7 @@ __pycache__
 .aider*
 .terraform/
 .obsidian
+target/
+.bloop/
+.metals/
+.bsp/
