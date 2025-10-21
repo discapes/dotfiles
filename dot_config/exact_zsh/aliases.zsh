@@ -118,7 +118,7 @@ else
 fi
 alias ff="fastfetch"
 alias dsps='docker node ps $(docker node ls -q) --filter desired-state=Running -q --format "table {{.Node}}\t{{.Name}}\t{{.Image}}" | sed 1d | sort -u'
-alias m="make -f ../Makefile"
+alias m='make -f $(git rev-parse --show-toplevel)/Makefile'
 
 if [ "$TERM" == "xterm-kitty" ]; then
   # to connect to places where the kitten doesn't work eg. openwrt
