@@ -20,4 +20,7 @@
   # environment.systemPackages = with pkgs; [
   #   e2fsprogs # for filefrag
   # ];
+  #
+  services.tailscale.enable = true;
+  services.syncthing.enable = true;
 }

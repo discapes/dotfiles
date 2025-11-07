@@ -20,6 +20,7 @@
     "openrazer"
     "wireshark"
     "podman"
+    "docker"
     "adbusers"
     "plugdev"
     "kvm"
