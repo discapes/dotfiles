@@ -22,14 +22,14 @@ return {
     --   },
     -- },
   },
-  {
-    "raddari/last-color.nvim",
-    dependencies = { "catppuccin/nvim" },
-    -- event = "VeryLazy",
-    lazy = false,
-    config = function()
-      local theme = require("last-color").recall() or "catppuccin-mocha"
-      vim.cmd.colorscheme(theme)
-    end,
-  },
+  -- {
+  --   "raddari/last-color.nvim",
+  --   dependencies = { "catppuccin/nvim" },
+  --   -- event = "VeryLazy",
+  --   lazy = false,
+  --   config = function()
+  --     local theme = require("last-color").recall() or "catppuccin-mocha"
+  --     vim.cmd.colorscheme(theme)
+  --   end,
+  -- },
 }
