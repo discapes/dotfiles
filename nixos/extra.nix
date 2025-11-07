@@ -60,6 +60,7 @@
     chezmoi
     wl-clipboard
     clang # needed for treesitter
+    tree-sitter
     python3
     file
     lshw
@@ -73,7 +74,8 @@
     wireguard-tools
     gnome-extension-manager
     libreoffice-qt6-fresh
-
+    cargo # for mason to install nil_ls
+    statix
   ];
 
   services.flatpak.enable = true;
