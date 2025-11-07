@@ -30,20 +30,27 @@ return {
       },
       cssls = {},
       -- we don't want to spellcheck comments
-      harper_ls = {
+      -- harper_ls = {
+      --   disable = true,
+      --   settings = {
+      --     ["harper-ls"] = {
+      --       linters = {
+      --         ToDoHyphen = false,
+      --       },
+      --     },
+      --   },
+      --   filetypes = {
+      --     "text",
+      --     "plaintex",
+      --     "typst",
+      --     "gitcommit",
+      --     "markdown",
+      --   },
+      -- },
+      tinymist = {
+        mason = false, -- we use pre-release 14
         settings = {
-          ["harper-ls"] = {
-            linters = {
-              ToDoHyphen = false,
-            },
-          },
-        },
-        filetypes = {
-          "text",
-          "plaintex",
-          "typst",
-          "gitcommit",
-          "markdown",
+          formatterPrintWidth = 55,
         },
       },
     },
