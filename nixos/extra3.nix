@@ -22,5 +22,13 @@
   # ];
   #
   services.tailscale.enable = true;
-  services.syncthing.enable = true;
+  services = {
+    syncthing = {
+      enable = true;
+      group = "users";
+      user = "me";
+      dataDir = "/home/me"; # Default folder for new synced folders
+      configDir = "/home/me/.config/syncthing"; # Folder for Syncthing's settings and keys
+    };
+  };
 }
