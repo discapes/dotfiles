@@ -13,3 +13,5 @@ target/
 .bloop/
 .metals/
 .bsp/
+.cache/
+.vscode/
