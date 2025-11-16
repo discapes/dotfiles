@@ -254,5 +254,7 @@ exec dunst
 # xdg-desktop-portal needs xdg-desktop-portal-wlr to be started
 exec /usr/libexec/xdg-desktop-portal-wlr & /usr/local/libexec/xdg-desktop-portal-termfilechooser & sleep 3; /usr/libexec/xdg-desktop-portal
 exec wl-paste -t text --watch clipman store
+xwayland disable
 
 include /etc/sway/config.d/*
+
