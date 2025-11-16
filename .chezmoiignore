@@ -6,4 +6,5 @@ README.md
 /nixos
 /nix-darwin
 /nixos-vm
+/sysbackup
 .off
