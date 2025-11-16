@@ -6,3 +6,4 @@ Type=Application
 Name=Signal
 Exec=/usr/bin/sh -c '~/.local/share/signal/signal-desktop -- %U'
 Icon=signal
+MimeType=x-scheme-handler/signalcaptcha;x-scheme-handler/sgnl;
