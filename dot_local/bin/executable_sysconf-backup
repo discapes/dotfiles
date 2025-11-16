@@ -9,6 +9,7 @@ cp -a /etc/portage/package.env "$DEST/portage"/
 cp -a /etc/portage/package.mask "$DEST/portage"/
 cp -a /etc/portage/package.use "$DEST/portage"/
 cp -a /etc/portage/repos.conf/eselect-repo.conf "$DEST/portage"/
+cp -ar /etc/portage/profile/ "$DEST/portage"/
 cp -ar /var/db/repos/example_repository/ "$DEST/portage"/
 
 groups >"$DEST/groups.txt"
