@@ -8,5 +8,6 @@ max_line_length = 120
 quote_type = double
 
 #indent_style = space
-#indent_style = tab
-#indent_size = 4 # if tabs are used, this is just cosmetic
+indent_style = tab
+indent_size = 4
+# if tabs are used, this is just cosmetic
