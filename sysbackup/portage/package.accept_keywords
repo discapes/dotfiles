@@ -1,0 +1,50 @@
+# required by spotify-player (argument)
+=media-sound/spotify-player-9999 **
+# required by yazi (argument)
+=app-misc/yazi-9999 **
+# required by wtype (argument)
+=gui-apps/wtype-0.4 **
+# required by tinymist (argument)
+=app-text/tinymist-9999 **
+# required by pamixer (argument)
+=media-sound/pamixer-9999 **
+# required by zathura-pdf-mupdf (argument)
+=app-text/zathura-pdf-mupdf-9999 **
+# required by zathura-meta (argument)
+=app-text/zathura-meta-0-r1 **
+# required by sioyek (argument)
+=app-text/sioyek-9999 **
+# required by websocat (argument)
+=net-misc/websocat-1.14.0 **
+# required by =dev-python/uv-9999 (argument)
+=dev-python/uv-9999 **
+# required by openfortivpn (argument)
+=net-vpn/openfortivpn-1.23.1 **
+# required by app-emacs/rg-2.4.0::gentoo
+# required by rg (argument)
+=app-emacs/wgrep-3.0.0-r1 **
+# required by rg (argument)
+=app-emacs/rg-2.4.0 **
+# required by tofi (argument)
+=gui-apps/tofi-0.9.1 **
+# required by lazygit (argument)
+=dev-vcs/lazygit-9999 **
+# required by doasedit (argument)
+=app-admin/doasedit-9999 **
+# required by dust (argument)
+=sys-block/dust-1.2.3 **
+# required by armadillo (argument)
+=sci-libs/armadillo-15.0.3 **
+# required by ensmallen (argument)
+=sci-libs/ensmallen-2.16.2 **
+# required by numba (argument)
+=dev-python/numba-0.62.1 **
+# required by dev-python/numba-0.62.1::science[-test]
+# required by numba (argument)
+=dev-python/llvmlite-0.45.1 **
+# required by fuzzel (argument)
+=gui-apps/fuzzel-1.13.0 **
+# required by clipman (argument)
+=gui-apps/clipman-1.6.5 **
+# required by direnv (argument)
+=app-shells/direnv-9999 **

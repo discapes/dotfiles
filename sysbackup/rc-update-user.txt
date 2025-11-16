@@ -1,0 +1,4 @@
+pipewire
+pipewire-pulse
+syncthing
+wireplumber
