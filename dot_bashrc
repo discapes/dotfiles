@@ -13,79 +13,74 @@ if [[ $- != *i* ]]; then
   return
 fi
 
-# Put your fun stuff here.
+# ENVIRONMENT VARIABLES
 export JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
 export QT_QPA_PLATFORM=wayland
 export CLUTTER_BACKEND=wayland
 export SDL_VIDEODRIVER=wayland
 export GDK_BACKEND=wayland
 export MOZ_ENABLE_WAYLAND=1
+# works for cmake I think, but meson needs it to be passed with an argument too:
+export PKG_CONFIG_PATH=/usr/local/lib64/pkgconfig/
+export SSH_AUTH_SOCK=$HOME/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock
+export PATH="$HOME/.local/share/coursier/bin:$HOME/.local/bin:$HOME/.npm-global/bin:$PATH:$HOME/emsdk:$HOME/emsdk/upstream/emscripten:$HOME/.cargo/bin"
+export NVM_DIR="$HOME/.nvm"
+export TERM=xterm-256color
+# required for xdg-desktop-portal to work to pick xdg-desktop-portal-wlr for screencast
+export XDG_CURRENT_DESKTOP=sway
 
+# ALIASES
 alias vim=nvim
 alias sudo=doas
 alias log='tail -f /var/log/syslog'
 alias llog='less /var/log/syslog'
 alias e=exit
-edit() {
-  pushd /etc/portage
-  doasedit "$1"
-  popd
-}
 alias ports='doas ss -ltunp | grep -vF "[::]"'
 alias gov='cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'
-setgov() { echo "$1" | doas tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; }
-# from yazi
-y() {
+alias ls="ls -A --color"
+alias c=chezmoi
+alias fd="fd -Hi"
+alias rg="rg -Hi"
+alias lg=lazygit
+alias news="eselect news read"
+alias dot_clean="fd -tf '^\._' -X rm"
+alias gs="git status -s"
+alias ash='podman run --rm -it alpine'
+alias vpn='doas openfortivpn ext-remote.tierainfra.fi:9443 --saml-login'
+alias etc-update="doas etc-update"
+alias emerge="doas emerge"
+alias euse="doas euse"
+# doesn't likely work. some wifi networks break linux so bad a full restart is needed
+alias renet="doas rmmod -f brcmfmac hci_bcm4377; doas modprobe brcmfmac hci_bcm4377; doas rc-service NetworkManager restart"
+
+# FUNCTIONS
+y() { # from yazi
   local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
   yazi "$@" --cwd-file="$tmp"
   IFS= read -r -d '' cwd <"$tmp"
   [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
   rm -f -- "$tmp"
 }
-comp() {
-  echo "$1".cpp | entr -cs "g++ $1.cpp && ./a.out < ${2:-${1}input}"
+edit() {
+  pushd /etc/portage
+  doasedit "$1"
+  popd
 }
-
-alias etc-update="doas etc-update"
-alias emerge="doas emerge"
-alias euse="doas euse"
-function swap() {
+setgov() { echo "$1" | doas tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; }
+comp() { echo "$1".cpp | entr -cs "g++ $1.cpp && ./a.out < ${2:-${1}input}"; }
+swap() {
   local TMPFILE=tmp.$$
   mv "$1" $TMPFILE && mv "$2" "$1" && mv $TMPFILE "$2"
 }
+up() { curl -T "$1" -u "ncadmin:$(cat ~/.config/nextcloud-key)" 'https://cloud.app.miikat.dev/remote.php/dav/files/ncadmin/'"$(basename "$1")"; }
+ce() { chezmoi edit --apply ~/"$1"; }
 
-export SSH_AUTH_SOCK=$HOME/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock
-alias ash='podman run --rm -it alpine'
-alias vpn='doas openfortivpn ext-remote.tierainfra.fi:9443 --saml-login'
-
+# HOOKS
 command -v zoxide &>/dev/null && eval "$(zoxide init bash --cmd cd)"
-alias renet="doas rmmod -f brcmfmac hci_bcm4377; doas modprobe brcmfmac hci_bcm4377; doas rc-service NetworkManager restart"
-
-export PATH="$HOME/.local/share/coursier/bin:$HOME/.local/bin:$HOME/.npm-global/bin:$PATH:$HOME/emsdk:$HOME/emsdk/upstream/emscripten:$HOME/.cargo/bin"
-
-export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
-export TERM=xterm-256color
-# required for xdg-desktop-portal to work
-export XDG_CURRENT_DESKTOP=sway
 
-up() {
-  curl -T "$1" -u "ncadmin:$(cat ~/.config/nextcloud-key)" 'https://cloud.app.miikat.dev/remote.php/dav/files/ncadmin/'"$(basename "$1")"
-}
-alias ls="ls -A --color"
-alias c=chezmoi
-ce() {
-  chezmoi edit --apply ~/"$1"
-}
-alias fd="fd -Hi"
-alias rg="rg -Hi"
-alias lg=lazygit
-export PKG_CONFIG_PATH=/usr/local/lib64/pkgconfig/
-alias news="eselect news read"
-alias dot_clean="fd -tf '^\._' -X rm"
-alias gs="git status -s"
-
+# and finally:
 if [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
   exec dbus-run-session sway
 fi
