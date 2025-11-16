@@ -16,9 +16,12 @@ fi
 # ENVIRONMENT VARIABLES
 export JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
 export QT_QPA_PLATFORM=wayland
+export XDG_SESSION_TYPE=wayland
 export CLUTTER_BACKEND=wayland
 export SDL_VIDEODRIVER=wayland
 export GDK_BACKEND=wayland
+# .config/electron-flags.conf is not enough for flatpak apps
+export ELECTRON_OZONE_PLATFORM_HINT=auto
 export MOZ_ENABLE_WAYLAND=1
 # works for cmake I think, but meson needs it to be passed with an argument too:
 export PKG_CONFIG_PATH=/usr/local/lib64/pkgconfig/
