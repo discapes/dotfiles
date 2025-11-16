@@ -1,0 +1,28 @@
+#!/bin/bash
+
+DEST="$HOME/.local/share/chezmoi/sysbackup"
+mkdir -p "$DEST/portage"
+
+cp -a /etc/portage/make.conf "$DEST/portage"/
+cp -a /etc/portage/package.accept_keywords "$DEST/portage"/
+cp -a /etc/portage/package.env "$DEST/portage"/
+cp -a /etc/portage/package.mask "$DEST/portage"/
+cp -a /etc/portage/package.use "$DEST/portage"/
+cp -a /etc/portage/repos.conf/eselect-repo.conf "$DEST/portage"/
+cp -ar /var/db/repos/example_repository/ "$DEST/portage"/
+
+groups >"$DEST/groups.txt"
+rc-update >"$DEST/rc-update.txt"
+ls ~/.config/rc/runlevels/default/ >"$DEST/rc-update-user.txt"
+crontab -l >"$DEST/crontab.txt"
+
+cat /var/lib/portage/world >"$DEST/portage/world.txt"
+
+doas tar -C /etc/NetworkManager/ -caf - system-connections |
+  age -o "$DEST/system-connections.tar.gz.age" -r age1c2w0suxdttvaf6ju7vz6ws2825n5hwct3xnm2dgwmvpfgdefq4wsdq7dqq
+# decrypt with age -d -i ~/.config/age-key system-connections.tar.gz.age | tar tvf -
+
+cp -a /etc/fstab "$DEST/"
+cp -a /etc/doas.conf "$DEST/"
+
+echo "System configuration backup completed and stored in $DEST"

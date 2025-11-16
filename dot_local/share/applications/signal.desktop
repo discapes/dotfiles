@@ -1,0 +1,8 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=Signal
+Exec=/usr/bin/sh -c '~/.local/share/signal/signal-desktop -- %U'
+Icon=signal

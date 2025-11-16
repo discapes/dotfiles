@@ -1,0 +1,1 @@
+#!/usr/bin/env -S flatpak run com.bitwarden.desktop
