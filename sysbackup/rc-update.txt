@@ -1,5 +1,6 @@
        NetworkManager |      default                           
                binfmt | boot                                   
+            bluetooth |      default                           
              bootmisc | boot                                   
               cgroups |                                 sysinit
               chronyd |      default                           
