@@ -55,6 +55,7 @@ alias emerge="doas emerge"
 alias euse="doas euse"
 # doesn't likely work. some wifi networks break linux so bad a full restart is needed
 alias renet="doas rmmod -f brcmfmac hci_bcm4377; doas modprobe brcmfmac hci_bcm4377; doas rc-service NetworkManager restart"
+alias hs=swayhide
 
 # FUNCTIONS
 y() { # from yazi
@@ -70,7 +71,7 @@ edit() {
   popd
 }
 setgov() { echo "$1" | doas tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; }
-comp() { echo "$1".cpp | entr -cs "g++ $1.cpp && ./a.out < ${2:-${1}input}"; }
+comp() { echo "$1".cpp | entr -cs "make -f ../Makefile $1.out && ./$1.out < ${2:-${1}input}"; }
 swap() {
   local TMPFILE=tmp.$$
   mv "$1" $TMPFILE && mv "$2" "$1" && mv $TMPFILE "$2"
