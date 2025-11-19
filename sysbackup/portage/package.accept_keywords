@@ -48,3 +48,19 @@
 =gui-apps/clipman-1.6.5 **
 # required by direnv (argument)
 =app-shells/direnv-9999 **
+# required by bluetui (argument)
+=net-wireless/bluetui-0.8.0 **
+# required by dev-libs/libayatana-appindicator-glib (argument)
+=dev-libs/libayatana-appindicator-glib-9999 **
+# required by =net-im/telegram-desktop-6.2.4 (argument)
+=net-im/telegram-desktop-6.2.4 **
+# required by net-im/telegram-desktop-6.2.4::gentoo
+# required by =net-im/telegram-desktop-6.2.4 (argument)
+=dev-cpp/cld3-3.0.13_p20220331 **
+# required by net-im/telegram-desktop-6.2.4::gentoo
+# required by =net-im/telegram-desktop-6.2.4 (argument)
+=dev-cpp/expected-1.1.0 **
+# required by www-client/brave-browser-nightly::another-brave-overlay (argument)
+=www-client/brave-browser-nightly-1.86.87 **
+# required by libvpl (argument)
+=media-libs/libvpl-2.15.0 **
